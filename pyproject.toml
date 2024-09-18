@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "mlcourse"
+version = "0.1.0"
+description = "Material for my Machine Learning course"
+authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+# Use poetry only for dependency management
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+numpy = "^2.1.1"
+pandas = "^2.2.2"
+scikit-learn = "^1.5.2"
+matplotlib = "^3.9.2"
+torch = "^2.4.1"
+torchvision = "^0.19.1"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.2.7"
+pytest = "^8.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
