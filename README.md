@@ -31,3 +31,43 @@ Deep Learning is a subset of Machine Learning based on the usage of large (deep)
 > Soon!
 
 Reinforcement Learning is a subset of Machine Learning concerned with the maximization of rewards in a dynamic environment.
+
+## Usage
+
+```bash
+git clone https://github.com/bpesquet/mlcourse.git
+cd mlcourse
+python {path to Python code file}
+```
+
+## Development notes
+
+### Toolchain
+
+This project is built with the following software:
+
+- [Poetry](https://python-poetry.org/) for dependency management;
+- [Black](https://github.com/psf/black) for code formatting;
+- [Pylint](https://github.com/pylint-dev/pylint) to detect mistakes in the code;
+- [pytest](https://docs.pytest.org) for testing the code;
+- [Marp](https://marp.app/) for showcasing notes as slideshows during lectures.
+
+### Useful commands
+
+```bash
+# Reformat all Python files
+black mlcourse
+
+# Check the code for mistakes
+pylint mlcourse
+
+# Run all demos as unit tests
+# The -s flag prints tests output
+pytest [-s] mlcourse
+```
+
+## License
+
+[Creative Commons](LICENSE) for the textual content and [MIT](CODE_LICENSE) for the code.
+
+Copyright © 2024-present [Baptiste Pesquet](https://bpesquet.fr).
