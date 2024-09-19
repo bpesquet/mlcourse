@@ -15,16 +15,17 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 - Principles of supervised learning [ [notes](notes/supervised_learning_principles/README.md) ]
 - 👨🏻‍💻 Essential tools [ [lab](labs/essential_tools.md) ]
 - Predict California housing prices [ [notes](notes/predict_california_housing_prices/README.md) | [code](mlcourse/test_california_housing_prices.py) ]
-- Recognize handwritten digits [ [notes]() | [code]() ]
-- 👩🏻‍💻 Predict heart disease [ [lab]() | [code]() ]
-- Linear Regression [ [notes](notes/linear_regression/README.md) | [code](mlcourse/test_linear_regression.py) ]
-- Decision Trees & Random Forests [ [notes](notes/decision_trees_random_forests/README.md) | [code]() ]
+- 🚧 Recognize handwritten digits [ [notes]() | [code]() ]
+- 🚧 👩🏻‍💻 Predict heart disease [ [lab]() | [code]() ]
+- 🚧 Linear Regression [ [notes](notes/linear_regression/README.md) | [code](mlcourse/test_linear_regression.py) ]
+- 🚧 Decision Trees & Random Forests [ [notes](notes/decision_trees_random_forests/README.md) | [code]() ]
+- ... (more to come)
 
 ### Deep Learning
 
 > Soon!
 
-Deep Learning is a subset of Machine Learning based on the usage of large (deep) neural networks trained on vast amounts of data.
+Deep Learning is a subset of Machine Learning based on the usage of large neural networks trained on vast amounts of data.
 
 ### Reinforcement Learning
 
@@ -61,8 +62,8 @@ black mlcourse
 # Check the code for mistakes
 pylint mlcourse
 
-# Run all demos as unit tests
-# The -s flag prints tests output
+# Run all code examples as unit tests
+# The -s flag prints code output
 pytest [-s] mlcourse
 ```
 
