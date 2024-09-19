@@ -12,6 +12,9 @@ marp: true
 
 ---
 
+<!-- Show pagination, starting with second slide -->
+<!-- paginate: true -->
+
 ## Learning objectives
 
 - Discover how to train a Machine Learning model on tabular data.
@@ -87,23 +90,36 @@ marp: true
 
 ---
 
-### Step 2.1: discover data
+### Step 2.1: load the dataset
 
-Our first objective is to familiarize ourselves with the dataset.
+Many datasets containing tabular information are stored as a CSV (Comma-Separated Values) text file.
 
-Once data is loaded, the [pandas](https://pandas.pydata.org/) library  provides many useful functions for making sense of it.
+The pandas [read_csv](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html) function can load a CSV file into a DataFrame from either a local path or a URL.
 
 ---
 
 ### Step 2.2: analyze data
 
-The objective here is to gain insights about the data, in order to prepare it optimally for training.
+The objective here is to gain insights about the data, in order to prepare it optimally for training. This might involve:
+
+- plotting histograms of values.
+- computing statistical metrics like values repartition or correlation between features;
 
 ---
 
 ### Step 2.3: split the dataset
 
-A simple solution for splitting datasets is to use the `train_test_split`function from scikit-learn.
+Once trained, a ML model must be able to **generalize** (perform well with new data). In order to assert this ability, data is always split into two or three sets before training:
+
+- **Training set** (typically 80% or more): fed to the model during training.
+- **Validation set**: used to tune the model without biasing it in favor of the test set.
+- **Test set**: used to check the final model's performance on unseen data.
+
+![Dataset splitting](images/dataset_splitting.png)
+
+---
+
+A simple solution for splitting datasets is to use the scikit-learn [train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) function.
 
 Just before or after that, inputs (features given to the model) have to be separated from targets (values it must predict).
 
@@ -113,11 +129,79 @@ Just before or after that, inputs (features given to the model) have to be separ
 
 ### Step 2.4: data preprocessing
 
-For this dataset, this task involves:
+In Machine Learning, the chosen dataset has to be carefully prepared before using it to train a model. This can have a major impact on the outcome of the training process.
 
-- Handling missing values.
+This important task, sometimes called *data preprocessing*, might involve:
+
+- Removing superflous features (if any).
+- Adding missing values.
 - Scaling data.
-- Transforming categorical values into numeric form.
+- Transforming values into numeric form.
+- Augmenting data with artificially generated samples.
+- Engineering new features.
+
+---
+
+#### Handling of missing values
+
+Most ML algorithms cannot work with missing values in features.
+
+Depending on the percentage of missing data, three options exist:
+
+- remove the corresponding data samples;
+- remove the whole feature(s);
+- replace the missing values (using 0, the mean, the median or something more meaningful in the context).
+
+---
+
+#### Feature scaling
+
+Most ML algorithms work best when all features have a similar scale. Several solutions exist:
+
+- **Min-Max scaling**: features are shifted and rescaled to the $[0,1]$ range by substracting the `min` value and dividing by `(max-min)` on the first axis.
+- **Standardization**: features are centered (substracted by their mean) then reduced (divided by their standard deviation) on the first axis. All resulting features have a mean of 0 and a standard deviation of 1.
+
+---
+
+#### Encoding of categorical features
+
+Some features or targets may come as discrete rather than continuous values. Moreover, these discrete values might be strings. ML models are only able to manage numerical-only data.
+
+A solution is to apply one-of-K encoding, also named **dummy encoding** or **one-hot encoding**. Each categorical feature with `K` possible values is transformed into a vector of `K` binary features, with one of them 1 and all others 0.
+
+> Using arbitrary integer values rather than binary vectors would create a proximity relationship between the new features, which could confuse the model during training.
+
+---
+
+##### One-hot encoding and training/test sets
+
+Depending on value distribution between training and test sets, some categories might appear only in one set.
+
+The best solution is to one-hot encode based on the training set categories, ignoring test-only categories.
+
+---
+
+#### Data augmentation
+
+**Data augmentation** is the process of enriching a dataset by adding new samples, slightly modified copies of existing data or newly created synthetic data.
+
+[![Image augmentation example](images/image_augmentation.png)](https://towardsdatascience.com/machinex-image-data-augmentation-using-keras-b459ef87cd22)
+
+---
+
+#### Feature engineering
+
+**Feature engineering** is the process of preparing the proper input features, in order to facilitate the learning task. The problem is made easier by expressing it in a simpler way. This usually requires a good domain knowledge.
+
+The ability of deep neural networks to discover useful features by themselves has somewhat reduced the criticality of feature engineering. Nevertheless, it remains important in order to solve problems more elegantly and with fewer data.
+
+---
+
+Example (taken from the book [Deep Learning with Python](https://github.com/fchollet/deep-learning-with-python-notebooks)): the task of learning the time of day from a clock is far easier with engineered features rather than raw clock images.
+
+[![Feature engineering](images/feature_engineering.png)](https://www.manning.com/books/deep-learning-with-python)
+
+---
 
 #### Preprocessing pipelines
 
