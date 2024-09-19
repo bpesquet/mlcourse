@@ -124,7 +124,10 @@ def split_dataset(df):
 
 
 def preprocess_dataset(df_x_train, df_y_train):
-    """Preprocess a dataset"""
+    """Preprocess the dataset:
+    - replace missing values
+    - scale data through standardization
+    - transform categorical values into numeric form"""
 
     # Compute percent of missing values among features
     print(df_x_train.isnull().sum() * 100 / df_x_train.isnull().count())
@@ -143,6 +146,9 @@ def preprocess_dataset(df_x_train, df_y_train):
     # Print all values for the "ocean_proximity" feature
     df_x_train["ocean_proximity"].value_counts()
 
+    # This pipeline applies the following operations:
+    # - replace missing values with the median value of the corresponding feature
+    # - apply standardization to all features (=> mean=0 and standard deviation=1)
     num_pipeline = Pipeline(
         [
             ("imputer", SimpleImputer(strategy="median")),
