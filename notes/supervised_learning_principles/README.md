@@ -1,9 +1,14 @@
 ---
 marp: true
-paginate: true
 ---
 
+<!-- Apply header and footer to first slide only -->
+<!-- _header: "[![Bordeaux INP logo](../ensc_logo.jpg)](https://www.bordeaux-inp.fr)" -->
+<!-- _footer: "[Baptiste Pesquet](https://www.bpesquet.fr)" -->
+
 # Principles of supervised learning
+
+---
 
 ## Learning objectives
 
@@ -12,9 +17,10 @@ paginate: true
 
 ---
 
-## Terminology
+<!-- Show pagination starting with second slide -->
+<!-- paginate: true -->
 
----
+## Terminology
 
 ### Components of a supervised ML system
 

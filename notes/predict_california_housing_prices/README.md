@@ -1,11 +1,16 @@
 ---
 marp: true
-paginate: true
 ---
+
+<!-- Apply header and footer to first slide only -->
+<!-- _header: "[![Bordeaux INP logo](../ensc_logo.jpg)](https://www.bordeaux-inp.fr)" -->
+<!-- _footer: "[Baptiste Pesquet](https://www.bpesquet.fr)" -->
 
 # Predict California housing prices
 
 > This chapter is inspired by the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2)
+
+---
 
 ## Learning objectives
 
