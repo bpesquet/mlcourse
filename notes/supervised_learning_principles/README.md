@@ -145,7 +145,7 @@ The core data structure of Machine Learning, a **tensor** is a multidimensional 
 - A tensor’s *rank* is its number of axes.
 - A tensor’s *shape* describes the number of values along each axis.
 
-> A *scalar* is a rank 0 (0D) tensor, a *vector* a rank 1 (1D) tensor and a *matrix* is a rank 2 (2D) tensor.
+> A *scalar* is a rank 0 (0D) tensor, a *vector* is a rank 1 (1D) tensor and a *matrix* is a rank 2 (2D) tensor.
 
 ---
 

@@ -8,7 +8,7 @@ marp: true
 
 # Predict California housing prices
 
-> This chapter is inspired by the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2)
+> This chapter is inspired by the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2).
 
 ---
 
@@ -103,7 +103,8 @@ The pandas [read_csv](https://pandas.pydata.org/docs/reference/api/pandas.read_c
 The objective here is to gain insights about the data, in order to prepare it optimally for training. This might involve:
 
 - plotting histograms of values.
-- computing statistical metrics like values repartition or correlation between features;
+- computing statistical metrics like values repartition or correlation between features.
+- ...
 
 ---
 
@@ -287,8 +288,6 @@ A more sophisticated strategy is to apply **K-fold cross validation**. Training 
 ---
 
 ## Step 4: tune the most promising model
-
----
 
 ### Step 4.1: search for the best hyperparameters
 
