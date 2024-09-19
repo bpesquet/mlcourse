@@ -294,7 +294,7 @@ def test_california_housing_prices(show_plots=False):
     # STEP 1
     # The df_ prefix is used to distinguish dataframes from plain NumPy arrays
     df_housing = load_dataset(
-        "https://raw.githubusercontent.com/bpesquet/ainotes/master/data/california_housing.csv"
+        "https://raw.githubusercontent.com/bpesquet/mlcourse/main/datasets/california_housing.csv"
     )
 
     # STEP 2
