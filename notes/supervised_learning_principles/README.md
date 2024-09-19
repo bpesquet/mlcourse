@@ -10,15 +10,16 @@ marp: true
 
 ---
 
+<!-- Show pagination, starting with second slide -->
+<!-- paginate: true -->
+
 ## Learning objectives
 
-- Define how a supervised ML system can be formalized.
+- Discover the code concepts of supervised learning.
+- Understand how a supervised ML system can be formalized.
 - Develop an intuition of learning via gradient descent.
 
 ---
-
-<!-- Show pagination starting with second slide -->
-<!-- paginate: true -->
 
 ## Terminology
 
@@ -133,6 +134,18 @@ $$\pmb{Y} = \begin{bmatrix}
        \ \vdots & \vdots & \ddots & \vdots \\
        \ y^{(m)}_1 & y^{(m)}_2 & \cdots & y^{(m)}_K
      \end{bmatrix} \in \mathbb{R}^{m \times K}$$
+
+---
+
+### Tensors
+
+The core data structure of Machine Learning, a **tensor** is a multidimensional array of primitive values sharing the same type (most often numerical). For example, inputs and target matrices are stored as tensors in program memory.
+
+- A tensor’s dimension is also called an *axis*.
+- A tensor’s *rank* is its number of axes.
+- A tensor’s *shape* describes the number of values along each axis.
+
+> A *scalar* is a rank 0 (0D) tensor, a *vector* a rank 1 (1D) tensor and a *matrix* is a rank 2 (2D) tensor.
 
 ---
 

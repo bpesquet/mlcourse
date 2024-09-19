@@ -10,6 +10,9 @@ marp: true
 
 ---
 
+<!-- Show pagination, starting with second slide -->
+<!-- paginate: true -->
+
 ## Learning objectives
 
 - Know what Machine Learning and Deep Learning are about.
