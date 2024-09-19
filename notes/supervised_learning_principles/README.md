@@ -137,7 +137,7 @@ $$\pmb{Y} = \begin{bmatrix}
 
 ---
 
-### Tensors
+#### Tensors
 
 The core data structure of Machine Learning, a **tensor** is a multidimensional array of primitive values sharing the same type (most often numerical). For example, inputs and target matrices are stored as tensors in program memory.
 
