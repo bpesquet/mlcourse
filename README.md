@@ -14,7 +14,7 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 
 - Principles of supervised learning [ [notes](notes/supervised_learning_principles/README.md) ]
 - 👨🏻‍💻 Essential tools [ [lab](labs/essential_tools.md) ]
-- Predict California housing prices [ [notes](notes/predict_california_housing_prices/README.md) | [code](mlcourse/test_predict_california_housing_prices.py) ]
+- Predict California housing prices [ [notes](notes/predict_california_housing_prices/README.md) | [code](mlcourse/test_california_housing_prices.py ]
 - Recognize handwritten digits [ [notes]() | [code]() ]
 - 👩🏻‍💻 Predict heart disease [ [lab]() | [code]() ]
 - Linear Regression [ [notes](notes/linear_regression/README.md) | [code](mlcourse/test_linear_regression.py) ]

@@ -317,6 +317,7 @@ def test_california_housing_prices(show_plots=False):
         final_model, df_x_test, df_y_test, preprocessing_pipeline
     )
 
+    # STEP 5
     save_model(final_model, preprocessing_pipeline)
 
 
