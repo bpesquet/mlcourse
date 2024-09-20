@@ -110,7 +110,7 @@ AI has many social and societal implications:
 
 ---
 
-### References
+## References
 
 1. S. Legg; M. Hutter (2007). "A Collection of Definitions of Intelligence". [Advances in Artificial General Intelligence: Concepts, Architectures and Algorithms](http://dl.acm.org/citation.cfm?id=1565458). Vol. 157. IOS Press. pp. 17–24. ISBN 978-1586037581.
 1. Sharma, Radha R. (2008). Emotional Intelligence from 17th Century to 21st Century: Perspectives and Directions for Future Research. Sage Journals. Vol. 12.

@@ -23,8 +23,6 @@ marp: true
 
 ## Whats is Machine Learning?
 
----
-
 ### The first definition of Machine Learning
 
 > "The field of study that gives computers the ability to learn without being explicitly programmed." (Arthur Samuel, 1959).
@@ -131,8 +129,6 @@ The system is able to detect abnomal samples (*outliers*).
 
 ## How do machines learn, actually?
 
----
-
 ### Algorithm #1: K-Nearest Neighbors
 
 Prediction is based on the `k` nearest neighbors of a data sample.
@@ -161,8 +157,6 @@ Layers of loosely neuron-inpired computation units that can approximate any cont
 ---
 
 ## The advent of Deep Learning
-
----
 
 ### The Deep Learning tsunami
 
