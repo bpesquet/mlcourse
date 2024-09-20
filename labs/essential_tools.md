@@ -12,3 +12,5 @@ The following tutorials will give you the first level of knowledge you need to s
 If you have already used NumPy, you may follow the pandas and scikit-learn tutorials first.
 
 > It is essential to test all code examples while studying these tutorials. The easiest way to obtain a working Python environement is by using a [Jupyter notebook](https://jupyter.org/) execution platform like [Google Colaboratory](https://colab.research.google.com/), [Paperspace](https://www.paperspace.com/notebooks) or [Kaggle Notebooks](https://www.kaggle.com/code).
+
+When done with the tutorials, you may take the following test to check your new knowledge: <https://app.wooclap.com/IMLJFN?from=event-page>
