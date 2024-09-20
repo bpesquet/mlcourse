@@ -174,6 +174,12 @@ A solution is to apply one-of-K encoding, also named **dummy encoding** or **one
 
 ---
 
+##### One-hot encoding example
+
+![One-hot encoding example](images/one_hot_example.png)
+
+---
+
 ##### One-hot encoding and training/test sets
 
 Depending on value distribution between training and test sets, some categories might appear only in one set.
