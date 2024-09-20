@@ -149,7 +149,7 @@ Build a tree-like structure based on a series of discovered questions on the dat
 
 ---
 
-### Algorithm #3: Neural Networks
+### Algorithm #3: Artificial Neural Networks
 
 Layers of loosely neuron-inpired computation units that can approximate any continuous function.
 

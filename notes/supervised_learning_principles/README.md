@@ -15,7 +15,7 @@ marp: true
 
 ## Learning objectives
 
-- Discover the code concepts of supervised learning.
+- Discover the core concepts of supervised learning.
 - Understand how a supervised ML system can be formalized.
 - Develop an intuition of learning via gradient descent.
 
@@ -82,7 +82,7 @@ $$\pmb{x}^{(i)} = \begin{pmatrix}
 
 #### Targets
 
-**Targets** are the expected results (labels) associated to a data sample, often called the *ground truth*. They are denoted using the $\pmb{y}$ variable.
+**Targets** are the expected results (labels) associated to a data sample, often called the *ground truth*. They are often denoted using the $\pmb{y}$ variable.
 
 Some ML models have to predict more than one value for each sample (for example, in multiclass classification). In that case, $K>1$.
 
@@ -149,6 +149,14 @@ The core data structure of Machine Learning, a **tensor** is a multidimensional 
 
 ---
 
+#### Tensor axes
+
+Many tensor operations can be applied along one or several axes. They are indexed starting at 0.
+
+[![NumPy axes](images/numpy_axes.png)](https://www.sharpsightlabs.com/blog/numpy-axes-explained/)
+
+---
+
 ### Model
 
 The representation learnt from data during training is called a **model**. It defines the relationship between features and labels.
@@ -194,7 +202,7 @@ $$\pmb{y'}^{(i)} = \begin{pmatrix}
 
 #### Predictions matrix
 
-Model predictions for the whole dataset can be stored in a $m \times K$ matrix denoted $\pmb{Y'}$.
+Model predictions for the whole dataset can be stored in a $m \times K$ matrix often denoted $\pmb{Y'}$.
 
 $$\pmb{Y'} =
 \begin{bmatrix}
