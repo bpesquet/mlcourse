@@ -1,5 +1,6 @@
 ---
 marp: true
+math: true  # Use default Marp engin for math rendering
 ---
 
 <!-- Apply header and footer to first slide only -->
@@ -15,15 +16,12 @@ marp: true
 
 ## Learning objectives
 
-- Discover the core concepts of supervised learning.
+- Discover the terminology and core concepts of supervised learning.
 - Understand how a supervised ML system can be formalized.
-- Develop an intuition of learning via gradient descent.
 
 ---
 
-## Terminology
-
-### Components of a supervised ML system
+## Components of a supervised ML system
 
 - Some **data** to learn from.
 - A **model** to transform data into results.
@@ -32,9 +30,9 @@ marp: true
 
 ---
 
-### Data
+## Data
 
-#### Features
+### Features
 
 A **feature** is an attribute (property) of the data given to the model: the number of rooms in a house, the color of a pixel in an image, the presence of a specific word in a text, etc. Most of the time, they come under numerical form.
 
@@ -44,7 +42,7 @@ They are often denoted using the $x$ variable.
 
 ---
 
-#### Labels
+### Labels
 
 A **label** (or **class** in the context of classification), is a result the model is trying to predict: the future price of an asset, the nature of the animal shown in a picture, the presence or absence of a face, etc.
 
@@ -52,7 +50,7 @@ They are often denoted using the $y$ variable.
 
 ---
 
-#### Samples
+### Samples
 
 An **sample**, also called an **example**, is a particular instance of data: an individual email, an image, etc.
 
@@ -60,7 +58,7 @@ A **labeled sample** includes both its feature(s) and the associated label(s) to
 
 ---
 
-#### Inputs
+### Inputs
 
 **Inputs** correspond to all features for one sample of the dataset.
 
@@ -99,7 +97,7 @@ $$\pmb{y}^{(i)} = \begin{pmatrix}
 
 ---
 
-#### Inputs matrix
+### Inputs matrix
 
 Many ML models expect their inputs to come under the form of a $m \times n$ matrix, often called **design matrix** and denoted $\pmb{X}$.
 
@@ -118,7 +116,7 @@ $$\pmb{X} = \begin{bmatrix}
 
 ---
 
-#### Targets matrix
+### Targets matrix
 
 Accordingly, expected results are often stored in a $m \times K$ matrix denoted $\pmb{Y}$.
 
@@ -137,7 +135,7 @@ $$\pmb{Y} = \begin{bmatrix}
 
 ---
 
-#### Tensors
+### Tensors
 
 The core data structure of Machine Learning, a **tensor** is a multidimensional array of primitive values sharing the same type (most often numerical). For example, inputs and target matrices are stored as tensors in program memory.
 
@@ -157,7 +155,7 @@ Many tensor operations can be applied along one or several axes. They are indexe
 
 ---
 
-### Model
+## Model
 
 The representation learnt from data during training is called a **model**. It defines the relationship between features and labels.
 
@@ -167,14 +165,14 @@ Most (but not all) ML systems are model-based.
 
 ---
 
-#### The two phases of a model's life
+### The two phases of a model's life
 
 - **Training**: using labeled samples, the model learns to find a relationship between features and labels.
 - **Inference**: the trained model is used to make predictions on unlabeled samples (new data unseen during training).
 
 ---
 
-#### Model parameters Vs hyperparameters
+### Parameters Vs hyperparameters
 
 **Parameters**, sometimes called **weights**, are the internal values that affect the computed output of a model. During the training phase, they are algorithmically adjusted for optimal performance w.r.t the loss function. The set of parameters for a model is often denoted $\pmb{\omega}$ or $\pmb{\theta}$.
 
@@ -182,7 +180,7 @@ They are not to be confused with **hyperparameters**, which are configuration pr
 
 ---
 
-#### Hypothesis function
+### Hypothesis function
 
 Mathematically speaking, a model is a function of the inputs that depends on its parameters and computes results (which will be compared to targets during the training process).
 
@@ -200,7 +198,7 @@ $$\pmb{y'}^{(i)} = \begin{pmatrix}
 
 ---
 
-#### Predictions matrix
+### Predictions matrix
 
 Model predictions for the whole dataset can be stored in a $m \times K$ matrix often denoted $\pmb{Y'}$.
 
@@ -221,7 +219,7 @@ $$\pmb{Y'} =
 
 ---
 
-### Loss function
+## Loss function
 
 The **loss function**, also called **cost function** or **objective function**, quantifies the difference, often called **error**, between targets (expected results) and actual results computed by the model. Its value at any given time is a scalar called the **loss value**, or simply **loss**.
 
@@ -233,7 +231,7 @@ The loss function is generally denoted $\mathcal{L}$ or $\mathcal{J}$.
 
 ---
 
-#### Loss function example
+### Loss function example
 
 The choice of the loss function depends on the problem type.
 
@@ -243,181 +241,10 @@ $$\mathcal{L}_{\mathrm{MSE}}(\pmb{\omega}) = \frac{1}{m}\sum_{i=1}^m (h_{\pmb{\o
 
 ---
 
-### Optimization algorithm
+## Optimization algorithm
 
 Used only during the training phase, it aims at finding the set of model parameters (denoted $\pmb{\omega^*}$ or $\pmb{\theta^*}$) that minimizes the loss value.
 
 Depending on the task and the model type, several algorithms of various complexity exist.
 
 [![Untrained Vs trained model](images/LossSideBySide.png)](https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss)
-
----
-
-## Reducing loss via gradient descent
-
----
-
-### The gradient descent algorithm
-
-#### An iterative approach
-
-- The model's parameters are iteratively updated until an optimum is reached.
-- Each GD iteration combines two steps: computing the gradient of the loss function, then use it to update model parameters.
-
-[![Iterative approach](images/GradientDescentDiagram.png)](https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss)
-
----
-
-#### Step 1: compute gradient of loss function
-
-A **gradient** expresses the variation of a function relative to the variation of its parameters.
-
-$$\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega}) = \begin{pmatrix}
-       \ \frac{\partial}{\partial \omega_1} \mathcal{L}(\pmb{\omega}) \\
-       \ \frac{\partial}{\partial \omega_2} \mathcal{L}(\pmb{\omega}) \\
-       \ \vdots \\
-     \end{pmatrix}$$
-
-- $\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega})$: gradient of loss function $\mathcal{L}(\pmb{\omega})$.
-- $\frac{\partial}{\partial \omega_i} \mathcal{L}(\pmb{\omega})$: partial derivative of the loss function *w.r.t.* its $i$th parameter.
-
----
-
-#### Step 2: update model parameters
-
-In order to reduce loss for the next iteration, parameters are updated in the **opposite direction** of the gradient.
-
-$$\pmb{\omega_{t+1}} = \pmb{\omega_t} - \eta\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})$$
-
-- $\pmb{\omega_{t}}$: set of parameters at step $t$ of the gradient descent.
-- $\pmb{\omega_{t+1}}$: set of parameters at step $t+1$ (after update).
-- $\eta$ (sometimes denoted $\alpha$ or $\lambda$): update factor for parameters, called the **_learning rate_**.
-
----
-
-### Examples
-
-#### 1D gradient descent (one parameter)
-
-![Gradient Descent](images/gradient_descent_1parameter.png)
-
----
-
-#### 2D gradient descent (two parameters)
-
-![Tangent Space](images/tangent_space.png)
-
----
-
-#### Dynamics of a 2D gradient descent
-
-[![Gradient descent line graph](images/gradient_descent_line_graph.gif)](https://alykhantejani.github.io/a-brief-introduction-to-gradient-descent/)
-
----
-
-### Gradient descent types
-
-#### Batch Gradient Descent
-
-The gradient is computed on the whole dataset before model parameters are updated.
-
-- Advantages: simple and safe (always converges in the right direction).
-- Drawback: can become slow and even untractable with a big dataset.
-
----
-
-#### Stochastic Gradient Descent (SGD)
-
-The gradient is computed on only one randomly chosen sample whole dataset before parameters are updated.
-
-- Advantages:
-  - Very fast.
-  - Enables learning from each new sample (*online learning*).
-- Drawback:
-  - Convergence is not guaranteed.
-  - No vectorization of computations.
-
----
-
-#### Mini-Batch SGD
-
-The gradient is computed on a small set of samples, called a *batch*, before parameters are updated.
-
-- Combines the advantages of batch and stochastic GD.
-- Default method for many ML libraries.
-- The mini-batch size varies between 10 and 1000 samples, depending of the dataset size.
-
----
-
-### Parameters update
-
-#### Impact of learning rate
-
-[![Learning rate](images/learning_rate.png)](https://developers.google.com/machine-learning/crash-course/fitter/graph)
-
----
-
-#### The local minima problem
-
-![Local minima](images/local_minima.jpg)
-
----
-
-![Gradient Descent](images/gd_ng.jpg)
-
----
-[![GD loss landscape](images/gd_loss_landscape.jpg)](https://www.youtube.com/embed/Q3pTEtSEvDI)
-
----
-
-### Gradient descent optimization algorithms
-
-#### Gradient descent evolution map
-
-[![Gradient Descent evolution map](images/gradient_descent_evolution_map.png)](https://towardsdatascience.com/10-gradient-descent-optimisation-algorithms-86989510b5e9)
-
----
-
-#### Momentum
-
-Momentum optimization accelerates the descent speed in the direction of the minimum by accumulating previous gradients. It can also escape plateaux faster then plain GD.
-
-[![Momemtum demo](images/gd_momentum_demo.gif)](https://youtu.be/qPKKtvkVAjY)
-
----
-
-##### Momentum equations
-
-$$\pmb{m_{t+1}} = \beta_t \pmb{m_t} - \nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})$$
-
-$$\pmb{\omega_{t+1}} = \pmb{\omega_t} + \eta_t\pmb{m_{t+1}}$$
-
-- $\pmb{m_t}$: momentum at step $t$.
-- $\beta_t \in [0,1]$: friction factor that prevents gradients updates from growing too large. A typical value is $0.9$.
-
----
-
-##### Momentum Vs plain GD
-
-[![Momentum Vs plain GD](images/gd_momentum.png)](https://youtu.be/kVU8zTI-Od0)
-
----
-
-#### RMSprop
-
-*RMSprop* decays the learning rate differently for each parameter, scaling down the gradient vector along the steepest dimensions. The underlying idea is to adjust the descent direction a bit more towards the global minimum.
-
-$$\pmb{v_{t+1}} = \beta_t \pmb{v_t} + (1-\beta_t) \left(\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})\right)^2$$
-
-$$\pmb{\omega_{t+1}} = \pmb{\omega_t} - \frac{\eta}{\sqrt{\pmb{v_{t}}+\epsilon}}\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega_t})$$
-
-- $\pmb{v_t}$: moving average of squared gradients at step $t$.
-- $\epsilon$: smoothing term to avoid divisions by zero. A typical value is $10^{-10}$.
-
----
-
-#### Adam and other techniques
-
-*Adam* (*Adaptive Moment Estimation*) combines the ideas of momentum and RMSprop. It is the *de facto* choice nowadays.
-
-Gradient descent optimization is a rich subfield of Machine Learning. Read more in [this article](http://ruder.io/optimizing-gradient-descent/).
