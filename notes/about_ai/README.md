@@ -1,6 +1,6 @@
 ---
 marp: true
-math: true  # Use default Marp engin for math rendering---
+math: true  # Use default Marp engin for math rendering
 ---
 
 <!-- Apply header and footer to first slide only -->
@@ -13,6 +13,14 @@ math: true  # Use default Marp engin for math rendering---
 
 <!-- Show pagination, starting with second slide -->
 <!-- paginate: true -->
+
+## Learning objectives
+
+- Find out what's being the Artificial Intelligence term.
+- Learn about the history of AI.
+- Discover with some of the many facets of AI.
+
+---
 
 ## A recent discipline
 
