@@ -6,6 +6,6 @@ marp: true
 <!-- _header: "[![Bordeaux INP logo](../ensc_logo.jpg)](https://www.bordeaux-inp.fr)" -->
 <!-- _footer: "[Baptiste Pesquet](https://www.bpesquet.fr)" -->
 
-# Linear Regression
+# Artificial Neural Networks
 
 > Soon!
