@@ -1,6 +1,7 @@
 ---
 marp: true
 math: true  # Use default Marp engin for math rendering---
+---
 
 <!-- Apply header and footer to first slide only -->
 <!-- _header: "[![Bordeaux INP logo](../ensc_logo.jpg)](https://www.bordeaux-inp.fr)" -->
