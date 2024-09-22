@@ -1,5 +1,6 @@
 ---
 marp: true
+math: true  # Use default Marp engin for math rendering
 ---
 
 <!-- Apply header and footer to first slide only -->
@@ -17,7 +18,7 @@ marp: true
 
 - Discover how to train a Machine Learning model on bitmap images.
 - Understand how loss and model performance are evaluated in classification tasks.
-- Discover several performance metrics and how to choose between them.
+- Discover several performance metrics for classification, and how to choose between them.
 
 ---
 
@@ -55,9 +56,9 @@ A common practice for the MNIST dataset is to set apart 10,000 images for the te
 
 Digital images are stored using either the *bitmap* format (color values for all individual pixels in the image) or a *vectorized* format (a description of the elementary shapes in the image).
 
-Bitmap images can be easily manipulated as tensors. Each pixel color is typically expressed using a combination of the three primary colors (red, green and blue), with an integer value between 0 and 255 for each one.
+Bitmap images can be easily manipulated as tensors. Each pixel color is typically expressed using a combination of the three primary colors (red, green and blue), with an integer value in the $[0,255]$ range for each one.
 
-For grayscale bitmap images like those of the MNIST dataset, each pixel has only one integer value between 0 and 255.
+For grayscale bitmap images like those of the MNIST dataset, each pixel has only one integer value in the $[0,255]$ range.
 
 ---
 
@@ -65,11 +66,25 @@ For grayscale bitmap images like those of the MNIST dataset, each pixel has only
 
 ---
 
-#### Rescaling images
+### Reshaping images and videos
 
-As [seen before](../predict_california_housing_prices/README.md#feature-scaling), many ML algorithms need their inputs to be of similar scale for optimal results.
+A bitmap image can be represented as a 3D multidimensional array (height, width, color_channels).
 
-The common rescaling solution for the pixel values of bitmap images (integers between 0 and 255) is to divide them by 255, in order to obtain float values between 0 and 1.
+A video can be represented as a 4D multidimensional array (frames, height, width, color_channels).
+
+They have to be reshaped (*flattened* in that case) into a vector before being fed to most ML algorithms.
+
+---
+
+![Bitmap image flattening](images/image2vector.jpeg)
+
+---
+
+#### Rescaling images and videos
+
+As [seen before](../predict_california_housing_prices/README.md#feature-scaling), many ML algorithms need their inputs to be of similar scale for optimal performance.
+
+A common rescaling solution for the pixel values of bitmap images and videos (integers in the $[0,255]$ range) is to divide them by 255, in order to obtain float values in the $[0,1]$ range.
 
 ---
 
@@ -136,6 +151,12 @@ $$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$$
 The confusion matrix is a useful representation of classification results. Row are actual classes, columns are predicted classes.
 
 [![Confusion matrix for 5s](images/confusion_matrix.png)](https://github.com/ageron/handson-ml2)
+
+---
+
+##### Confusion matrix for binary digits classification
+
+![Confusion matrix for binary digits classification](images/confusion_matrix_binary.png)
 
 ---
 
@@ -207,3 +228,9 @@ $$\mathcal{L}_{\mathrm{CE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K
 ### Assessing model performance
 
 Since dataset is not class imbalanced anymore, accuracy is now a reliable metric.
+
+---
+
+#### Confusion matrix for multiclass digits classification
+
+![Confusion matrix for multiclass digits classification](images/confusion_matrix_multiclass.png)
