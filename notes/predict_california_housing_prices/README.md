@@ -1,5 +1,6 @@
 ---
 marp: true
+math: true  # Use default Marp engin for math rendering
 ---
 
 <!-- Apply header and footer to first slide only -->
@@ -162,6 +163,8 @@ Most ML algorithms work best when all features have a similar scale. Several sol
 - **Min-Max scaling**: features are shifted and rescaled to the $[0,1]$ range by substracting the `min` value and dividing by `(max-min)` on the first axis.
 - **Standardization**: features are centered (substracted by their mean) then reduced (divided by their standard deviation) on the first axis. All resulting features have a mean of 0 and a standard deviation of 1.
 
+> In order to to avoid *information leakage*, the test set must be scaled with metrics (means, categories, etc) computed on the training set ([explanation 1](https://stats.stackexchange.com/questions/174823/how-to-apply-standardization-normalization-to-train-and-testset-if-prediction-i/174865#174865), [explanation 2](https://machinelearningmastery.com/data-leakage-machine-learning/)).
+
 ---
 
 #### Encoding of categorical features
@@ -312,7 +315,7 @@ This step can be either:
 
 Now is the time to evaluate the final model on the test set that we put apart before.
 
-An important point is that preprocessing operations should be applied to test data using preprocessing values (mean, categories...) previously computed on training data. This prevents **information leakage** from test data ([explanation](https://machinelearningmastery.com/data-leakage-machine-learning/))
+> Ass [seen before](#feature-scaling), preprocessing operations should be applied to test data using preprocessing metrics computed on training data.
 
 ---
 
