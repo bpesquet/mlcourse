@@ -3,21 +3,15 @@ Linear Regression with PyTorch
 """
 
 # Relax some linting rules for test code
-# pylint: disable=duplicate-code,too-many-locals,too-many-statements
+# pylint: disable=missing-docstring,duplicate-code,too-many-locals,too-many-statements
 
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 import torch
 from torch import nn
 
 
 def test_linear_regression(show_plots=False):
-    """Main test function"""
-
-    # Improve plots appearance
-    sns.set_theme()
-
     # Print environment info
     print(f"PyTorch version: {torch.__version__}")
 
