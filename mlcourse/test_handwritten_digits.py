@@ -27,6 +27,19 @@ def load_mnist_dataset():
     return images, targets
 
 
+def plot_digits(images, n_digits=10):
+    """Plot some images of the dataset"""
+
+    # Temporary hide Seaborn grid lines
+    with sns.axes_style("white"):
+        plt.figure()
+        for i in range(n_digits):
+            digit = images[i].reshape(28, 28)
+            _ = plt.subplot(2, 5, i + 1)
+            plt.imshow(digit)
+    plt.show()
+
+
 def split_preprocess_dataset(images, targets):
     """Split the dataset between training and test sets"""
 
@@ -101,6 +114,11 @@ def test_handwritten_digits(show_plots=False):
     """Main test function"""
 
     images, targets = load_mnist_dataset()
+
+    if show_plots:
+        # Improve plots appearance
+        sns.set_theme()
+        plot_digits(images)
 
     x_train, x_test, y_train, y_test = split_preprocess_dataset(images, targets)
 
