@@ -15,10 +15,10 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 
 - Principles of supervised learning [ [notes](notes/supervised_learning_principles/README.md) ]
 - 👨🏻‍💻 Essential tools [ [lab](labs/essential_tools/README.md) ]
-- Predict California housing prices [ [notes](notes/predict_california_housing_prices/README.md) | [code](mlcourse/test_california_housing_prices.py) ]
-- Recognize handwritten digits [ [notes](notes/recognize_handwritten_digits/README.md) | [code](/mlcourse/test_handwritten_digits.py) ]
+- Predict California housing prices [ [notes](notes/california_housing_prices/README.md) | [code](mlcourse/test_california_housing_prices.py) ]
+- Recognize handwritten digits [ [notes](notes/handwritten_digits/README.md) | [code](/mlcourse/test_handwritten_digits.py) ]
 - 🚧 👩🏻‍💻 Predict heart disease [ [lab](labs/predict_hear_disease/README.md) ]
-- 🚧 Learning via Gradient Descent [ [notes](notes/learning_via_gradient_descent/README.md) ]
+- Learning via Gradient Descent [ [notes](notes/gradient_descent/README.md) ]
 - 🚧 Linear Regression [ [notes](notes/linear_regression/README.md) ]
 - 🚧 Decision Trees & Random Forests [ [notes](notes/decision_trees_random_forests/README.md) ]
 - 🚧 Artificial Neural Networks [ [notes](notes/artificial_neural_networks/README.md) ]

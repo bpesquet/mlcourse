@@ -186,3 +186,132 @@ $$\pmb{\omega_{t+1}} = \pmb{\omega_t} - \frac{\eta}{\sqrt{\pmb{v_{t}}+\epsilon}}
 *Adam* (*Adaptive Moment Estimation*) combines the ideas of momentum and RMSprop. It is the *de facto* choice nowadays.
 
 Gradient descent optimization is a rich subfield of Machine Learning. Read more in [this article](http://ruder.io/optimizing-gradient-descent/).
+
+---
+
+## Gradients computation
+
+### Numerical differentiation
+
+- Finite difference approximation of derivatives.
+- Interpretations: instantaneous rate of change, slope of the tangent.
+- Generally unstable and limited to a small set of functions.
+
+$$g'(a) = \frac{\partial g(a)}{\partial a} = \lim_{h \to 0} \frac{g(a + h) - g(a)}{h}$$
+
+$$\frac{\partial f(\pmb{x})}{\partial x_i} = \lim_{h \to 0} \frac{f(\pmb{x} + h\pmb{e}_i) - f(\pmb{x})}{h}$$
+
+---
+
+### Symbolic differentiation
+
+- Automatic manipulation of expressions for obtaining derivative expressions.
+- Used in modern mathematical software (Mathematica, Maple...).
+- Can lead to *expression swell*: exponentially large
+symbolic expressions.
+
+$$\frac{\mathrm{d}}{\mathrm{d}x}\left(f(x)+g(x)\right) = \frac{\mathrm{d}}{\mathrm{d}x}f(x)+\frac{\mathrm{d}}{\mathrm{d}x}g(x)$$
+
+$$\frac{\mathrm{d}}{\mathrm{d}x}\left(f(x)g(x)\right) = \left(\frac{\mathrm{d}}{\mathrm{d}x}f(x)\right)g(x)+f(x)\left(\frac{\mathrm{d}}{\mathrm{d}x}g(x)\right)$$
+
+---
+
+### Automatic differentiation (*autodiff*)
+
+- Family of techniques for efficiently computing derivatives of numeric functions.
+- Can differentiate closed-form math expressions, but also algorithms using branching, loops or recursion.
+
+### Autodiff and its main modes
+
+- AD combines numerical and symbolic differentiation.
+- General idea: apply symbolic differentiation at the elementary operation level and keep intermediate numerical results.
+- AD exists in two modes: forward and reverse. Both rely on the **chain rule**.
+
+$$\frac{\mathrm{d}y}{\mathrm{d}x} = \frac{\mathrm{d}y}{\mathrm{d}w_2} \frac{\mathrm{d}w_2}{\mathrm{d}w_1} \frac{\mathrm{d}w_1}{\mathrm{d}x}$$
+
+---
+
+### Forward mode autodiff
+
+- Computes gradients w.r.t. one parameter along with the function output.
+- Relies on [dual numbers](https://en.wikipedia.org/wiki/Automatic_differentiation#Automatic_differentiation_using_dual_numbers).
+- Efficient when output dimension >> number of parameters.
+
+---
+
+### Reverse mode autodiff
+
+- Computes function output, then do a backward pass to compute gradients w.r.t. all parameters for the output.
+- Efficient when number of parameters >> output dimension.
+
+---
+
+#### Example: reverse mode autodiff in action
+
+Let's define the function $f$ of two variables $x_1$ and $x_2$ like so:
+
+$$f(x_1,x_2) = log_e(x_1) + x_1x_2 - sin(x_2)$$
+
+It can be represented as a *computational graph*:
+
+![Computational graph](images/computational_graph.png)
+
+---
+
+##### Step 1: forward pass
+
+Intermediate values are calculated and tensor operations are memorized for future gradient computations.
+
+![The forward pass](images/autodiff_forward_pass.png)
+
+---
+
+##### Step 2: backward pass
+
+The [chain rule](https://en.wikipedia.org/wiki/Chain_rule) is applied to compute every intermediate gradient, starting from output.
+
+$$y = f(g(x)) \;\;\;\; \frac{\partial y}{\partial x} = \frac{\partial f}{\partial g} \frac{\partial g}{\partial x}\;\;\;\; \frac{\partial y}{\partial x} = \sum_{i=1}^n \frac{\partial f}{\partial g^{(i)}} \frac{\partial g^{(i)}}{\partial x}$$
+
+---
+
+![Autodiff backward pass](images/autodiff_backward_pass.png)
+
+---
+
+$$y=v_5=v_4-v_3$$
+
+$$\frac{\partial y}{\partial v_4}=1\;\;\;\;\frac{\partial y}{\partial v_3}=-1$$
+
+$$v_4=v_1+v_2$$
+
+$$\frac{\partial y}{\partial v_1}=\frac{\partial y}{\partial v_4}\frac{\partial v_4}{\partial v_1}=1\;\;\;\;\frac{\partial y}{\partial v_2}=\frac{\partial y}{\partial v_4}\frac{\partial v_4}{\partial v_2}=1$$
+
+---
+
+$$v_1 = log_e(x_1)\;\;\;\;v_2 = x_1x_2\;\;\;\;v_3 = sin(x_2)$$
+
+$$\frac{\partial v_1}{\partial x_1}=\frac{1}{x_1}\;\;\;\;\frac{\partial v_2}{\partial x_1}=x_2\;\;\;\;\frac{\partial v_2}{\partial x_2}=x_1\;\;\;\;\frac{\partial v_3}{\partial x_2}=cos(x_2)$$
+
+$$\frac{\partial y}{\partial x_1}=\frac{\partial y}{\partial v_1}\frac{\partial v_1}{\partial x_1}+\frac{\partial y}{\partial v_2}\frac{\partial v_2}{\partial x_1}=\frac{1}{x_1}+x_2$$
+
+$$\frac{\partial y}{\partial x_2}=\frac{\partial y}{\partial v_2}\frac{\partial v_2}{\partial x_2}+\frac{\partial y}{\partial v_3}\frac{\partial v_3}{\partial x_2}=x_1-cos(x_2)$$
+
+---
+
+### Autodifferention with PyTorch
+
+*Autograd* is the name of PyTorch's autodifferentiation engine.
+
+If its `requires_grad` attribute is set to `True`, PyTorch will track all operations on a tensor and provide *reverse mode automatic differentiation*: partial derivatives are automatically computed backward w.r.t. all involved parameters.
+
+The gradient for a tensor will be accumulated into its `.grad` attribute.
+
+More info on autodiff in PyTorch is available [here](https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html).
+
+---
+
+### Differentiable programming
+
+Aka [software 2.0](https://medium.com/@karpathy/software-2-0-a64152b37c35).
+
+> "People are now building a new kind of software by assembling networks of parameterized functional blocks and by training them from examples using some form of gradient-based optimization…. It’s really very much like a regular program, except it’s parameterized, automatically differentiated, and trainable/optimizable" (Y. LeCun).
