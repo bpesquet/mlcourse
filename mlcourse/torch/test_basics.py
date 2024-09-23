@@ -74,7 +74,7 @@ def test_tensor_manipulation():
         if torch.cuda.is_available()
         else "mps" if torch.backends.mps.is_available() else "cpu"
     )
-    print(f"Using {device} device")
+    print(f"PyTorch version: {torch.__version__}. using {device} device")
 
     # Copy tensor to GPU memory (if available)
     x_device = x.to(device)
@@ -243,9 +243,6 @@ def test_model_loading_saving():
 
 # Standalone execution
 if __name__ == "__main__":
-    # Print environment info
-    print(f"PyTorch version: {torch.__version__}")
-
     test_tensor_manipulation()
     test_autodiff()
     test_dataset_loading()

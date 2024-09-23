@@ -3,7 +3,7 @@ Linear Regression with PyTorch
 """
 
 # Relax some linting rules for test code
-# pylint: disable=missing-docstring,duplicate-code,too-many-locals,too-many-statements
+# pylint: disable=duplicate-code,too-many-locals,too-many-statements
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,8 +12,7 @@ from torch import nn
 
 
 def test_linear_regression(show_plots=False):
-    # Print environment info
-    print(f"PyTorch version: {torch.__version__}")
+    """Main test function"""
 
     # Accessing GPU device if available, or failing back to CPU
     device = torch.device(
@@ -21,9 +20,9 @@ def test_linear_regression(show_plots=False):
         if torch.cuda.is_available()
         else "mps" if torch.backends.mps.is_available() else "cpu"
     )
-    print(f"Using {device} device")
+    print(f"PyTorch version: {torch.__version__}. using {device} device")
 
-    # Configuration and hyperparameters
+    # Configuration values and hyperparameters
     input_dim = 1
     output_dim = 1
     n_epochs = 60

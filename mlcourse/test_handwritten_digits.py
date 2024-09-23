@@ -118,6 +118,7 @@ def test_handwritten_digits(show_plots=False):
     if show_plots:
         # Improve plots appearance
         sns.set_theme()
+
         plot_digits(images)
 
     x_train, x_test, y_train, y_test = split_preprocess_dataset(images, targets)

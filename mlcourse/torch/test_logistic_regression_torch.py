@@ -3,7 +3,7 @@ Logistic Regression with PyTorch
 """
 
 # Relax some linting rules for test code
-# pylint: disable=missing-docstring,duplicate-code,too-many-locals,too-many-statements
+# pylint: disable=duplicate-code,too-many-locals,too-many-statements
 
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_classification
@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader
 
 
 def test_logistic_regression(show_plots=False):
-    print(f"PyTorch version: {torch.__version__}")
+    """Main test function"""
 
     # Accessing GPU device if available, or failing back to CPU
     device = torch.device(
@@ -21,9 +21,9 @@ def test_logistic_regression(show_plots=False):
         if torch.cuda.is_available()
         else "mps" if torch.backends.mps.is_available() else "cpu"
     )
-    print(f"Using {device} device")
+    print(f"PyTorch version: {torch.__version__}. using {device} device")
 
-    # Configuration and hyperparameters
+    # Configuration values and hyperparameters
     n_samples = 1000
     input_dim = 2
     output_dim = 4  # Number of classes
