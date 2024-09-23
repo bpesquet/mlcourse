@@ -21,7 +21,7 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 - Learning via Gradient Descent [ [notes](notes/gradient_descent/README.md) ]
 - 🚧 Linear Regression [ [notes](notes/linear_regression/README.md) ]
 - 🚧 Decision Trees & Random Forests [ [notes](notes/decision_trees_random_forests/README.md) ]
-- 🚧 Artificial Neural Networks [ [notes](notes/artificial_neural_networks/README.md) ]
+- 🚧 Feedforward Neural Networks [ [notes](notes/feedforward_neural_networks/README.md) | [code](/mlcourse/test_feedforward_neural_networks.py)]
 - ... (more to come)
 
 ### Deep Learning
