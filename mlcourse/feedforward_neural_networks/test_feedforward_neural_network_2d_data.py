@@ -1,5 +1,5 @@
 """
-Feedforward Neural Network a.k.a. MultiLayer Perceptron (MLP)
+Feedforward Neural Network a.k.a. MultiLayer Perceptron (MLP) trained on a 2D dataset
 """
 
 import numpy as np
@@ -10,7 +10,6 @@ from sklearn.datasets import make_circles
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
 
 
 def plot_2d_dataset(x, y):
@@ -81,8 +80,8 @@ def load_2d_dataset(inputs, targets, batch_size, device):
     return dataloader
 
 
-def fit_with_manual_gd(model, dataloader, criterion, learning_rate, n_epochs, device):
-    """Train a model on a dataset"""
+def fit(model, dataloader, criterion, learning_rate, n_epochs, device):
+    """Train a model on a dataset, using manual parameters update"""
 
     for epoch in range(n_epochs):
         for x_batch, y_batch in dataloader:
@@ -100,8 +99,9 @@ def fit_with_manual_gd(model, dataloader, criterion, learning_rate, n_epochs, de
             # Compute gradients of loss w.r.t. each parameter
             loss.backward()
 
+            # no_grad() avoids tracking operations history when gradients computation is not needed
             with torch.no_grad():
-                # Manual dradient descent step: update the weights in the opposite direction of their gradient
+                # Manual gradient descent step: update the weights in the opposite direction of their gradient
                 for param in model.parameters():
                     param -= learning_rate * param.grad
 
@@ -111,21 +111,24 @@ def fit_with_manual_gd(model, dataloader, criterion, learning_rate, n_epochs, de
             )
 
 
-def test_feedforward_neural_network(show_plots=False, use_mps=False):
+def test_feedforward_neural_network_2d_data(show_plots=False):
     """Main test function"""
 
+    # pylint: disable=duplicate-code
     # Accessing GPU device if available, or failing back to CPU
-    # There are performance issues with MPS backend for MLP-like models
     device = torch.device(
         "cuda"
         if torch.cuda.is_available()
-        else "mps" if torch.backends.mps.is_available() and use_mps else "cpu"
+        # There are performance issues with MPS backend for MLP-like models
+        else "cpu"
     )
     print(f"PyTorch version: {torch.__version__}. using {device} device")
+    # Relax some linting rules for test code
+    # pylint: enable=duplicate-code
 
     # Configuration values and hyperparameters
     input_dim = 2
-    hidden_dim = 3  # Number of neurons on the hidden layer
+    hidden_dim = 2  # Number of neurons on the hidden layer
     output_dim = 1  # Only one output for binary classification
     batch_size = 5
     n_epochs = 50
@@ -133,7 +136,7 @@ def test_feedforward_neural_network(show_plots=False, use_mps=False):
 
     inputs, targets = create_2d_dataset(show_plots)
 
-    dataloader = load_2d_dataset(inputs, targets, batch_size, device)
+    dataloader = load_2d_dataset(inputs, targets, batch_size, device=device)
 
     # Create the model as a sequential stack of layers
     model = nn.Sequential(
@@ -144,11 +147,11 @@ def test_feedforward_neural_network(show_plots=False, use_mps=False):
     ).to(device)
     print(model)
 
-    # nn.CrossEntropyLoss computes softmax internally
+    # Binary cross-entropy loss
     criterion = nn.BCELoss()
 
     # Training loop
-    fit_with_manual_gd(model, dataloader, criterion, learning_rate, n_epochs, device)
+    fit(model, dataloader, criterion, learning_rate, n_epochs, device)
 
     if show_plots:
         plot_decision_boundary(model, inputs, targets, device)
@@ -156,4 +159,4 @@ def test_feedforward_neural_network(show_plots=False, use_mps=False):
 
 # Standalone execution
 if __name__ == "__main__":
-    test_feedforward_neural_network(show_plots=True)
+    test_feedforward_neural_network_2d_data(show_plots=True)
