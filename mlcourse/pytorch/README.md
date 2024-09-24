@@ -1,4 +1,4 @@
-# PyTorch code examples
+# Introduction to PyTorch
 
 ## PyTorch Basics
 
