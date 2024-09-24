@@ -80,6 +80,16 @@ def load_2d_dataset(inputs, targets, batch_size, device):
     return dataloader
 
 
+def count_parameters(model, trainable=True):
+    """Return the total number of (trainable) parameters for a model"""
+
+    return (
+        sum(p.numel() for p in model.parameters() if p.requires_grad)
+        if trainable
+        else sum(p.numel() for p in model.parameters())
+    )
+
+
 def fit(model, dataloader, criterion, learning_rate, n_epochs, device):
     """Train a model on a dataset, using manual parameters update"""
 
@@ -146,6 +156,7 @@ def test_feedforward_neural_network_2d_data(show_plots=False):
         nn.Sigmoid(),
     ).to(device)
     print(model)
+    print(f"Number of trainable parameters: {count_parameters(model)}")
 
     # Binary cross-entropy loss
     criterion = nn.BCELoss()
