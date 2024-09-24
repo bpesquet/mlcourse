@@ -227,11 +227,11 @@ def test_feedforward_neural_network_fashion_images(show_plots=False):
     device = torch.device(
         "cuda"
         if torch.cuda.is_available()
-        # There are performance issues with MPS backend for MLP-like models
+        # else "mps" if torch.backends.mps.is_available()
+        # There are performance issues with MPS backend for MLP-like models: using cpu instead
         else "cpu"
     )
     print(f"PyTorch version: {torch.__version__}. using {device} device")
-    # Relax some linting rules for test code
     # pylint: enable=duplicate-code
 
     # Configuration values and hyperparameters

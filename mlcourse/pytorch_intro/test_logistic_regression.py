@@ -19,11 +19,11 @@ def test_logistic_regression(show_plots=False):
     device = torch.device(
         "cuda"
         if torch.cuda.is_available()
-        # There are performance issues with MPS backend for MLP-like models
+        # else "mps" if torch.backends.mps.is_available()
+        # There are performance issues with MPS backend for MLP-like models: using cpu instead
         else "cpu"
     )
     print(f"PyTorch version: {torch.__version__}. using {device} device")
-    # Relax some linting rules for test code
 
     # Configuration values and hyperparameters
     n_samples = 1000
@@ -48,22 +48,17 @@ def test_logistic_regression(show_plots=False):
         plt.scatter(
             inputs[:, 0], inputs[:, 1], marker="o", c=targets, s=25, edgecolor="k"
         )
+        plt.title(f"Logistic Regression with PyTorch: {output_dim} classes")
         plt.show()
 
     # Convert dataset to PyTorch tensors
     x_train = torch.from_numpy(inputs).float().to(device)
-    y_train = torch.from_numpy(targets).int().to(device)
+    y_train = torch.from_numpy(targets).to(device)
 
     # Create data loader
     clf_dataloader = DataLoader(
         list(zip(x_train, y_train)), batch_size=batch_size, shuffle=True
     )
-
-    # Number of samples
-    n_samples = len(clf_dataloader.dataset)
-
-    # Number of batches in an epoch (= n_samples / batch_size, rounded up)
-    n_batches = len(clf_dataloader)
 
     # Logistic regression model
     model = nn.Linear(in_features=input_dim, out_features=output_dim).to(device)
@@ -73,6 +68,12 @@ def test_logistic_regression(show_plots=False):
 
     # Mini-batch stochastic gradient descent
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+
+    # Number of samples
+    n_samples = len(clf_dataloader.dataset)
+
+    # Number of batches in an epoch (= n_samples / batch_size, rounded up)
+    n_batches = len(clf_dataloader)
 
     # Train the model
     for epoch in range(n_epochs):
@@ -101,12 +102,12 @@ def test_logistic_regression(show_plots=False):
                 )
 
         # Compute epoch metrics
-        mean_loss = epoch_loss / n_batches
+        epoch_loss /= n_batches
         epoch_acc = n_correct / n_samples
 
         if (epoch + 1) % 5 == 0:
             print(
-                f"Epoch [{(epoch + 1):3}/{n_epochs:3}] finished. Mean loss: {mean_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
+                f"Epoch [{(epoch + 1):3}/{n_epochs:3}] finished. Mean loss: {epoch_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
             )
 
 

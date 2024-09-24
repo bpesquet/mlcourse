@@ -7,6 +7,7 @@ Linear Regression with PyTorch
 
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 import torch
 from torch import nn
 
@@ -18,11 +19,9 @@ def test_linear_regression(show_plots=False):
     device = torch.device(
         "cuda"
         if torch.cuda.is_available()
-        # There are performance issues with MPS backend for MLP-like models
-        else "cpu"
+        else "mps" if torch.backends.mps.is_available() else "cpu"
     )
     print(f"PyTorch version: {torch.__version__}. using {device} device")
-    # Relax some linting rules for test code
 
     # Configuration values and hyperparameters
     input_dim = 1
@@ -75,7 +74,7 @@ def test_linear_regression(show_plots=False):
 
     # Convert dataset to PyTorch tensors
     x_train = torch.from_numpy(inputs).float().to(device)
-    y_train = torch.from_numpy(targets).float().to(device)
+    y_train = torch.from_numpy(targets).to(device)
 
     # Linear regression model
     model = nn.Linear(in_features=input_dim, out_features=output_dim).to(device)
@@ -108,6 +107,9 @@ def test_linear_regression(show_plots=False):
             )
 
     if show_plots:
+        # Improve plots appearance
+        sns.set_theme()
+
         # Plot the training results
         predicted = model(x_train).detach().cpu().numpy()
         plt.plot(inputs, targets, "ro", label="Original data")
