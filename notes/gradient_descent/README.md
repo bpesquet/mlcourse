@@ -298,15 +298,9 @@ $$\frac{\partial y}{\partial x_2}=\frac{\partial y}{\partial v_2}\frac{\partial 
 
 ---
 
-### Autodifferention with PyTorch
+### Autodifferention in practice
 
-*Autograd* is the name of PyTorch's autodifferentiation engine.
-
-If its `requires_grad` attribute is set to `True`, PyTorch will track all operations on a tensor and provide *reverse mode automatic differentiation*: partial derivatives are automatically computed backward w.r.t. all involved parameters.
-
-The gradient for a tensor will be accumulated into its `.grad` attribute.
-
-More info on autodiff in PyTorch is available [here](https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html).
+Many Machine Learning libraries offer out-of-the-box support for automatic gradients computation. Some prominent ones are currently [TensorFlow](https://www.tensorflow.org/), [PyTorch](https://pytorch.org) and [JAX](https://jax.readthedocs.io).
 
 ---
 

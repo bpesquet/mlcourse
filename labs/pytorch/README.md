@@ -10,4 +10,4 @@ The easiest way to discover PyTorch is by following a tutorial. The official web
 
 ## Step 2: study some code examples
 
-You should now be able to understand some simple PyTorch code. Put this new skill to the test by studying these [examples](../../mlcourse/torch/README.md).
+You should now be able to understand some simple PyTorch code. Put this new skill to the test by studying these [examples](../../mlcourse/pytorch/README.md).
