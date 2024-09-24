@@ -18,7 +18,7 @@ good-names=i,j,k,x,y
 max-args = 6
 
 # Maximum number of locals for function / method body
-max-locals = 17
+max-locals = 18
 
 [TYPECHECK]
 

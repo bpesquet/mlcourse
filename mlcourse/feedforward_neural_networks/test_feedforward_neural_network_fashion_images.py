@@ -3,6 +3,7 @@ Feedforward Neural Network a.k.a. MultiLayer Perceptron (MLP) trained on fashion
 """
 
 import matplotlib.pyplot as plt
+import seaborn as sns
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
@@ -47,6 +48,31 @@ def plot_fashion_images(data, device, model=None):
 
         plt.axis("off")
         plt.imshow(img.cpu().detach().numpy().squeeze(), cmap="gray")
+    plt.show()
+
+
+def plot_loss_acc(history, dataset="Training"):
+    """Plot training loss and accuracy. Takes a Keras-like History object as parameter"""
+
+    loss_values = history["loss"]
+    recorded_epochs = range(1, len(loss_values) + 1)
+
+    fig, (ax1, ax2) = plt.subplots(2, 1)
+    ax1.plot(recorded_epochs, loss_values, ".--", label=f"{dataset} loss")
+    ax1.set_ylabel("Loss")
+    ax1.legend()
+
+    acc_values = history["acc"]
+    ax2.plot(recorded_epochs, acc_values, ".--", label=f"{dataset} accuracy")
+    ax2.set_xlabel("Epochs")
+    ax2.set_ylabel("Accuracy")
+    plt.legend()
+
+    final_loss = loss_values[-1]
+    final_acc = acc_values[-1]
+    fig.suptitle(
+        f"{dataset} loss: {final_loss:.5f}. {dataset} accuracy: {final_acc*100:.2f}%"
+    )
     plt.show()
 
 
@@ -118,11 +144,16 @@ class FashionNet(nn.Module):
 def fit(model, dataloader, criterion, optimizer, n_epochs, device):
     """Train a model on a dataset, using a predefined gradient descent optimizer"""
 
+    # Object storing training history
+    history = {"loss": [], "acc": []}
+
     # Number of samples
     n_samples = len(dataloader.dataset)
 
     # Number of batches in an epoch (= n_samples / batch_size, rounded up)
     n_batches = len(dataloader)
+
+    print(f"Training started! {n_samples} samples. {n_batches} batches per epoch")
 
     # Train the model
     for epoch in range(n_epochs):
@@ -159,6 +190,12 @@ def fit(model, dataloader, criterion, optimizer, n_epochs, device):
         print(
             f"Epoch [{(epoch + 1):3}/{n_epochs:3}] finished. Mean loss: {mean_loss:.5f}. Accuracy: {epoch_acc * 100:.2f}%"
         )
+
+        # Record epoch metrics for later plotting
+        history["loss"].append(mean_loss)
+        history["acc"].append(epoch_acc)
+
+    return history
 
 
 def evaluate(model, dataloader, device):
@@ -221,12 +258,18 @@ def test_feedforward_neural_network_fashion_images(show_plots=False):
     # Adam optimizer for GD
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-    fit(model, train_loader, criterion, optimizer, n_epochs, device)
+    history = fit(model, train_loader, criterion, optimizer, n_epochs, device)
 
     # Evaluate model performance on test data
     evaluate(model, test_loader, device)
 
     if show_plots:
+        # Improve plots appearance
+        sns.set_theme()
+
+        # Plot training history
+        plot_loss_acc(history)
+
         # Plot model predictions for some test images
         plot_fashion_images(test_dataset, device, model)
 
