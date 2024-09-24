@@ -12,6 +12,14 @@ disable=line-too-long,not-callable
 # Good variable names which should always be accepted, separated by a comma
 good-names=i,j,k,x,y
 
+[DESIGN]
+
+# Maximum number of arguments for function / method
+max-args = 6
+
+# Maximum number of locals for function / method body
+max-locals = 17
+
 [TYPECHECK]
 
 # List of members which are set dynamically and missed by Pylint inference

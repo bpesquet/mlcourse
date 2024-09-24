@@ -2,9 +2,6 @@
 PyTorch Basics
 """
 
-# Relax some linting rules for test code
-# pylint: disable=missing-docstring,duplicate-code,too-many-locals,too-many-statements
-
 import math
 import numpy as np
 from sklearn.datasets import make_circles
@@ -14,6 +11,8 @@ from torchvision import datasets, transforms, models
 
 
 def test_tensor_manipulation():
+    """Test tensors manipulation"""
+
     # Create a 1D tensor with predefined values
     x = torch.tensor([5.5, 3])
     assert x.shape == torch.Size([2])
@@ -87,6 +86,8 @@ def test_tensor_manipulation():
 
 
 def test_autodiff():
+    """Test autograd engine"""
+
     # Example 1: basic operations
 
     # Create tensor with gradient computation activated
@@ -135,6 +136,8 @@ def test_autodiff():
 
 
 def test_dataset_loading():
+    """Test dataset loading"""
+
     # Relative path for saving and loading models
     data_folder = "./_output"
 
@@ -221,6 +224,8 @@ def test_dataset_loading():
 
 
 def test_model_loading_saving():
+    """Test model loading and saving"""
+
     # Relative path for saving and loading models
     model_folder = "./_output"
 

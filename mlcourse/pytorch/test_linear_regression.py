@@ -2,8 +2,8 @@
 Linear Regression with PyTorch
 """
 
-# Relax some linting rules for test code
-# pylint: disable=duplicate-code,too-many-locals,too-many-statements
+# Relax some linting rules
+# pylint: disable=duplicate-code
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -18,9 +18,11 @@ def test_linear_regression(show_plots=False):
     device = torch.device(
         "cuda"
         if torch.cuda.is_available()
-        else "mps" if torch.backends.mps.is_available() else "cpu"
+        # There are performance issues with MPS backend for MLP-like models
+        else "cpu"
     )
     print(f"PyTorch version: {torch.__version__}. using {device} device")
+    # Relax some linting rules for test code
 
     # Configuration values and hyperparameters
     input_dim = 1
@@ -96,7 +98,7 @@ def test_linear_regression(show_plots=False):
 
         # no_grad() avoids tracking operations history when gradients computation is not needed
         with torch.no_grad():
-            # Manual dradient descent step: update the weights in the opposite direction of their gradient
+            # Manual gradient descent step: update the weights in the opposite direction of their gradient
             for param in model.parameters():
                 param -= learning_rate * param.grad
 

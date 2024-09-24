@@ -2,8 +2,8 @@
 Logistic Regression with PyTorch
 """
 
-# Relax some linting rules for test code
-# pylint: disable=duplicate-code,too-many-locals,too-many-statements
+# Relax some linting rules
+# pylint: disable=duplicate-code,too-many-locals
 
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_classification
@@ -19,9 +19,11 @@ def test_logistic_regression(show_plots=False):
     device = torch.device(
         "cuda"
         if torch.cuda.is_available()
-        else "mps" if torch.backends.mps.is_available() else "cpu"
+        # There are performance issues with MPS backend for MLP-like models
+        else "cpu"
     )
     print(f"PyTorch version: {torch.__version__}. using {device} device")
+    # Relax some linting rules for test code
 
     # Configuration values and hyperparameters
     n_samples = 1000
