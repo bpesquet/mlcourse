@@ -1,5 +1,5 @@
 """
-Feedforward Neural Network a.k.a. MultiLayer Perceptron (MLP) trained on fasion images
+Feedforward Neural Network a.k.a. MultiLayer Perceptron (MLP) trained on fashion images
 """
 
 import matplotlib.pyplot as plt
