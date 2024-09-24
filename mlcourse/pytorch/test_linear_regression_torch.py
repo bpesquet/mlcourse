@@ -94,8 +94,9 @@ def test_linear_regression(show_plots=False):
         # Compute gradients
         loss.backward()
 
-        # Gradient descent step: update the weights in the opposite direction of their gradient
+        # no_grad() avoids tracking operations history when gradients computation is not needed
         with torch.no_grad():
+            # Manual dradient descent step: update the weights in the opposite direction of their gradient
             for param in model.parameters():
                 param -= learning_rate * param.grad
 

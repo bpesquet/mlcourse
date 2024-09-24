@@ -17,7 +17,7 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 - 👨🏻‍💻 Essential tools [ [lab](labs/essential_tools/README.md) ]
 - Predict California housing prices [ [notes](notes/california_housing_prices/README.md) | [code](mlcourse/test_california_housing_prices.py) ]
 - Recognize handwritten digits [ [notes](notes/handwritten_digits/README.md) | [code](/mlcourse/test_handwritten_digits.py) ]
-- 🚧 👩🏻‍💻 Predict heart disease [ [lab](labs/predict_hear_disease/README.md) ]
+- 🚧 👩🏻‍💻 Predict heart disease [ [lab](labs/predict_heart_disease/README.md) ]
 - Learning via Gradient Descent [ [notes](notes/gradient_descent/README.md) ]
 - 🚧 Linear Regression [ [notes](notes/linear_regression/README.md) ]
 - 🚧 Decision Trees & Random Forests [ [notes](notes/decision_trees_random_forests/README.md) ]
@@ -30,7 +30,7 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 
 Deep Learning is a subset of Machine Learning based on the usage of large neural networks trained on vast amounts of data.
 
-- 👨🏻‍💻 Introduction to PyTorch [ [lab](labs/pytorch/README.md) | [code](/mlcourse/torch/README.md) ]
+- 👨🏻‍💻 Introduction to PyTorch [ [lab](labs/pytorch/README.md) | [code](/mlcourse/pytorch/README.md) ]
 - 🚧 Convolutional Neural Networks [ [notes](notes/convolutional_neural_networks/README.md) ]
 - ... (more to come)
 

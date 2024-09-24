@@ -90,6 +90,7 @@ def test_logistic_regression(show_plots=False):
             loss.backward()
             optimizer.step()
 
+            # no_grad() avoids tracking operations history when gradients computation is not needed
             with torch.no_grad():
                 # Accumulate data for epoch metrics: loss and number of correct predictions
                 epoch_loss += loss.item()
