@@ -1,5 +1,7 @@
 """
-Recognize handwritten digits
+Assessing classification performance.
+
+Inspired by https://github.com/ageron/handson-ml2/blob/master/03_classification.ipynb
 """
 
 import matplotlib.pyplot as plt
@@ -110,7 +112,7 @@ def train_and_evaluate_classifier(x, y, show_plots):
     return model
 
 
-def test_handwritten_digits(show_plots=False):
+def test_assessing_classification_performance(show_plots=False):
     """Main test function"""
 
     images, targets = load_mnist_dataset()
@@ -145,4 +147,4 @@ def test_handwritten_digits(show_plots=False):
 
 # Standalone execution
 if __name__ == "__main__":
-    test_handwritten_digits(show_plots=True)
+    test_assessing_classification_performance(show_plots=True)

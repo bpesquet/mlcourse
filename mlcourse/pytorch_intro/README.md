@@ -26,7 +26,7 @@ After gradients computation, parameters are updated manually to better illustrat
 
 This [example](test_logistic_regression.py) uses the [Linear](https://pytorch.org/docs/stable/generated/torch.nn.Linear.html) class to implement logistic regression on a simple dataset generated via [scikit-learn](https://scikit-learn.org).
 
-It uses the [cross-entropy](../../notes/handwritten_digits/README.md#choosing-a-loss-function-1) a.k.a. negative log-likelihood loss, implemented by the [CrossEntropyLoss](https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html) class.
+It uses the [cross-entropy](../../notes/assessing_classification_performance/README.md#choosing-a-loss-function-1) a.k.a. negative log-likelihood loss, implemented by the [CrossEntropyLoss](https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html) class.
 
 > This is equivalent to combining the [LogSoftmax](https://pytorch.org/docs/stable/generated/torch.nn.LogSoftmax.html#torch.nn.LogSoftmax) and [NLLLoss](https://pytorch.org/docs/stable/generated/torch.nn.NLLLoss.html#torch.nn.NLLLoss) classes ([more details](https://towardsdatascience.com/cross-entropy-negative-log-likelihood-and-all-that-jazz-47a95bd2e81)).
 

@@ -7,7 +7,7 @@ math: true  # Use default Marp engin for math rendering
 <!-- _header: "[![Bordeaux INP logo](../ensc_logo.jpg)](https://www.bordeaux-inp.fr)" -->
 <!-- _footer: "[Baptiste Pesquet](https://www.bpesquet.fr)" -->
 
-# Recognize handwritten digits
+# Assessing classification performance
 
 ---
 
@@ -16,9 +16,9 @@ math: true  # Use default Marp engin for math rendering
 
 ## Learning objectives
 
+- Understand how to evaluate a Machine Learning model in a classification task.
+- Discover several performance metrics and how to choose between them.
 - Discover how to train a Machine Learning model on bitmap images.
-- Understand how loss and model performance are evaluated in classification tasks.
-- Discover several performance metrics for classification, and how to choose between them.
 
 ---
 
@@ -96,7 +96,13 @@ To simplify things, let's start by trying to identify one digit: the number 5. T
 
 ---
 
-### Choosing a loss function
+### Assessing performance during training
+
+The training process is steered by the [loss function](../supervised_learning_principles/README.md#loss-function), which quantifies the difference between expected and actual results on the training set.
+
+---
+
+#### Choosing a loss function
 
 This choice depends on the problem type. For binary classification tasks where expected results are either 1 (*True*) or 0 (*False*), a popular choice is the **Binary Cross Entropy loss**, a.k.a. *log(istic regression) loss*. It is implemented in the scikit-learn [log_loss](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html) function.
 
@@ -113,7 +119,7 @@ $$\mathcal{L}_{\mathrm{BCE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m \left(y^{(
 
 ---
 
-### Assesing model performance
+### Assessing performance during inference
 
 Once trained, a model's performance must be evaluated with metrics dedicated to classification tasks.
 
@@ -213,7 +219,7 @@ Let's switch back to our original task: recognize any of the 10 possibles digits
 
 ---
 
-### Choosing a loss function
+### Assessing performance during training
 
 The log loss extends naturally to the multiclass case. It is called **Cross Entropy** a.k.a. *Negative Log-Likelihood*, and is also implemented in the scikit-learn [log_loss](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html) function.
 
@@ -225,7 +231,7 @@ $$\mathcal{L}_{\mathrm{CE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K
 
 ---
 
-### Assessing model performance
+### Assessing performance during inference
 
 Since dataset is not class imbalanced anymore, accuracy is now a reliable metric.
 
