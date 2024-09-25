@@ -17,13 +17,13 @@ math: true  # Use default Marp engin for math rendering
 ## Learning objectives
 
 - Know the possibilities, architecture and key components of a feedforward neural network.
-- Understand how neural networks are trained.
+- Understand how neural networks are trained and tuned.
 
 ---
 
-## Discovering neural networks
+## Toying with a neural network
 
-[![TensorFlow playground](images/tf_playground.png)](http://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.1&regularizationRate=0&noise=0&networkShape=2&seed=0.59857&showTestData=false&discretize=false&percTrainData=30&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false&showTestData_hide=false&problem_hide=true&regularization_hide=true&regularizationRate_hide=true&percTrainData_hide=false)
+[![TensorFlow playground](images/tf_playground.png)](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.1&regularizationRate=0&noise=0&networkShape=2&seed=0.41559&showTestData=false&discretize=false&percTrainData=70&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false&showTestData_hide=true&problem_hide=true&regularization_hide=true&regularizationRate_hide=true&percTrainData_hide=true&noise_hide=true&dataset_hide=true)
 
 ---
 
@@ -78,6 +78,18 @@ At the time, no learning algorithm existed for training the hidden layers of a M
 - 1986: learning through backpropagation (Rumelhart, Hinton, Williams).
 - 1989: first researchs on deep neural nets (LeCun, Bengio).
 - 1991: Universal approximation theorem. Given appropriate complexity and appropriate learning, a network can theorically approximate any continuous function.
+
+---
+
+### Universal approximation theorem (1991)
+
+- The hidden layers of a neural network transform their input space.
+
+- A network can be seen as a series of non-linear compositions applied to the input data.
+
+- Given appropriate complexity and appropriate learning, a network can theorically approximate any continuous function.
+
+- One of the most important theoretical results for neural networks.
 
 ---
 
@@ -140,6 +152,12 @@ $$ReLU'(x) =
 
 ---
 
+#### Plotting activation functions
+
+![Activation functions](images/activation_functions.png)
+
+---
+
 ## Training process
 
 ### Learning algorithm
@@ -191,7 +209,7 @@ The training algorithm is as follows:
 
 ---
 
-### Hyperparameters
+### Training hyperparameters
 
 Hyperparameters ($\neq$ model parameters) are adjustable configuration values that let you control the model training process.
 
@@ -222,3 +240,45 @@ $$y = f(g(x)) \;\;\;\; \frac{\partial y}{\partial x} = \frac{\partial f}{\partia
 ### Visual demo of backpropagation
 
 [![Backprop explained visually](images/visual_backprop_demo.png)](https://developers-dot-devsite-v2-prod.appspot.com/machine-learning/crash-course/backprop-scroll)
+
+---
+
+## Tuning a neural network
+
+## Hyperparameters choice
+
+In general order of importance:
+
+- Number of layers
+- Number of neurons on hidden layers
+- Activation functions
+- Learning rate
+- Batch size
+- ...
+
+---
+
+### Tackling overfitting
+
+#### Regularization
+
+Limit weights values by adding a penalty to the loss function.
+
+$$\mathcal{l1} = \frac{\lambda}{m} {\sum |{\mathbf{\theta}_{ij}}|}\;\;\;\;
+\mathcal{l2} = \frac{2\lambda}{m} {\sum {\mathbf{\theta}_{ij}}^2}$$
+
+$\lambda$ is called the **regularization rate**.
+
+---
+
+#### Dropout
+
+During training, some input units are randomly set to 0. The network must adapt and become more generic. The more units dropped out, the stronger the regularization.
+
+![Dropout](images/dropout.png)
+
+---
+
+### Interactive recap
+
+[![Neural networks playground (complete)](images/tf_playground_complete.png)](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.48717&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false)
