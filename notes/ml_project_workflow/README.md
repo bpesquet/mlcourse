@@ -7,7 +7,7 @@ math: true  # Use default Marp engin for math rendering
 <!-- _header: "[![Bordeaux INP logo](../ensc_logo.jpg)](https://www.bordeaux-inp.fr)" -->
 <!-- _footer: "[Baptiste Pesquet](https://www.bpesquet.fr)" -->
 
-# Predict California housing prices
+# Machine Learning project workflow
 
 > This chapter is inspired by the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2).
 
@@ -18,9 +18,9 @@ math: true  # Use default Marp engin for math rendering
 
 ## Learning objectives
 
-- Discover how to train a Machine Learning model on tabular data.
-- Get familiar with the general workflow of a supervised ML project.
-- Learn how to leverage the [pandas](https://pandas.pydata.org/) and [scikit-learn](https://scikit-learn.org) libraries.
+- Get familiar with the general workflow of a (supervised) Machine Learning project
+- Understand each step of this process, from problem definition to model deployment.
+- Discover how to train a ML model on tabular data.
 
 > You may test the trained model [here](https://housing-prices-api.herokuapp.com/).
 

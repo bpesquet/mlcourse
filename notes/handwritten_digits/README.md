@@ -44,7 +44,7 @@ It is also possible to retrieve this dataset from several online sources, like f
 
 ### Dataset splitting
 
-Data preparation begins with splitting the dataset between training and test sets (see [here](../california_housing_prices/README.md#step-23-split-the-dataset) for more details).
+Data preparation begins with splitting the dataset between training and test sets (see [here](../ml_project_workflow/README.md#step-23-split-the-dataset) for more details).
 
 A common practice for the MNIST dataset is to set apart 10,000 images for the test set.
 
@@ -82,7 +82,7 @@ They have to be reshaped (*flattened* in that case) into a vector before being f
 
 #### Rescaling images and videos
 
-As [seen before](../california_housing_prices/README.md#feature-scaling), many ML algorithms need their inputs to be of similar scale for optimal performance.
+As [seen before](../ml_project_workflow/README.md#feature-scaling), many ML algorithms need their inputs to be of similar scale for optimal performance.
 
 A common rescaling solution for the pixel values of bitmap images and videos (integers in the $[0,255]$ range) is to divide them by 255, in order to obtain float values in the $[0,1]$ range.
 
