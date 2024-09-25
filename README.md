@@ -16,8 +16,8 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 #### Fundamentals
 
 - Principles of supervised learning [ [notes](notes/supervised_learning_principles/README.md) ]
-- End-to-end project workflow [ [notes](notes/project_workflow/README.md) | [example](mlcourse/project_workflow/README.md) ]
-- Assessing classification performance [ [notes](notes/classification_performance/README.md) | [example](/mlcourse/classification_performance/README.md) ]
+- End-to-end project workflow [ [notes](notes/project_workflow/README.md) | [example](mlcourse/project_workflow/) ]
+- Assessing classification performance [ [notes](notes/classification_performance/README.md) | [example](/mlcourse/classification_performance/) ]
 - Learning via Gradient Descent [ [notes](notes/gradient_descent/README.md) ]
 - 👨🏻‍💻 Essential tools [ [lab](labs/essential_tools/README.md) ]
 - 🚧 👩🏻‍💻 Predict heart disease [ [lab](labs/predict_heart_disease/README.md) ]
@@ -34,10 +34,10 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 
 Deep Learning is a subset of Machine Learning based on the usage of large neural networks trained on vast amounts of data.
 
-- Feedforward Neural Networks [ [notes](notes/feedforward_neural_networks/README.md) | [example](/mlcourse/pytorch_intro/README.md#feedforward-neural-network) ]
-- 👩🏻‍💻 Introduction to PyTorch [ [lab](labs/pytorch_intro/README.md) | [examples](/mlcourse/pytorch_intro/README.md) ]
-- 👨🏻‍💻 Classify 2D data with a neural network [ [lab](labs/classify_2d_data/README.md) | [solution](/mlcourse/classify_2d_data/README.md) ]
-- Convolutional Neural Networks [ [notes](notes/convolutional_neural_networks/README.md) | [example](/mlcourse/convolutional_neural_networks/README.md) ]
+- Feedforward Neural Networks [ [notes](notes/feedforward_neural_networks/README.md) | [example](/mlcourse/feedforward_neural_networks/) ]
+- 👩🏻‍💻 Introduction to PyTorch [ [lab](labs/pytorch_intro/README.md) | [examples](/mlcourse/pytorch_intro/) ]
+- 👨🏻‍💻 Classify 2D data with a neural network [ [lab](labs/classify_2d_data/README.md) | [solution](/mlcourse/classify_2d_data/) ]
+- Convolutional Neural Networks [ [notes](notes/convolutional_neural_networks/README.md) | [example](/mlcourse/convolutional_neural_networks/) ]
 - ... (more to come)
 
 ### Reinforcement Learning
