@@ -158,6 +158,8 @@ Output size = input size
 
 Same principle as a dense neural network: **backpropagation** + **gradient descent**.
 
+For convolution layers, the learned parameters are the values of the different kernels.
+
 [Backpropagation In Convolutional Neural Networks](https://www.jefkine.com/general/2016/09/05/backpropagation-in-convolutional-neural-networks/)
 
 ---
@@ -247,3 +249,35 @@ Trained on 2 GPU for 5 to 6 days.
   - Sophisticated optimizers
   - Normalisation layers
   - Network design
+
+---
+
+## Using a pretrained network
+
+---
+
+### An efficient strategy
+
+A *pretrained* convnet is a saved network that was previously trained on a large dataset (typically on a large-scale image classification task). If the training set was general enough, it can act as a generic model and its learned features can be useful for many problems.
+
+It is an example of *transfer learning*.
+
+There are two ways to use a pretrained model: *feature extraction* and *fine-tuning*.
+
+---
+
+### Feature extraction
+
+Reuse the convolution base of a pretrained model, and add a custom classifier trained from scratch on top ot if.
+
+State-of-the-art models (VGG, ResNet, Inception...) are regularly published by top AI institutions.
+
+### Fine-tuning
+
+Slightly adjusts the top feature extraction layers of the model being reused, in order to make it more relevant for the new context.
+
+These top layers and the custom classification layers on top of them are jointly trained.
+
+---
+
+![Fine-tuning](images/fine_tuning.png)
