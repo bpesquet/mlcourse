@@ -15,13 +15,13 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 
 - Principles of supervised learning [ [notes](notes/supervised_learning_principles/README.md) ]
 - 👨🏻‍💻 Essential tools [ [lab](labs/essential_tools/README.md) ]
-- Machine Learning project workflow [ [notes](notes/ml_project_workflow/README.md) | [code](mlcourse/test_ml_project_workflow.py) ]
-- Assessing classification performance [ [notes](notes/assessing_classification_performance/README.md) | [code](/mlcourse/test_classification_performance.py) ]
+- End-to-end project workflow [ [notes](notes/project_workflow/README.md) | [code](mlcourse/project_workflow/test_project_workflow.py) ]
+- Assessing classification performance [ [notes](notes/classification_performance/README.md) | [code](/mlcourse/classification_performance/test_classification_performance.py) ]
 - 🚧 👩🏻‍💻 Predict heart disease [ [lab](labs/predict_heart_disease/README.md) ]
 - Learning via Gradient Descent [ [notes](notes/gradient_descent/README.md) ]
 - 🚧 Linear Regression [ [notes](notes/linear_regression/README.md) ]
 - 🚧 Decision Trees & Random Forests [ [notes](notes/decision_trees_random_forests/README.md) ]
-- Feedforward Neural Networks [ [notes](notes/feedforward_neural_networks/README.md) | [code](/mlcourse/feedforward_neural_networks/README.md) ]
+- Feedforward Neural Networks [ [notes](notes/feedforward_neural_networks/README.md) | [code](/mlcourse/pytorch_intro/README.md#feedforward-neural-network) ]
 - ... (more to come)
 
 ### Deep Learning

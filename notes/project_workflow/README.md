@@ -7,7 +7,7 @@ math: true  # Use default Marp engin for math rendering
 <!-- _header: "[![Bordeaux INP logo](../ensc_logo.jpg)](https://www.bordeaux-inp.fr)" -->
 <!-- _footer: "[Baptiste Pesquet](https://www.bpesquet.fr)" -->
 
-# Machine Learning project workflow
+# End-to-end project workflow
 
 ---
 

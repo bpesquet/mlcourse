@@ -1,5 +1,5 @@
 """
-Machine Learning project workflow.
+End-to-end project workflow.
 
 Inspired by https://github.com/ageron/handson-ml2/blob/master/02_end_to_end_machine_learning_project.ipynb
 """
@@ -296,7 +296,7 @@ def save_model(model, pipeline):
     # ...
 
 
-def test_ml_project_workflow(show_plots=False):
+def test_project_workflow(show_plots=False):
     """Main test function"""
 
     # STEP 1
@@ -331,4 +331,4 @@ def test_ml_project_workflow(show_plots=False):
 
 # Standalone execution
 if __name__ == "__main__":
-    test_ml_project_workflow(show_plots=True)
+    test_project_workflow(show_plots=True)

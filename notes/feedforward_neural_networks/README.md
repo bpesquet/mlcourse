@@ -162,9 +162,9 @@ To facilitate training, initial weights must be:
 
 ### Loss function
 
-For binary classification tasks, the standard choice is the [binary cross-entropy loss](../../notes/assessing_classification_performance/README.md#binary-cross-entropy-loss), For each sample of the batch, it will compare the output of the model (a value $\in [0,1]$ provided by the sigmoid function) with the expected binary value $\in \{0,1\}$.
+For binary classification tasks, the standard choice is the [binary cross-entropy loss](../../notes/classification_performance/README.md#binary-cross-entropy-loss), For each sample of the batch, it will compare the output of the model (a value $\in [0,1]$ provided by the sigmoid function) with the expected binary value $\in \{0,1\}$.
 
-The standard choice for multiclass classification tasks is the [cross-entropy loss](../../notes/assessing_classification_performance/README.md) a.k.a. negative log-likelihood loss.
+The standard choice for multiclass classification tasks is the [cross-entropy loss](../../notes/classification_performance/README.md) a.k.a. negative log-likelihood loss.
 
 ---
 
