@@ -20,14 +20,18 @@ class Convnet(nn.Module):
 
         # Define a sequential stack
         self.layer_stack = nn.Sequential(
-            # Feature extraction part, with convolutional and pooling layers
+            # 2D convolution, output dimensions: (32, 26, 26)
+            # Without padding, output_dim = (input_dim - kernel_size + 1) / stride
             nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3),
             nn.ReLU(),
+            # Max pooling, output dimensions: (32, 13, 13)
             nn.MaxPool2d(kernel_size=2),
+            # 2D convolution, output dimensions: (64, 11, 11)
             nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3),
             nn.ReLU(),
+            # Max pooling, output dimensions: (64, 5, 5)
             nn.MaxPool2d(kernel_size=2),
-            # Classification part, with fully connected linear layers
+            # Flattening layer, output dimensions: (64x5x5 = 1600,)
             nn.Flatten(),
             nn.Linear(in_features=1600, out_features=128),
             nn.ReLU(),
