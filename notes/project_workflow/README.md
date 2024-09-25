@@ -60,10 +60,11 @@ math: true  # Use default Marp engin for math rendering
 
 ---
 
-### Example: predict housing prices in California
+### Problem example: predict housing prices
 
-- Inputs: housing properties in an area (number of rooms, median income, etc).
-- Output: median housing price in the area.
+- Regression task.
+- Inputs: housing properties (number of rooms, median income, etc).
+- Output: housing prices.
 
 ---
 
@@ -79,21 +80,9 @@ math: true  # Use default Marp engin for math rendering
 
 ---
 
-### The California housing dataset
-
-- Based on data from the 1990 California census.
-- The raw CSV file is available [here](https://raw.githubusercontent.com/bpesquet/mlcourse/main/datasets/california_housing.csv).
-- It is a slightly modified version of the [original dataset](https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html).
-
-[![Kaggle houses banner](images/kaggle_housesbanner.png)](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/overview)
-
----
-
 ### Step 2.1: load the dataset
 
 Many datasets containing tabular information are stored as a CSV (Comma-Separated Values) text file.
-
-The pandas [read_csv](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html) function can load a CSV file into a DataFrame from either a local path or a URL.
 
 ---
 
@@ -119,9 +108,7 @@ Once trained, a ML model must be able to **generalize** (perform well with new d
 
 ---
 
-A simple solution for splitting datasets is to use the scikit-learn [train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html) function.
-
-Just before or after that, inputs (features given to the model) have to be separated from targets (values it must predict).
+During dataset splitting, inputs (features given to the model) have to be separated from targets (values it must predict).
 
 [![Using train_test_split](images/train-test-split.jpg)](https://mgalarnyk.github.io/)
 
@@ -208,14 +195,6 @@ The ability of deep neural networks to discover useful features by themselves ha
 Example (taken from the book [Deep Learning with Python](https://github.com/fchollet/deep-learning-with-python-notebooks)): the task of learning the time of day from a clock is far easier with engineered features rather than raw clock images.
 
 [![Feature engineering](images/feature_engineering.png)](https://www.manning.com/books/deep-learning-with-python)
-
----
-
-#### Preprocessing pipelines
-
-Data preprocessing is done through a series of sequential operations on data (handling missing values, standardization, one-hot encoding...).
-
-Some Machine Learning tools support the definition of [pipelines](https://scikit-learn.org/stable/modules/compose.html#pipeline) for streamlining these operations. This is useful to prevent mistakes and oversights when preprocessing new data.
 
 ---
 

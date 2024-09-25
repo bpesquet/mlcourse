@@ -235,8 +235,6 @@ $$\mathcal{L}_{\mathrm{CE}}(\pmb{\omega}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K
 
 Since dataset is not class imbalanced anymore, accuracy is now a reliable metric.
 
----
-
 #### Confusion matrix for multiclass digits classification
 
 ![Confusion matrix for multiclass digits classification](images/confusion_matrix_multiclass.png)
