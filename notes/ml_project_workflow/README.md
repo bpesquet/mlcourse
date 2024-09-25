@@ -9,8 +9,6 @@ math: true  # Use default Marp engin for math rendering
 
 # Machine Learning project workflow
 
-> This chapter is inspired by the book [Hands-On Machine Learning](https://github.com/ageron/handson-ml2).
-
 ---
 
 <!-- Show pagination, starting with second slide -->
@@ -20,7 +18,7 @@ math: true  # Use default Marp engin for math rendering
 
 - Get familiar with the general workflow of a (supervised) Machine Learning project
 - Understand each step of this process, from problem definition to model deployment.
-- Discover how to train a ML model on tabular data.
+- Discover how to train a Machine Learning model on tabular data.
 
 > You may test the trained model [here](https://housing-prices-api.herokuapp.com/).
 
@@ -217,7 +215,7 @@ Example (taken from the book [Deep Learning with Python](https://github.com/fcho
 
 Data preprocessing is done through a series of sequential operations on data (handling missing values, standardization, one-hot encoding...).
 
-scikit-learn support the definition of **pipelines** for streamlining these operations. This is useful to prevent mistakes and oversights when preprocessing new data.
+Some Machine Learning tools support the definition of [pipelines](https://scikit-learn.org/stable/modules/compose.html#pipeline) for streamlining these operations. This is useful to prevent mistakes and oversights when preprocessing new data.
 
 ---
 
