@@ -1,8 +1,6 @@
-# Feedforward Neural Networks
+# Classify 2D data with a neural network
 
-## Classify 2D dataset
-
-This [example](test_feedforward_neural_network_2d_data.py) trains a classifying model on a 2D dataset generated with [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html). It is designed to mimic the experience of the [TensorFlow Playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=2,2&seed=0.17539&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false).
+This [example](test_classify_2d_data.py) trains a [feedforward neural network](../../notes/feedforward_neural_networks/README.md) on a 2D dataset generated with [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html).
 
 Generated data (NumPy tensors) needs to be converted to PyTorch tensors before training a PyTorch-based model. These new tensors are stored in the memory of the available device (GPU ou CPU).
 

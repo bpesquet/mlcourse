@@ -24,7 +24,8 @@ def plot_2d_dataset(x, y):
 
 
 def plot_decision_boundary(model, x, y, device):
-    """Plot the frontier between classes for a 2-dimensional dataset"""
+    """Plot the frontier between classes for a 2-dimensional dataset.
+    Note: x and y must be NumPy arrays, not PyTorch tensors."""
 
     plt.figure()
     # Set min and max values and give it some padding
@@ -42,6 +43,7 @@ def plot_decision_boundary(model, x, y, device):
     plt.contourf(xx, yy, zz, cmap=plt.colormaps.get_cmap("Spectral"))
     cm_bright = ListedColormap(["#FF0000", "#0000FF"])
     plt.scatter(x[:, 0], x[:, 1], c=y, cmap=cm_bright)
+    plt.title("Classification results")
     plt.show()
 
 
@@ -121,7 +123,7 @@ def fit(model, dataloader, criterion, learning_rate, n_epochs, device):
             )
 
 
-def test_feedforward_neural_network_2d_data(show_plots=False):
+def test_classify_2d_data(show_plots=False):
     """Main test function"""
 
     # pylint: disable=duplicate-code
@@ -138,7 +140,7 @@ def test_feedforward_neural_network_2d_data(show_plots=False):
 
     # Configuration values and hyperparameters
     input_dim = 2
-    hidden_dim = 2  # Number of neurons on the hidden layer
+    hidden_dim = 3  # Number of neurons on the hidden layer
     output_dim = 1  # Only one output for binary classification
     batch_size = 5
     n_epochs = 50
@@ -170,4 +172,4 @@ def test_feedforward_neural_network_2d_data(show_plots=False):
 
 # Standalone execution
 if __name__ == "__main__":
-    test_feedforward_neural_network_2d_data(show_plots=True)
+    test_classify_2d_data(show_plots=True)
