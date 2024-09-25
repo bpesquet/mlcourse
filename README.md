@@ -13,25 +13,31 @@ This repository contains the material for my Machine Learning course: [lecture n
 
 Supervised Learning is a subset of Machine Learning in which expected results are fed into the system alongside training data.
 
+#### Fundamentals
+
 - Principles of supervised learning [ [notes](notes/supervised_learning_principles/README.md) ]
-- 👨🏻‍💻 Essential tools [ [lab](labs/essential_tools/README.md) ]
-- End-to-end project workflow [ [notes](notes/project_workflow/README.md) | [code](mlcourse/project_workflow/test_project_workflow.py) ]
-- Assessing classification performance [ [notes](notes/classification_performance/README.md) | [code](/mlcourse/classification_performance/test_classification_performance.py) ]
-- 🚧 👩🏻‍💻 Predict heart disease [ [lab](labs/predict_heart_disease/README.md) ]
+- End-to-end project workflow [ [notes](notes/project_workflow/README.md) | [example](mlcourse/project_workflow/README.md) ]
+- Assessing classification performance [ [notes](notes/classification_performance/README.md) | [example](/mlcourse/classification_performance/README.md) ]
 - Learning via Gradient Descent [ [notes](notes/gradient_descent/README.md) ]
+- 👨🏻‍💻 Essential tools [ [lab](labs/essential_tools/README.md) ]
+- 🚧 👩🏻‍💻 Predict heart disease [ [lab](labs/predict_heart_disease/README.md) ]
+
+#### Algorithms
+
 - 🚧 Linear Regression [ [notes](notes/linear_regression/README.md) ]
 - 🚧 Decision Trees & Random Forests [ [notes](notes/decision_trees_random_forests/README.md) ]
-- Feedforward Neural Networks [ [notes](notes/feedforward_neural_networks/README.md) | [code](/mlcourse/pytorch_intro/README.md#feedforward-neural-network) ]
 - ... (more to come)
 
-### Deep Learning
+### Neural Networks and Deep Learning
 
 > Update in progress!
 
 Deep Learning is a subset of Machine Learning based on the usage of large neural networks trained on vast amounts of data.
 
-- 👨🏻‍💻 Introduction to PyTorch [ [lab](labs/pytorch_intro/README.md) | [code](/mlcourse/pytorch_intro/README.md) ]
-- Convolutional Neural Networks [ [notes](notes/convolutional_neural_networks/README.md) | [code](/mlcourse/test_convolutional_neural_network.py) ]
+- Feedforward Neural Networks [ [notes](notes/feedforward_neural_networks/README.md) | [example](/mlcourse/pytorch_intro/README.md#feedforward-neural-network) ]
+- 👩🏻‍💻 Introduction to PyTorch [ [lab](labs/pytorch_intro/README.md) | [examples](/mlcourse/pytorch_intro/README.md) ]
+- 👨🏻‍💻 Classify 2D data with a neural network [ [lab](labs/classify_2d_data/README.md) | [solution](/mlcourse/classify_2d_data/README.md) ]
+- Convolutional Neural Networks [ [notes](notes/convolutional_neural_networks/README.md) | [example](/mlcourse/test_convolutional_neural_network.py) ]
 - ... (more to come)
 
 ### Reinforcement Learning
