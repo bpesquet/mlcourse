@@ -218,7 +218,7 @@ This step is often iterative and can be quite empirical. Depending on data and m
 
 ---
 
-### Underfitting and overfitting
+#### Underfitting and overfitting
 
 - **Underfitting** (sometimes called *bias*): insufficient performance on training set.
 - **Overfitting** (sometimes called *variance*): performance gap between training and validation sets.
@@ -226,6 +226,19 @@ This step is often iterative and can be quite empirical. Depending on data and m
 Ultimately, we look for a tradeoff between underfitting and overfitting.
 
 The goal of the training step is to find a model powerful enough to **overfit the training set**.
+
+---
+
+#### Possible solutions
+
+- Tackle underfitting:
+  - Use a more complex model
+  - Train the model longer
+
+- Tackle overfitting:
+  - Use more training data
+  - Limit the model complexity
+  - Introduce model-specific solutions
 
 ---
 
@@ -262,6 +275,12 @@ After obtaining baseline results, other more sophisticated models may be tried, 
 Some results looks too good to be true. They are often cases of severe overfitting to the training set, which means the model won't perform well with unseen data.
 
 One way to assert overfitting is to split training data between a smaller training set and a **validation set**, used only to evaluate model performance after each training iteration.
+
+---
+
+#### Observing overfitting
+
+![Observing overfitting](images/observing_overfitting.png)
 
 ---
 
