@@ -37,7 +37,7 @@ Deep Learning is a subset of Machine Learning based on the usage of large neural
 - Feedforward Neural Networks [ [notes](notes/feedforward_neural_networks/README.md) | [example](/mlcourse/pytorch_intro/README.md#feedforward-neural-network) ]
 - 👩🏻‍💻 Introduction to PyTorch [ [lab](labs/pytorch_intro/README.md) | [examples](/mlcourse/pytorch_intro/README.md) ]
 - 👨🏻‍💻 Classify 2D data with a neural network [ [lab](labs/classify_2d_data/README.md) | [solution](/mlcourse/classify_2d_data/README.md) ]
-- Convolutional Neural Networks [ [notes](notes/convolutional_neural_networks/README.md) | [example](/mlcourse/test_convolutional_neural_network.py) ]
+- Convolutional Neural Networks [ [notes](notes/convolutional_neural_networks/README.md) | [example](/mlcourse/convolutional_neural_networks/README.md) ]
 - ... (more to come)
 
 ### Reinforcement Learning
