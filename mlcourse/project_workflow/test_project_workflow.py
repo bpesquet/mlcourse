@@ -31,9 +31,6 @@ def load_dataset(url):
     print(f"Dataset shape: {dataset.shape}")
 
     # Print a concise summary of the dataset
-    # 9 attributes are numerical, one ("ocean_proximity") is categorical
-    # "median_house_value" is the target attribute
-    # One attribute ("total_bedrooms") has missing values
     dataset.info()
 
     # Show 10 random samples of the dataset
