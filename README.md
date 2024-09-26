@@ -9,8 +9,6 @@ This repository contains the material for my Machine Learning course: [lecture n
 
 ### Supervised Learning
 
-> Update in progress!
-
 Supervised Learning is a subset of Machine Learning in which expected results are fed into the system alongside training data.
 
 #### Fundamentals
@@ -20,9 +18,11 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 - Assessing classification performance [ [notes](notes/classification_performance/README.md) | [example](/mlcourse/classification_performance/) ]
 - Learning via Gradient Descent [ [notes](notes/gradient_descent/README.md) ]
 - 👨🏻‍💻 Essential tools [ [lab](labs/essential_tools/README.md) ]
-- 🚧 👩🏻‍💻 Predict heart disease [ [lab](labs/predict_heart_disease/README.md) ]
+- 👩🏻‍💻 Predict heart disease [ [lab](labs/predict_heart_disease/README.md) | [solution](/mlcourse/predict_heart_disease/) ]
 
 #### Algorithms
+
+> Update in progress!
 
 - 🚧 Linear Regression [ [notes](notes/linear_regression/README.md) ]
 - 🚧 Decision Trees & Random Forests [ [notes](notes/decision_trees_random_forests/README.md) ]
