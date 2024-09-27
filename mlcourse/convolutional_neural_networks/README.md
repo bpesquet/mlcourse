@@ -11,4 +11,5 @@ The model leverages the following PyTorch classes:
 - [ReLU](https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html): the corresponding activation function.
 - [MaxPool2d](https://pytorch.org/docs/stable/generated/torch.nn.MaxPool2d.html): to apply max pooling.
 - [Flatten](https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html): to flatten the extracted features into a vector.
+- [LazyLinear](https://pytorch.org/docs/stable/generated/torch.nn.LazyLinear.html) fully connected layer whose input features are inferred during the first forward pass.
 - [Linear](https://pytorch.org/docs/stable/generated/torch.nn.Linear.html): fully connected layer used for final classification.

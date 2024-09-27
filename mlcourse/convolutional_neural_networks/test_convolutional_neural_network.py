@@ -20,21 +20,24 @@ class Convnet(nn.Module):
 
         # Define a sequential stack
         self.layer_stack = nn.Sequential(
-            # 2D convolution, output dimensions: (32, 26, 26)
+            # 2D convolution, output shape: (batch_zize, 32, 26, 26) with Fashion-MNIST images
             # Without padding, output_dim = (input_dim - kernel_size + 1) / stride
             nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3),
             nn.ReLU(),
-            # Max pooling, output dimensions: (32, 13, 13)
+            # Max pooling, output shape: (batch_zize, 32, 13, 13) with Fashion-MNIST images
             nn.MaxPool2d(kernel_size=2),
-            # 2D convolution, output dimensions: (64, 11, 11)
+            # 2D convolution, output shape: (batch_zize, 64, 11, 11) with Fashion-MNIST images
             nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3),
             nn.ReLU(),
-            # Max pooling, output dimensions: (64, 5, 5)
+            # Max pooling, output shape: (batch_zize, 64, 5, 5) with Fashion-MNIST images
             nn.MaxPool2d(kernel_size=2),
-            # Flattening layer, output dimensions: (64x5x5 = 1600,)
+            # Flattening layer, output shape: (batch_zize, 64x5x5 = 1600) with Fashion-MNIST images
             nn.Flatten(),
-            nn.Linear(in_features=1600, out_features=128),
+            # Linear layer whose input features are inferred during the first call to forward(). Output shape: (batch_zize, 128)
+            # This avoids hardcoding the output shape of the previous layer, which depends on the shape of input images
+            nn.LazyLinear(out_features=128),
             nn.ReLU(),
+            # Output shape: (batch_zoze, 10)
             nn.Linear(in_features=128, out_features=n_classes),
         )
 
