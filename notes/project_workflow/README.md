@@ -66,6 +66,8 @@ math: true  # Use default Marp engin for math rendering
 - Inputs: housing properties (number of rooms, median income, etc).
 - Output: housing prices.
 
+[![Kaggle houses banner](images/kaggle_housesbanner.png)](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/overview)
+
 ---
 
 ## Step 2: collect, analyze and prepare data
@@ -84,6 +86,8 @@ math: true  # Use default Marp engin for math rendering
 
 Many datasets containing tabular information are stored as a CSV (Comma-Separated Values) text file.
 
+An example dataset containing housing data and prices is available [here](https://raw.githubusercontent.com/bpesquet/mlcourse/main/datasets/california_housing.csv).
+
 ---
 
 ### Step 2.2: analyze data
@@ -101,8 +105,8 @@ The objective here is to gain insights about the data, in order to prepare it op
 Once trained, a ML model must be able to **generalize** (perform well with new data). In order to assert this ability, data is always split into two or three sets before training:
 
 - **Training set** (typically 80% or more): fed to the model during training.
-- **Validation set**: used to tune the model without biasing it in favor of the test set.
 - **Test set**: used to check the final model's performance on unseen data.
+- **Validation set**: used to tune the model without biasing it in favor of the test set.
 
 ![Dataset splitting](images/dataset_splitting.png)
 
@@ -274,7 +278,7 @@ After obtaining baseline results, other more sophisticated models may be tried, 
 
 Some results looks too good to be true. They are often cases of severe overfitting to the training set, which means the model won't perform well with unseen data.
 
-One way to assert overfitting is to split training data between a smaller training set and a **validation set**, used only to evaluate model performance after each training iteration.
+As seen earlier, one way to assert overfitting is to split training data between a smaller training set and a **validation set**, used only to evaluate model performance after each training iteration.
 
 ---
 
@@ -319,7 +323,9 @@ Now is the time to evaluate the final model on the test set that we put apart be
 
 ### Step 5.1: save the final model and data pipeline
 
-A trained model can be saved to several formats. A standard common is to use Python's built-in persistence model, [pickle](https://docs.python.org/3/library/pickle.html), through the [joblib](https://pypi.org/project/joblib/) library for efficiency reasons.
+This step depends on the technology stack.
+
+It's often useful to save the pipeline of preprocessing operations (if any) alongside the trained model, since these operations must be applied to production data before using the model in inference mode.
 
 ---
 

@@ -82,6 +82,6 @@ pytest [-s] mlcourse
 
 ## License
 
-[Creative Commons](LICENSE) for the textual content and [MIT](CODE_LICENSE) for the code.
+[Creative Commons](LICENSE) for textual content and [MIT](CODE_LICENSE) for code.
 
 Copyright © 2024-present [Baptiste Pesquet](https://bpesquet.fr).
