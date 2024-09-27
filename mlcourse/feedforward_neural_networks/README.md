@@ -7,7 +7,7 @@ Thie [example](test_feedforward_neural_network.py) trains a model to classify fa
 
 A [PyTorch class](https://pytorch.org/vision/stable/generated/torchvision.datasets.FashionMNIST.html) simplifies the loading process of this dataset.
 
-The model is defined as a subclass of the [Module](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module) class. The is the standard way to create models in PyTorch. Their constructor defines the layer architecture and their `forward()` method defines the forward pass of the model.
+The model is defined as a subclass of the [Module](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module) class. The is the standard way to create models in PyTorch. Their constructor defines the layer architecture and their `forward()` method defines the forward pass of the model. That is all PyTorch needs to compute gradients thanks to its [autodifferentiation engine](../pytorch_intro/README.md#pytorch-basics).
 
 The first operation applied to model inputs is the [Flatten](https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html) layer. It reshapes the input images of shape `(1, 28, 28)` into a 1D tensor (a vector) processed by the linear layers.
 
