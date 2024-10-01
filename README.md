@@ -42,9 +42,12 @@ Deep Learning is a subset of Machine Learning based on the usage of large neural
 
 ### Reinforcement Learning
 
-> Soon!
+> Update in progress!
 
 Reinforcement Learning is a subset of Machine Learning concerned with the maximization of rewards in a dynamic environment.
+
+- 🚧 Introduction to Reinforcement Learning [ [notes](notes/rl_introduction/README.md) ]
+- ... (more to come)
 
 ## Usage
 
