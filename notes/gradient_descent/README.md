@@ -118,7 +118,7 @@ The gradient is computed on a small set of samples, called a *batch*, before par
 
 #### Impact of learning rate
 
-[![Learning rate](images/learning_rate.png)](https://developers.google.com/machine-learning/crash-course/fitter/graph)
+[![Learning rate](images/learning_rate.png)](https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent-exercise?hl=fr)
 
 ---
 
