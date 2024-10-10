@@ -73,7 +73,7 @@ def test_linear_regression(show_plots=False):
     )
 
     # Convert dataset to PyTorch tensors
-    x_train = torch.from_numpy(inputs).float().to(device)
+    x_train = torch.from_numpy(inputs).to(device)
     y_train = torch.from_numpy(targets).to(device)
 
     # Linear regression model
