@@ -124,7 +124,7 @@ class FashionNet(nn.Module):
             nn.Linear(in_features=input_dim, out_features=hidden_dim),
             nn.ReLU(),
             # Output layer
-            nn.Linear(in_features=64, out_features=output_dim),
+            nn.Linear(in_features=hidden_dim, out_features=output_dim),
         )
 
     def forward(self, x):
