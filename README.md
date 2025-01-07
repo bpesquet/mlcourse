@@ -16,7 +16,7 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 - Principles of supervised learning [ [notes](notes/supervised_learning_principles/README.md) ]
 - [End-to-end project workflow](mlcourse/project_workflow/)
 - Assessing classification performance [ [notes](notes/classification_performance/README.md) | [example](/mlcourse/classification_performance/) ]
-- Learning via Gradient Descent [ [notes](notes/gradient_descent/README.md) ]
+- [Learning via Gradient Descent](mlcourse/gradient_descent/)
 - 👨🏻‍💻 Essential tools [ [lab](labs/essential_tools/README.md) ]
 - 👩🏻‍💻 Predict heart disease [ [lab](labs/predict_heart_disease/README.md) | [solution](/mlcourse/predict_heart_disease/) ]
 

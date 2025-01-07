@@ -6,10 +6,9 @@ math: true  # Use default Marp engine for math rendering
 <!-- Apply header and footer to first slide only -->
 <!-- _header: "[![Bordeaux INP logo](../ensc_logo.jpg)](https://www.bordeaux-inp.fr)" -->
 <!-- _footer: "[Baptiste Pesquet](https://www.bpesquet.fr)" -->
+<!-- headingDivider: 3 -->
 
 # Learning via Gradient Descent
-
----
 
 <!-- Show pagination, starting with second slide -->
 <!-- paginate: true -->
@@ -20,8 +19,6 @@ math: true  # Use default Marp engine for math rendering
 - Learn about its main issues.
 - Discover some of the main GD optimization techniques.
 
----
-
 ## The gradient descent algorithm
 
 ### An iterative approach
@@ -30,8 +27,6 @@ math: true  # Use default Marp engine for math rendering
 - Each GD iteration combines two steps: computing the gradient of the loss function, then use it to update model parameters.
 
 [![Iterative approach](images/GradientDescentDiagram.png)](https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss)
-
----
 
 ### Step 1: compute gradient of loss function
 
@@ -46,8 +41,6 @@ $$\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega}) = \begin{pmatrix}
 - $\nabla_{\pmb{\omega}}\mathcal{L}(\pmb{\omega})$: gradient of loss function $\mathcal{L}(\pmb{\omega})$.
 - $\frac{\partial}{\partial \omega_i} \mathcal{L}(\pmb{\omega})$: partial derivative of the loss function *w.r.t.* its $i$th parameter.
 
----
-
 ### Step 2: update model parameters
 
 In order to reduce loss for the next iteration, parameters are updated in the **opposite direction** of the gradient.
@@ -57,8 +50,6 @@ $$\pmb{\omega_{t+1}} = \pmb{\omega_t} - \eta\nabla_{\pmb{\omega}}\mathcal{L}(\pm
 - $\pmb{\omega_{t}}$: set of parameters at step $t$ of the gradient descent.
 - $\pmb{\omega_{t+1}}$: set of parameters at step $t+1$ (after update).
 - $\eta$ (sometimes denoted $\alpha$ or $\lambda$): update factor for parameters, called the **_learning rate_**.
-
----
 
 ### Examples
 
@@ -72,13 +63,9 @@ $$\pmb{\omega_{t+1}} = \pmb{\omega_t} - \eta\nabla_{\pmb{\omega}}\mathcal{L}(\pm
 
 ![Tangent Space](images/tangent_space.png)
 
----
-
 #### Dynamics of a 2D gradient descent
 
 [![Gradient descent line graph](images/gradient_descent_line_graph.gif)](https://alykhantejani.github.io/a-brief-introduction-to-gradient-descent/)
-
----
 
 ### Gradient descent types
 
@@ -112,15 +99,11 @@ The gradient is computed on a small set of samples, called a *batch*, before par
 - Default method for many ML libraries.
 - The mini-batch size varies between 10 and 1000 samples, depending of the dataset size.
 
----
-
 ### Parameters update
 
 #### Impact of learning rate
 
 [![Learning rate](images/learning_rate.png)](https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent-exercise?hl=fr)
-
----
 
 ### The local minima problem
 
@@ -131,9 +114,8 @@ The gradient is computed on a small set of samples, called a *batch*, before par
 ![Gradient Descent](images/gd_ng.jpg)
 
 ---
-[![GD loss landscape](images/gd_loss_landscape.jpg)](https://www.youtube.com/embed/Q3pTEtSEvDI)
 
----
+[![GD loss landscape](images/gd_loss_landscape.jpg)](https://www.youtube.com/embed/Q3pTEtSEvDI)
 
 ### Gradient descent optimization algorithms
 
@@ -187,8 +169,6 @@ $$\pmb{\omega_{t+1}} = \pmb{\omega_t} - \frac{\eta}{\sqrt{\pmb{v_{t}}+\epsilon}}
 
 Gradient descent optimization is a rich subfield of Machine Learning. Read more in [this article](http://ruder.io/optimizing-gradient-descent/).
 
----
-
 ## Gradients computation
 
 ### Numerical differentiation
@@ -201,8 +181,6 @@ $$g'(a) = \frac{\partial g(a)}{\partial a} = \lim_{h \to 0} \frac{g(a + h) - g(a
 
 $$\frac{\partial f(\pmb{x})}{\partial x_i} = \lim_{h \to 0} \frac{f(\pmb{x} + h\pmb{e}_i) - f(\pmb{x})}{h}$$
 
----
-
 ### Symbolic differentiation
 
 - Automatic manipulation of expressions for obtaining derivative expressions.
@@ -213,8 +191,6 @@ symbolic expressions.
 $$\frac{\mathrm{d}}{\mathrm{d}x}\left(f(x)+g(x)\right) = \frac{\mathrm{d}}{\mathrm{d}x}f(x)+\frac{\mathrm{d}}{\mathrm{d}x}g(x)$$
 
 $$\frac{\mathrm{d}}{\mathrm{d}x}\left(f(x)g(x)\right) = \left(\frac{\mathrm{d}}{\mathrm{d}x}f(x)\right)g(x)+f(x)\left(\frac{\mathrm{d}}{\mathrm{d}x}g(x)\right)$$
-
----
 
 ### Automatic differentiation (*autodiff*)
 
@@ -229,15 +205,11 @@ $$\frac{\mathrm{d}}{\mathrm{d}x}\left(f(x)g(x)\right) = \left(\frac{\mathrm{d}}{
 
 $$\frac{\mathrm{d}y}{\mathrm{d}x} = \frac{\mathrm{d}y}{\mathrm{d}w_2} \frac{\mathrm{d}w_2}{\mathrm{d}w_1} \frac{\mathrm{d}w_1}{\mathrm{d}x}$$
 
----
-
 ### Forward mode autodiff
 
 - Computes gradients w.r.t. one parameter along with the function output.
 - Relies on [dual numbers](https://en.wikipedia.org/wiki/Automatic_differentiation#Automatic_differentiation_using_dual_numbers).
 - Efficient when output dimension >> number of parameters.
-
----
 
 ### Reverse mode autodiff
 
@@ -286,8 +258,6 @@ $$v_4=v_1+v_2$$
 
 $$\frac{\partial y}{\partial v_1}=\frac{\partial y}{\partial v_4}\frac{\partial v_4}{\partial v_1}=1\;\;\;\;\frac{\partial y}{\partial v_2}=\frac{\partial y}{\partial v_4}\frac{\partial v_4}{\partial v_2}=1$$
 
----
-
 $$v_1 = log_e(x_1)\;\;\;\;v_2 = x_1x_2\;\;\;\;v_3 = sin(x_2)$$
 
 $$\frac{\partial v_1}{\partial x_1}=\frac{1}{x_1}\;\;\;\;\frac{\partial v_2}{\partial x_1}=x_2\;\;\;\;\frac{\partial v_2}{\partial x_2}=x_1\;\;\;\;\frac{\partial v_3}{\partial x_2}=cos(x_2)$$
@@ -296,13 +266,9 @@ $$\frac{\partial y}{\partial x_1}=\frac{\partial y}{\partial v_1}\frac{\partial 
 
 $$\frac{\partial y}{\partial x_2}=\frac{\partial y}{\partial v_2}\frac{\partial v_2}{\partial x_2}+\frac{\partial y}{\partial v_3}\frac{\partial v_3}{\partial x_2}=x_1-cos(x_2)$$
 
----
-
 ### Autodifferention in practice
 
 Many Machine Learning libraries offer out-of-the-box support for automatic gradients computation. Some prominent ones are currently [TensorFlow](https://www.tensorflow.org/), [PyTorch](https://pytorch.org) and [JAX](https://jax.readthedocs.io).
-
----
 
 ### Differentiable programming
 

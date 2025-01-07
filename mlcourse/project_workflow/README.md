@@ -292,7 +292,7 @@ In order to guarantee an optimal quality of service, the deployed system must be
 - Checking input data quality.
 - Retraining the model on fresh data.
 
-## Implementation details
+## Annex: implementation details
 
 ### Dataset
 
