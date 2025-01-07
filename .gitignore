@@ -1,7 +1,7 @@
 # macOS folder files
 .DS_Store
 
-# Outpuf files
+# Output files
 _output/
 
 # VS Code settings

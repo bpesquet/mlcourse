@@ -1,6 +1,6 @@
 ---
 marp: true
-math: true  # Use default Marp engin for math rendering
+math: true  # Use default Marp engine for math rendering
 ---
 
 <!-- Apply header and footer to first slide only -->
