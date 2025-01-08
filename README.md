@@ -4,7 +4,7 @@ This repository contains the material for my Machine Learning course: [lecture n
 
 ## Table of Contents
 
-- About Artificial Intelligence [ [notes](notes/about_ai//README.md) ]
+- [About Artificial Intelligence](mlcourse/about_ai/)
 - Machine Learning: an introduction [ [notes](notes/ml_introduction/README.md) ]
 
 ### Supervised Learning
