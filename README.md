@@ -11,9 +11,9 @@ This repository contains the material for my Machine Learning course: [lecture n
 
 Supervised Learning is a subset of Machine Learning in which expected results are fed into the system alongside training data.
 
-#### Fundamentals
+#### Fundamentalsv
 
-- Principles of supervised learning [ [notes](notes/supervised_learning_principles/README.md) ]
+- [Principles of supervised learning](mlcourse/supervised_learning_principles/)
 - [End-to-end project workflow](mlcourse/project_workflow/)
 - [Assessing classification performance](mlcourse/classification_performance/)
 - [Learning via Gradient Descent](mlcourse/gradient_descent/)

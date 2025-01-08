@@ -60,9 +60,7 @@ A **labeled sample** includes both its feature(s) and the associated label(s) to
 
 ### Inputs
 
-**Inputs** correspond to all features for one sample of the dataset.
-
-They are often denoted using the $\pmb{x}$ variable (notice the boldface to indicate that it is a vector).
+**Inputs** correspond to all features for one sample of the dataset.They are often denoted using the $\pmb{x}$ variable (notice the boldface to indicate that it is a vector).
 
 $$\pmb{x}^{(i)} = \begin{pmatrix}
        \ x^{(i)}_1 \\
@@ -80,9 +78,7 @@ $$\pmb{x}^{(i)} = \begin{pmatrix}
 
 #### Targets
 
-**Targets** are the expected results (labels) associated to a data sample, often called the *ground truth*. They are often denoted using the $\pmb{y}$ variable.
-
-Some ML models have to predict more than one value for each sample (for example, in multiclass classification). In that case, $K>1$.
+**Targets** are the expected results (labels) associated to a data sample, often called the *ground truth* and denoted using the $\pmb{y}$ variable. Some ML models have to predict more than one value for each sample (for example, in multiclass classification). In that case, $K>1$.
 
 $$\pmb{y}^{(i)} = \begin{pmatrix}
        \ y^{(i)}_1 \\
@@ -182,7 +178,7 @@ They are not to be confused with **hyperparameters**, which are configuration pr
 
 ### Hypothesis function
 
-Mathematically speaking, a model is a function of the inputs that depends on its parameters and computes results (which will be compared to targets during the training process).
+Mathematically speaking, a model is a function of the inputs that depends on its parameters and computes results.
 
 This function, called the **hypothesis function**, is denoted $h_{\pmb{\omega}}$ to show that it is parametrized by $\pmb{\omega}$. Its output (predicted result) is denoted  $\pmb{y'}$ or $\hat{\pmb{y}}$.
 
