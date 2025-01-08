@@ -1,6 +1,8 @@
 # Machine Learning Course
 
-This repository contains the material for my Machine Learning course: [lecture notes](notes/), [code examples](mlcourse/) and [lab works](labs/). I have tried to write them in such a way that they should be accessible to anyone wanting to learn the subject, regardless of whether you are one of my students or not.
+This repository contains the material for my Machine Learning course: lecture notes, code examples and lab works.
+
+I have tried to write them in such a way that they should be accessible to anyone wanting to learn the subject, regardless of whether you are one of my students or not.
 
 ## Table of Contents
 
@@ -11,14 +13,13 @@ This repository contains the material for my Machine Learning course: [lecture n
 
 Supervised Learning is a subset of Machine Learning in which expected results are fed into the system alongside training data.
 
-#### Fundamentalsv
+#### Fundamentals
 
 - [Principles of supervised learning](mlcourse/supervised_learning_principles/)
 - [End-to-end project workflow](mlcourse/project_workflow/)
 - [Assessing classification performance](mlcourse/classification_performance/)
 - [Learning via Gradient Descent](mlcourse/gradient_descent/)
-- 👨🏻‍💻 Essential tools [ [lab](labs/essential_tools/README.md) ]
-- 👩🏻‍💻 Predict heart disease [ [lab](labs/predict_heart_disease/README.md) | [solution](/mlcourse/predict_heart_disease/) ]
+- [Lab: Predict heart disease](labs/predict_heart_disease/)
 
 #### Algorithms
 
