@@ -21,7 +21,7 @@ The dataset is provided by the Cleveland Clinic Foundation for Heart Disease ([m
 | Thal | 3 = normal; 6 = fixed defect; 7 = reversable defect | Categorical | string |
 | Target | Diagnosis of heart disease (1 = true; 0 = false) | Classification | integer |
 
-You should take inspiration from the [project workflow](../../mlcourse/project_workflow/) and [classification performance](../../mlcourse/classification_performance/) examples.
+You should take inspiration from the [project workflow](../../lectures/project_workflow/) and [classification performance](../../lectures/classification_performance/) examples.
 
 You may train any binary classification model, for example a basic [SGDClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html).
 
