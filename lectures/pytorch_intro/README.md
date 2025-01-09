@@ -1,21 +1,5 @@
 # Introduction to PyTorch
 
-## PyTorch Basics
-
-This [example](test_basics.py) demonstrates several fundamental aspects of PyTorch:
-
-- Tensor manipulation
-- Autodifferentiation engine
-- Dataset loading
-- Model loading and saving
-
-### References
-
-- [PyTorch official website](https://pytorch.org)
-- [PyTorch tensors](https://pytorch.org/tutorials/beginner/basics/tensorqs_tutorial.html)
-- [A gentle introduction to autograd](https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html)
-- [Writing Custom Datasets, DataLoaders and Transforms](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html)
-
 ## Linear Regression
 
 This [example](test_linear_regression.py) uses the [Linear](https://pytorch.org/docs/stable/generated/torch.nn.Linear.html) class to implement linear regression on a simple 2D dataset.

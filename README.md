@@ -1,53 +1,45 @@
 # Machine Learning Course
 
-This repository contains the material for my Machine Learning course: lecture notes, code examples and lab works.
+This repository contains the public material for my Machine Learning course: [lecture notes](lectures/) with code examples and [lab works](labs/).
 
 I have tried to write them in such a way that they should be accessible to anyone wanting to learn the subject, regardless of whether you are one of my students or not.
 
 ## Table of Contents
 
-- [About Artificial Intelligence](mlcourse/about_ai/)
-- [Machine Learning: an introduction](mlcourse/ml_introduction/)
+- [About Artificial Intelligence](lectures/about_ai/)
+- [Machine Learning: an introduction](lectures/ml_introduction/)
 
-### Supervised Learning
+### Supervised learning fundamentals
 
 Supervised Learning is a subset of Machine Learning in which expected results are fed into the system alongside training data.
 
-#### Fundamentals
-
-- [Principles of supervised learning](mlcourse/supervised_learning_principles/)
-- [End-to-end project workflow](mlcourse/project_workflow/)
-- [Assessing classification performance](mlcourse/classification_performance/)
-- [Learning via Gradient Descent](mlcourse/gradient_descent/)
+- [Principles of supervised learning](lectures/supervised_learning_principles/)
+- [End-to-end project workflow](lectures/project_workflow/)
+- [Assessing classification performance](lectures/classification_performance/)
+- [Learning via Gradient Descent](lectures/gradient_descent/)
 - [Lab: Predict heart disease](labs/predict_heart_disease/)
 
-#### Algorithms
+### Classic algorithms
 
-> Update in progress!
-
-- 🚧 Linear Regression [ [notes](notes/linear_regression/README.md) ]
-- 🚧 Decision Trees & Random Forests [ [notes](notes/decision_trees_random_forests/README.md) ]
+- 🚧 [Linear Regression](lectures/linear_regression/)
+- 🚧 [Decision Trees & Random Forests](lectures/decision_trees_random_forests/)
 - ... (more to come)
 
-### Neural Networks and Deep Learning
-
-> Update in progress!
+### Neural networks and Deep Learning
 
 Deep Learning is a subset of Machine Learning based on the usage of large neural networks trained on vast amounts of data.
 
-- Feedforward Neural Networks [ [notes](notes/feedforward_neural_networks/README.md) | [example](/mlcourse/feedforward_neural_networks/) ]
-- 👩🏻‍💻 Introduction to PyTorch [ [lab](labs/pytorch_intro/README.md) | [examples](/mlcourse/pytorch_intro/) ]
-- 👨🏻‍💻 Classify 2D data with a neural network [ [lab](labs/classify_2d_data/README.md) | [solution](/mlcourse/classify_2d_data/) ]
+- [Feedforward Neural Networks](lectures/feedforward_neural_networks/)
+- [Lab: Introduction to PyTorch](labs/pytorch_intro/)
+- [Lab: Classify 2D data with a neural network](labs/classify_2d_data/)
 - Convolutional Neural Networks [ [notes](notes/convolutional_neural_networks/README.md) | [example](/mlcourse/convolutional_neural_networks/) ]
 - ... (more to come)
 
 ### Reinforcement Learning
 
-> Update in progress!
-
 Reinforcement Learning is a subset of Machine Learning concerned with the maximization of rewards in a dynamic environment.
 
-- 🚧 Introduction to Reinforcement Learning [ [notes](notes/rl_introduction/README.md) ]
+- 🚧 [Introduction to Reinforcement Learning](lectures/rl_introduction/)
 - ... (more to come)
 
 ## Usage
@@ -74,14 +66,14 @@ This project is built with the following software:
 
 ```bash
 # Reformat all Python files
-black mlcourse
+black .
 
 # Check the code for mistakes
-pylint mlcourse
+pylint lectures
 
 # Run all code examples as unit tests
 # The -s flag prints code output
-pytest [-s] mlcourse
+pytest [-s] .
 ```
 
 ## License
