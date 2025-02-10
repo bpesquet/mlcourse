@@ -1,6 +1,8 @@
 # Predict heart disease
 
-The goal of this lab is to train a model for the diagnosis of coronary artery disease, a binary classification task.
+The goal of this lab is to train a model for the diagnosis of coronary artery disease.
+
+## Dataset
 
 The dataset is provided by the Cleveland Clinic Foundation for Heart Disease ([more information](https://archive.ics.uci.edu/ml/datasets/heart+Disease)). The dataset file to use is available [here](https://raw.githubusercontent.com/bpesquet/mlcourse/main/datasets/heart.csv). Each row describes a patient. Below is a description of each column.
 
@@ -21,8 +23,33 @@ The dataset is provided by the Cleveland Clinic Foundation for Heart Disease ([m
 | Thal | 3 = normal; 6 = fixed defect; 7 = reversable defect | Categorical | string |
 | Target | Diagnosis of heart disease (1 = true; 0 = false) | Classification | integer |
 
-You should take inspiration from the [project workflow](../../lectures/project_workflow/) and [classification performance](../../lectures/classification_performance/) examples.
+## Platform
 
-You may train any binary classification model, for example a basic [SGDClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html).
+You may use either a local or remote Python environment for this lab.
 
-> **Bonus**: try another model, for example a decision tree, and compare their performances.
+> The easiest way to obtain a working Python setup is by using a cloud-based [Jupyter notebook](https://jupyter.org/) execution platform like [Google Colaboratory](https://colab.research.google.com/), [Paperspace](https://www.paperspace.com/notebooks) or [Kaggle Notebooks](https://www.kaggle.com/code).
+
+## Tools
+
+This lab is designed to make you discover three essential libraries of the Python ecosystem for Machine Learning: [NumPy](https://numpy.org), [pandas](https://pandas.pydata.org) and [scikit-learn](https://scikit-learn.org).
+
+The following tutorials will give you the first level of knowledge you need to start using these tools in your projects.
+
+- [NumPy: the absolute basics for beginners](https://numpy.org/doc/stable/user/absolute_beginners.html)
+- [10 minutes (or maybe a bit more 😊) to pandas](https://pandas.pydata.org/docs/user_guide/10min.html)
+  > If you're time-constrained, you may skip the following parts: *Selection*, *Merge*, *Grouping*, *Reshaping* and *Time Series*.
+- [Getting Started with scikit-learn](https://scikit-learn.org/stable/getting_started.html)
+
+> While studying these tutorials, it is essential to test all code examples.
+
+When done with the tutorials, take [this test](https://app.wooclap.com/IMLJFN?from=event-page) to check your understanding.
+
+## Training process
+
+You may train any binary classification model on this task, for example a basic [SGDClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html) implementing the logistic regression algorithm.
+
+To implement the training process, you should take inspiration from the [project workflow](../../lectures/project_workflow/) and [classification performance](../../lectures/classification_performance/) lectures.
+
+## Extra work
+
+Try another model, for example a decision tree, and compare their performances.

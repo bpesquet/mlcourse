@@ -30,9 +30,9 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 Deep Learning is a subset of Machine Learning based on the usage of large neural networks trained on vast amounts of data.
 
 - [Feedforward Neural Networks](lectures/feedforward_neural_networks/)
-- [Lab: Introduction to PyTorch](labs/pytorch_intro/)
-- [Lab: Classify 2D data with a neural network](labs/classify_2d_data/)
+- 🚧 [Lab: Recognize handwritten digits](labs/recognize_handwritten_digits/)
 - [Convolutional Neural Networks](lectures/convolutional_neural_networks/)
+- 🚧 [Lab: Classify common images](labs/classify_common_images/)
 - ... (more to come)
 
 ### Reinforcement Learning
