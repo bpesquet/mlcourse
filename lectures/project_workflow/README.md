@@ -215,6 +215,8 @@ $$\mathrm{RMSE}(\pmb{Y}, \pmb{Y'}) = \sqrt{\frac{1}{m}\sum_{i=1}^m (\pmb{y'}^{(i
 
 **Mean Absolute Error** (less sensitive to outliers) and **MSE** may also be used.
 
+> Assessing performance for classification tasks involves specific metrics. See [here](../classification_performance/) for more details.
+
 ### Step 3.2: start with a baseline model
 
 For each learning type (supervised, unsupervised...), several models of various complexity exist.
