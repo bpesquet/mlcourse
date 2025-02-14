@@ -63,6 +63,8 @@ $$\pmb{\omega_{t+1}} = \pmb{\omega_t} - \eta\nabla_{\pmb{\omega}}\mathcal{L}(\pm
 
 ![Tangent Space](images/tangent_space.png)
 
+---
+
 #### Dynamics of a 2D gradient descent
 
 [![Gradient descent line graph](images/gradient_descent_line_graph.gif)](https://alykhantejani.github.io/a-brief-introduction-to-gradient-descent/)
