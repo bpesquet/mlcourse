@@ -96,7 +96,7 @@ Elements of an array can be accessed in [various ways](https://numpy.org/doc/sta
 assert a[0] == 1
 ```
 
-> [!NOTE]
+> [!CAUTION]
 > As with built-in Python sequences, NumPy arrays are "0-indexed": the first element of the array is accessed using index `0`, not `1`.
 
 Like the original list, the array is mutable.
