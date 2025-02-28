@@ -1,38 +1,41 @@
 # Machine Learning Course
 
-This repository contains the public material for my Machine Learning course: [lecture notes](lectures/) with code examples and [lab works](labs/).
+This repository contains the public material for my Machine Learning course: [lecture notes](lectures/) with code examples, [tutorials](tutorials/) and [lab works](labs/).
 
 I have tried to write them in such a way that they should be accessible to anyone wanting to learn the subject, regardless of whether you are one of my students or not.
 
 ## Table of Contents
 
-- [About Artificial Intelligence](lectures/about_ai/)
-- [Machine Learning: an introduction](lectures/ml_introduction/)
+- 📚 [About Artificial Intelligence](lectures/about_ai/)
+- 📚 [Machine Learning: an introduction](lectures/ml_introduction/)
 
 ### Supervised learning fundamentals
 
 Supervised Learning is a subset of Machine Learning in which expected results are fed into the system alongside training data.
 
-- [Principles of supervised learning](lectures/supervised_learning_principles/)
-- [End-to-end project workflow](lectures/project_workflow/)
-- [Assessing classification performance](lectures/classification_performance/)
-- [Learning via Gradient Descent](lectures/gradient_descent/)
-- [Lab: Predict heart disease](labs/predict_heart_disease/)
+- 📚 [Principles of supervised learning](lectures/supervised_learning_principles/)
+- 📚 [End-to-end project workflow](lectures/project_workflow/)
+- 📚 [Assessing classification performance](lectures/classification_performance/)
+- 📚 [Learning via Gradient Descent](lectures/gradient_descent/)
+- 🛠️ 🚧 [NumPy](tutorials/numpy/), [pandas](tutorials/pandas/), [scikit-learn](tutorials/scikit-learn/)
+- 💻 [Predict heart disease](labs/predict_heart_disease/)
 
 ### Classic algorithms
 
-- 🚧 [Linear Regression](lectures/linear_regression/)
-- 🚧 [Decision Trees & Random Forests](lectures/decision_trees_random_forests/)
+- 📚 🚧 [Linear Regression](lectures/linear_regression/)
+- 📚 🚧 [Decision Trees & Random Forests](lectures/decision_trees_random_forests/)
 - ... (more to come)
 
 ### Neural networks and Deep Learning
 
 Deep Learning is a subset of Machine Learning based on the usage of large neural networks trained on vast amounts of data.
 
-- [Feedforward Neural Networks](lectures/feedforward_neural_networks/)
-- 🚧 [Lab: Recognize handwritten digits](labs/recognize_handwritten_digits/)
-- [Convolutional Neural Networks](lectures/convolutional_neural_networks/)
-- 🚧 [Lab: Classify common images](labs/classify_common_images/)
+- 📚 [Feedforward Neural Networks](lectures/feedforward_neural_networks/)
+- 🛠️ [PyTorch Fundamentals](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/fundamentals), [Linear Regression](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/linear_regression), [Logistic Regression](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/logistic_regression), [MultiLayer Perceptron](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/multilayer_perceptron)
+- 💻 🚧 [Recognize handwritten digits](labs/recognize_handwritten_digits/)
+- 📚 [Convolutional Neural Networks](lectures/convolutional_neural_networks/)
+- 🛠️ [Convolutional Neural Network with PyTorch](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/convolutional_neural_network)
+- 💻 🚧 [Classify common images](labs/classify_common_images/)
 - ... (more to come)
 
 ### Reinforcement Learning
