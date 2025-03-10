@@ -45,7 +45,7 @@ model.fit(x_train, y_train)
 The `fit()` method generally accepts two inputs:
 
 - The samples matrix (or design matrix), generally denoted `x_train`. The size of `x_train` is typically `(n_samples, n_features)`, which means that samples are represented as rows and features are represented as columns.
-- The target values, generally denoted `y_train`. They are real numbers for regression tasks, or integers for classification (or any other discrete set of values). For unsupervised learning tasks, `y_train` does not need to be specified. `y_train` is usually a 1D array where the $i$th entry corresponds to the target of the $i$th sample (row) of `x_train`.
+- The target values, generally denoted `y_train`. They are real numbers for regression tasks, or integers for classification (or any other discrete set of values). For unsupervised learning tasks, `y_train` does not need to be specified. `y_train` is usually a 1D array where the `i`th entry corresponds to the target of the `i`th sample (row) of `x_train`.
 
 Both `x_train` and `y_train` are usually expected to be NumPy arrays or equivalent array-like data types, though some estimators work with other formats such as sparse matrices.
 
