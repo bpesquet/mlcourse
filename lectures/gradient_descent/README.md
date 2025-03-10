@@ -4,7 +4,7 @@ math: true  # Use default Marp engine for math rendering
 ---
 
 <!-- Apply header and footer to first slide only -->
-<!-- _header: "[![Bordeaux INP logo](../ensc_logo.jpg)](https://www.bordeaux-inp.fr)" -->
+<!-- _header: "[![Bordeaux INP logo](../../images/ensc_logo.jpg)](https://www.bordeaux-inp.fr)" -->
 <!-- _footer: "[Baptiste Pesquet](https://www.bpesquet.fr)" -->
 <!-- headingDivider: 3 -->
 
