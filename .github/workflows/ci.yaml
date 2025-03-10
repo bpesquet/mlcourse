@@ -1,0 +1,24 @@
+name: Continuous Integration
+
+on:
+  # Trigger the jobs on each push to main branch
+  push:
+    branches:
+      - main
+
+jobs:
+  ci-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Install dependencies
+        run: poetry install
+      - name: Check the code
+        run: poetry run pylint lectures/* tutorials/*

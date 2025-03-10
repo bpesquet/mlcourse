@@ -1,5 +1,9 @@
 # Machine Learning Course
 
+![Dynamic TOML Badge: Python](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fbpesquet%2Fpytorch-tutorial%2Frefs%2Fheads%2Fmain%2Fpyproject.toml&query=%24.tool.poetry.dependencies.python&logo=python&logoColor=white&logoSize=auto&label=Python&labelColor=%233776AB&color=black)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/bpesquet/mlcourse/ci.yaml)
+
 This repository contains the public material for my Machine Learning course: [lecture notes](lectures/) with code examples, [tutorials](tutorials/) and [lab works](labs/).
 
 I have tried to write them in such a way that they should be accessible to anyone wanting to learn the subject, regardless of whether you are one of my students or not.
@@ -50,6 +54,7 @@ Reinforcement Learning is a subset of Machine Learning concerned with the maximi
 ```bash
 git clone https://github.com/bpesquet/mlcourse.git
 cd mlcourse
+poetry install
 python {path to Python code file}
 ```
 
@@ -75,7 +80,7 @@ black .
 pylint lectures/* tutorials/*
 
 # Run all code examples as unit tests
-# The -s flag prints code output
+# The optional -s flag prints code output
 pytest [-s] .
 ```
 
