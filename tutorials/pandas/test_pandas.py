@@ -20,6 +20,8 @@ def test_data_structures():
     df_poprep = pd.DataFrame({"Population": pop, "Area": area})
 
     print(df_poprep)
+    print(f"df_poprep: {df_poprep.shape}")
+    assert df_poprep.shape == (3, 2)
 
 
 def test_dataset_exploration():
@@ -34,6 +36,7 @@ def test_dataset_exploration():
     # Fetch dataset from url and load it into a DataFrame
     df_diabetes = pd.read_csv(dataset_url)
     print(f"df_diabetes: {df_diabetes.shape}")
+    assert df_diabetes.shape == (442, 11)
 
     # Print a consise summary of the DataFrame
     print(df_diabetes.info())
@@ -54,11 +57,11 @@ def test_dataset_exploration():
     # Print the last 5 rows
     print(df_diabetes[-5:])
 
-    # Print the number of rows for each value of the "SEX" column
-    print(df_diabetes["SEX"].value_counts())
-
     # Print rows with a blood pressure over 100
     print(df_diabetes[df_diabetes["BP"] > 100])
+
+    # Print the number of rows for each value of the "SEX" column
+    print(df_diabetes["SEX"].value_counts())
 
     # Average age of all patients
     avg_age = df_diabetes["AGE"].mean()
