@@ -72,7 +72,7 @@ This project is built with the following software:
 black .
 
 # Check the code for mistakes
-pylint lectures
+pylint lectures/* tutorials/*
 
 # Run all code examples as unit tests
 # The -s flag prints code output

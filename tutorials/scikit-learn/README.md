@@ -3,9 +3,11 @@
 > [!NOTE]
 > Adapted from [Getting Started with scikit-learn](https://scikit-learn.org/stable/getting_started.html).
 
+This tutorial teaches you the very basics of [Scikit-learn](https://scikit-learn.org/stable/index.html). Its complete source code is available [here](test_scikit_learn.py).
+
 ## What scikit-learn is
 
-[Scikit-learn](https://scikit-learn.org/stable/index.html) is an open source machine learning library that supports supervised and unsupervised learning. It also provides various tools for model fitting, data preprocessing, model selection, model evaluation, and many other utilities.
+**Scikit-learn** is an open source machine learning library that supports supervised and unsupervised learning. It also provides various tools for model fitting, data preprocessing, model selection, model evaluation, and many other utilities.
 
 ## How to import scikit-learn
 
