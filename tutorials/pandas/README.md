@@ -72,7 +72,7 @@ The [info()](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.
 
 ```python
 # Print a consise summary of the DataFrame
-print(df_diabetes.info())
+df_diabetes.info()
 ```
 
 ### Showing data samples

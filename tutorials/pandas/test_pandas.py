@@ -38,7 +38,7 @@ def test_dataset_exploration():
     assert df_diabetes.shape == (442, 11)
 
     # Print a consise summary of the DataFrame
-    print(df_diabetes.info())
+    df_diabetes.info()
 
     # Print the first 5 rows
     print(df_diabetes.head(n=5))
