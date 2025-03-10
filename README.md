@@ -17,7 +17,7 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 - 📚 [End-to-end project workflow](lectures/project_workflow/)
 - 📚 [Assessing classification performance](lectures/classification_performance/)
 - 📚 [Learning via Gradient Descent](lectures/gradient_descent/)
-- 🛠️ 🚧 [NumPy](tutorials/numpy/), [pandas](tutorials/pandas/), [scikit-learn](tutorials/scikit-learn/)
+- 🛠️ [NumPy](tutorials/numpy/), [pandas](tutorials/pandas/), [scikit-learn](tutorials/scikit-learn/)
 - 💻 [Predict heart disease](labs/predict_heart_disease/)
 
 ### Classic algorithms
