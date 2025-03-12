@@ -161,8 +161,7 @@ Arrays are typically "homogeneous", meaning that they contain elements of only o
 
 ```python
 # The array contains only integers.
-# "int" for integer, "64" for 64-bit
-assert a.dtype == np.int64
+print(a.dtype)
 
 a = np.array([0.5, 1])
 # The array contains a floating point value
