@@ -39,8 +39,9 @@ def test_array_attributes():
     assert a.size == math.prod(a.shape)
 
     # The array contains only integers.
-    # "int" for integer, "64" for 64-bit
+    # The exact type may be "int64" or "int32" depending on the underlying system
     print(a.dtype)
+    assert np.issubdtype(a.dtype, np.integer)
 
     a = np.array([0.5, 1])
     # The array contains a floating point value
