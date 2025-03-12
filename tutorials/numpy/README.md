@@ -287,7 +287,7 @@ np.testing.assert_allclose(a, [[10, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
 ```
 
 > [!TIP]
-> Learn more about shape manipulation [here](https://numpy.org/doc/stable/user/quickstart.html#shape-manipulation).
+> Learn more about [shape manipulation](https://numpy.org/doc/stable/user/quickstart.html#shape-manipulation).
 
 ## Indexing and slicing
 
@@ -375,7 +375,7 @@ np.testing.assert_allclose(np.max(data, axis=1), [2, 5, 6])
 ```
 
 > [!TIP]
-> Learn more about aggregation operations [here](https://numpy.org/doc/stable/reference/arrays.ndarray.html#array-ndarray-methods).
+> Learn more about [aggregation operations](https://numpy.org/doc/stable/reference/arrays.ndarray.html#array-ndarray-methods).
 
 ## Operations between arrays
 
@@ -447,6 +447,6 @@ np.testing.assert_allclose(data + ones_row, [[2, 3], [4, 5], [6, 7]])
 ```
 
 > [!TIP]
-> Learn more about broadcasting [here](https://numpy.org/doc/stable/user/basics.broadcasting.html#basics-broadcasting).
+> Learn more about [broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html#basics-broadcasting).
 
 *Image credits: [Jay Alammar](https://jalammar.github.io/)*

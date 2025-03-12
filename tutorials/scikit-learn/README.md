@@ -58,20 +58,20 @@ Once the estimator is fitted, it can be used for predicting target values of dat
 
 ```python
 # Predict classes for the training data
-y_pred = model.predict(x_train)
-print(y_train)
+y_pred_train = model.predict(x_train)
+print(y_pred_train)
 # Assess equality with expected values
-np.testing.assert_allclose(y_pred, y_train)
+np.testing.assert_allclose(y_pred_train, y_train)
 
 # Predict classes for new data
-y_pred = model.predict([[14, 15, 16], [4, 5, 6]])
-print(y_pred)
+y_pred_test = model.predict([[14, 15, 16], [4, 5, 6]])
+print(y_pred_test)
 # Assess equality with expected values
-np.testing.assert_allclose(y_pred, [1, 0])
+np.testing.assert_allclose(y_pred_test, [1, 0])
 ```
 
 > [!TIP]
-> Learn more about choosing the right model for your use case [here](https://scikit-learn.org/stable/machine_learning_map.html#ml-map).
+> Learn more about [choosing the right model for your use case](https://scikit-learn.org/stable/machine_learning_map.html#ml-map).
 
 ## Transformers and preprocessors
 
@@ -127,3 +127,6 @@ assert test_acc > 0.97
 # Compute classification metrics (precision, recall, f1-score) on th test set
 print(classification_report(y_test, y_pred))
 ```
+
+> [!TIP]
+> Learn more about [pipelines](https://scikit-learn.org/stable/modules/compose.html).

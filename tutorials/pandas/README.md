@@ -126,7 +126,7 @@ print(df_diabetes[df_diabetes["BP"] > 100])
 ```
 
 > [!TIP]
-> Learn more about indexing and selection data [here](https://pandas.pydata.org/docs/user_guide/indexing.html#indexing).
+> Learn more about [indexing and selection data](https://pandas.pydata.org/docs/user_guide/indexing.html#indexing).
 
 ### Aggregation operations
 

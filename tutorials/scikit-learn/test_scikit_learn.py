@@ -28,16 +28,16 @@ def test_fitting_predicting():
     model.fit(x_train, y_train)
 
     # Predict classes for the training data
-    y_pred = model.predict(x_train)
-    print(y_train)
+    y_pred_train = model.predict(x_train)
+    print(y_pred_train)
     # Assess equality with expected values
-    np.testing.assert_allclose(y_pred, y_train)
+    np.testing.assert_allclose(y_pred_train, y_train)
 
     # Predict classes for new data
-    y_pred = model.predict([[14, 15, 16], [4, 5, 6]])
-    print(y_pred)
+    y_pred_test = model.predict([[14, 15, 16], [4, 5, 6]])
+    print(y_pred_test)
     # Assess equality with expected values
-    np.testing.assert_allclose(y_pred, [1, 0])
+    np.testing.assert_allclose(y_pred_test, [1, 0])
 
 
 def test_preprocessing():
@@ -51,7 +51,7 @@ def test_preprocessing():
     x_scaled = StandardScaler().fit(x).transform(x)
     print(x_scaled)
 
-    # Assess standrdization results (mean=0, std=1 for each feature)
+    # Assess standrdization results (mean=0, std=1 for all features)
     np.testing.assert_allclose(x_scaled.mean(axis=1), [0, 0])
     np.testing.assert_allclose(x_scaled.std(axis=1), [1, 1])
 

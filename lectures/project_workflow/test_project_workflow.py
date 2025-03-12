@@ -101,15 +101,13 @@ def plot_dataset(df_housing):
 def split_dataset(df):
     """Split dataset between inputs/targets and training/test sets"""
 
-    # Separate inputs from targets
-
+    # Separate inputs from targets.
     # Target attribute is removed to create inputs
     df_x = df.drop("median_house_value", axis="columns")
-
     # Targets are stored separately in a new variable
     df_y = df["median_house_value"]
 
-    # Split dataset between training and test sets
+    # Split dataset between training and test sets.
     # A unique call to train_test_split is mandatory to maintain inputs/target correspondance between samples
     df_x_train, df_x_test, df_y_train, df_y_test = train_test_split(
         df_x, df_y, test_size=0.2
