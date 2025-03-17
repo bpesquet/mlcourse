@@ -33,7 +33,7 @@ The easiest way to obtain a working Python setup is by using a cloud-based [Jupy
 
 To tackle this challenge, you should leverage three essential libraries of the Python ecosystem for Machine Learning: [NumPy](https://numpy.org), [pandas](https://pandas.pydata.org) and [scikit-learn](https://scikit-learn.org).
 
-If any of these tools is new to you, follow the following tutorial(s): [NumPy](../../tutorials/numpy/), [pandas](../../tutorials/pandas/), [scikit-learn](../../tutorials/scikit-learn/).
+If any of these tools is new to you, follow the following tutorial(s) before going any further: [NumPy](../../tutorials/numpy/), [pandas](../../tutorials/pandas/), [scikit-learn](../../tutorials/scikit-learn/).
 
 ## Training process
 

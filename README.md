@@ -1,6 +1,6 @@
 # Machine Learning Course
 
-![Dynamic TOML Badge: Python](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fbpesquet%2Fpytorch-tutorial%2Frefs%2Fheads%2Fmain%2Fpyproject.toml&query=%24.tool.poetry.dependencies.python&logo=python&logoColor=white&logoSize=auto&label=Python&labelColor=%233776AB&color=black)
+![Dynamic TOML Badge: Python](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fbpesquet%2Fmlcourse%2Frefs%2Fheads%2Fmain%2Fpyproject.toml&query=%24.tool.poetry.dependencies.python&logo=python&logoColor=white&logoSize=auto&label=Python&labelColor=%233776AB&color=black)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/bpesquet/mlcourse/ci.yaml)
 
@@ -36,7 +36,7 @@ Deep Learning is a subset of Machine Learning based on the usage of large neural
 
 - 📚 [Feedforward Neural Networks](lectures/feedforward_neural_networks/)
 - 🛠️ [PyTorch Fundamentals](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/fundamentals), [Linear Regression](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/linear_regression), [Logistic Regression](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/logistic_regression), [MultiLayer Perceptron](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/multilayer_perceptron)
-- 💻 🚧 [Recognize handwritten digits](labs/recognize_handwritten_digits/)
+- 💻 [Recognize handwritten digits](labs/recognize_handwritten_digits/)
 - 📚 [Convolutional Neural Networks](lectures/convolutional_neural_networks/)
 - 🛠️ [Convolutional Neural Network with PyTorch](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/convolutional_neural_network)
 - 💻 🚧 [Classify common images](labs/classify_common_images/)
