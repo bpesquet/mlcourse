@@ -4,7 +4,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/bpesquet/mlcourse/ci.yaml)
 
-This repository contains the public material for my Machine Learning course: [lecture notes](lectures/) with code examples, [tutorials](tutorials/) and [lab works](labs/).
+This repository contains the public material for my Machine Learning course: [lecture notes](lectures/), [tutorials](tutorials/) and [lab works](labs/).
 
 I have tried to write them in such a way that they should be accessible to anyone wanting to learn the subject, regardless of whether you are one of my students or not.
 
@@ -22,7 +22,7 @@ Supervised Learning is a subset of Machine Learning in which expected results ar
 - 📚 [Assessing classification performance](lectures/classification_performance/)
 - 📚 [Learning via Gradient Descent](lectures/gradient_descent/)
 - 🛠️ [NumPy](tutorials/numpy/), [pandas](tutorials/pandas/), [scikit-learn](tutorials/scikit-learn/)
-- 💻 [Predict heart disease](labs/predict_heart_disease/)
+- 👩🏽‍💻 [Predict heart disease](labs/predict_heart_disease/)
 
 ### Classic algorithms
 
@@ -36,10 +36,10 @@ Deep Learning is a subset of Machine Learning based on the usage of large neural
 
 - 📚 [Feedforward Neural Networks](lectures/feedforward_neural_networks/)
 - 🛠️ [PyTorch Fundamentals](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/fundamentals), [Linear Regression](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/linear_regression), [Logistic Regression](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/logistic_regression), [MultiLayer Perceptron](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/multilayer_perceptron)
-- 💻 [Recognize handwritten digits](labs/recognize_handwritten_digits/)
+- 👨‍💻 [Recognize handwritten digits](labs/recognize_handwritten_digits/)
 - 📚 [Convolutional Neural Networks](lectures/convolutional_neural_networks/)
 - 🛠️ [Convolutional Neural Network with PyTorch](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/convolutional_neural_network)
-- 💻 🚧 [Classify common images](labs/classify_common_images/)
+- 👩🏼‍💻 [Classify common images](labs/classify_common_images/)
 - ... (more to come)
 
 ### Reinforcement Learning
