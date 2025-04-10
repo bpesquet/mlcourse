@@ -1,6 +1,6 @@
 # Recognize handwritten digits
 
-The goal of this lab is to train a model to recognize handwritten digits in grayscale images.
+The goal of this lab is to train a neural network to recognize handwritten digits in grayscale images.
 
 ## Dataset
 
@@ -16,9 +16,14 @@ The easiest way to obtain a working Python setup is by using a cloud-based [Jupy
 
 ## Tools
 
-This challenge can be tackled using several ML librairies. A prominent choice is [PyTorch](https://pytorch.org/).
+This challenge can be tackled by writing the neural network code "by hand" or by using a dedicated library. A prominent choice is [PyTorch](https://pytorch.org/), which facilitates the creation and training of networks of any size.
 
-If you are new to it, follow the following tutorials before going any further: [PyTorch Fundamentals](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/fundamentals), [Linear Regression](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/linear_regression), [Logistic Regression](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/logistic_regression), [MultiLayer Perceptron](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/multilayer_perceptron)
+Follow the following tutorials if you have little to no experience with this library:
+
+- [PyTorch Fundamentals](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/fundamentals)
+- [Linear Regression with PyTorch](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/linear_regression)
+- [Logistic Regression with PyTorch](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/logistic_regression)
+- [MultiLayer Perceptron with PyTorch](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/multilayer_perceptron)
 
 ## Training process
 
