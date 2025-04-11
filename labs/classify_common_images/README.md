@@ -1,10 +1,10 @@
 # Classify common images
 
-The goal of this lab is to train a neural network to classify color images.
+The goal of this lab is to train a neural network to classify common images.
 
 ## Dataset
 
-The [CIFAR10 dataset]() consists of 60,000 32x32 colour images in 10 classes, with 6,000 images per class. The classes are completely mutually exclusive. There are 50,000 training images and 10,000 test images.
+The [CIFAR10 dataset](https://www.cs.toronto.edu/~kriz/cifar.html) consists of 60,000 32x32 colour images in 10 classes, with 6,000 images per class. The classes are completely mutually exclusive. There are 50,000 training images and 10,000 test images.
 
 ![Training outcome](images/cifar10.png)
 
@@ -92,4 +92,4 @@ def plot_images(dataset, device, model=None):
 
 - Compute accuracy for both models on the test dataset.
 - Try to achieve an accuracy of `70%` or more on the test set with one of the models.
-- Integrate [TensorBoard]() for an easier visualization of the training results.
+- Integrate [TensorBoard](https://www.tensorflow.org/tensorboard) for an easier visualization of the training results.
