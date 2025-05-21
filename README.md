@@ -50,6 +50,10 @@ Deep Learning is a subset of Machine Learning based on the usage of large neural
 
 - 📚 [Recurrent Neural Networks](lectures/recurrent_neural_networks/)
 
+#### Large Language Models
+
+- 📚 [Large Language Models](lectures/large_language_models/)
+
 #### ... (More to come)
 
 ### Reinforcement Learning
