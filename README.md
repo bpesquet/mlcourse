@@ -10,7 +10,7 @@ I have tried to write them in such a way that they should be accessible to anyon
 
 ## Table of Contents
 
-- 📚 [About Artificial Intelligence](lectures/about_ai/)
+- 📚 [Artificial Intelligence: past, present, future(s) ⤴](https://github.com/bpesquet/bpesquet.github.io/blob/master/content/presentations/chembiona-2925/index.md)
 - 📚 [Machine Learning: an introduction](lectures/ml_introduction/)
 
 ### Supervised learning fundamentals
@@ -37,13 +37,13 @@ Deep Learning is a subset of Machine Learning based on the usage of large neural
 #### Feedforward neural networks
 
 - 📚 [Feedforward Neural Networks](lectures/feedforward_neural_networks/)
-- 🛠️ [PyTorch Fundamentals](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/fundamentals), [Linear Regression](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/linear_regression), [Logistic Regression](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/logistic_regression), [MultiLayer Perceptron](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/multilayer_perceptron)
+- 🛠️ [PyTorch Fundamentals ⤴](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/fundamentals), [Linear Regression with PyTorch ⤴](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/linear_regression) ⤴, [Logistic Regression with PyTorch ⤴](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/logistic_regression), [MultiLayer Perceptron with PyTorch ⤴](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/multilayer_perceptron) ⤴
 - 👨‍💻 [Recognize handwritten digits](labs/recognize_handwritten_digits/)
 
 #### Convolutional neural networks
 
 - 📚 [Convolutional Neural Networks](lectures/convolutional_neural_networks/)
-- 🛠️ [Convolutional Neural Network with PyTorch](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/convolutional_neural_network)
+- 🛠️ [Convolutional Neural Network with PyTorch ⤴](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/convolutional_neural_network)
 - 👩🏼‍💻 [Classify common images](labs/classify_common_images/)
 
 #### Recurrent neural networks

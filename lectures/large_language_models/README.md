@@ -50,7 +50,7 @@ style: |
   - **ELMo** [[Peters et al., 2017](https://arxiv.org/abs/1802.05365)]: word embedding method using a bidirectional LSTM.
 - Transformer:
   - **BERT** [[Devlin et al., 2018](https://arxiv.org/abs/1810.04805v2)]: first breakthrough model using the Transformer architecture.
-  - **ChatGPT**
+  - **ChatGPT** [[OpenAI, 2022](https://openai.com/blog/chatgpt/)]: dawn of the LLM era.
 
 ## LLMs under the hood
 
@@ -125,6 +125,7 @@ $$ y = \text{softmax}(\frac{u}{\tau})$$
 - **User prompt**: input or query provided to a LLM by a user.
 - **System prompt**: specialized type of prompt that sets the overall context, behavior, or persona for the model's responses.
   - [Example for a coding agent](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/blob/main/Cursor%20Prompts/Agent%20Prompt.txt)
+  - [Notes on Claude 4 system prompt](https://simonwillison.net/2025/May/25/claude-4-system-prompt/)
 - **Prompt engineering**: objective: developing and optimizing prompts to efficiently use a LLM ([more details](https://www.promptingguide.ai/)).
 
 ### CoT
