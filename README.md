@@ -11,7 +11,6 @@ I have tried to write them in such a way that they should be accessible to anyon
 ## Table of Contents
 
 - 📚 [Artificial Intelligence: past, present, future(s) ⤴](https://github.com/bpesquet/bpesquet.github.io/blob/master/content/presentations/chembiona-2925/index.md)
-- 📚 [Machine Learning: an introduction](lectures/ml_introduction/)
 
 ### Supervised learning fundamentals
 
