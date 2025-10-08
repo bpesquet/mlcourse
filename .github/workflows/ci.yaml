@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: CI
 
 on:
   # Trigger the jobs on each push to main branch
@@ -8,17 +8,27 @@ on:
 
 jobs:
   ci-tests:
+    name: CI tests
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Install poetry
-        run: pipx install poetry
+      - uses: actions/checkout@v5
+
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-          cache: "poetry"
-      - name: Install dependencies
-        run: poetry install
-      - name: Check the code
-        run: poetry run pylint lectures/* tutorials/*
+          python-version-file: ".python-version"
+
+      - name: Install uv with caching enabled
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Install the project
+        run: uv sync --locked --all-extras --dev
+
+      - name: Check code
+        run: uvx ruff check
+
+      - name: Run tests
+        run: uv run pytest

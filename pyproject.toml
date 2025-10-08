@@ -1,28 +1,25 @@
-[tool.poetry]
+[project]
 name = "mlcourse"
-version = "0.1.0"
-description = "Material for my Machine Learning course"
-authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
-license = "MIT"
+version = "0.1.2"
+description = "Public material for my Machine Learning course"
+license = "CC BY-NC-SA, MIT"
+license-files = ["LICENSE", "CODE_LICENSE"]
 readme = "README.md"
-# Use poetry only for dependency management
-package-mode = false
+authors = [
+    { name = "Baptiste Pesquet", email = "bpesquet@gmail.com" }
+]
+keywords = ["machine learning", "ml", "course", "python"]
+requires-python = ">=3.12"
+dependencies = [
+    "joblib>=1.5.2",
+    "matplotlib>=3.10.6",
+    "numpy>=2.3.3",
+    "pandas>=2.3.3",
+    "scikit-learn>=1.7.2",
+    "seaborn>=0.13.2",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-numpy = "^2.1.1"
-pandas = "^2.2.2"
-scikit-learn = "^1.5.2"
-matplotlib = "^3.9.2"
-torch = "^2.4.1"
-torchvision = "^0.19.1"
-seaborn = "^0.13.2"
-joblib = "^1.4.2"
-
-[tool.poetry.group.dev.dependencies]
-pylint = "^3.2.7"
-pytest = "^8.3.3"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]

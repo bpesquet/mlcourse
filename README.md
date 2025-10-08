@@ -1,10 +1,6 @@
 # Machine Learning Course
 
-![Dynamic TOML Badge: Python](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fbpesquet%2Fmlcourse%2Frefs%2Fheads%2Fmain%2Fpyproject.toml&query=%24.tool.poetry.dependencies.python&logo=python&logoColor=white&logoSize=auto&label=Python&labelColor=%233776AB&color=black)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/bpesquet/mlcourse/ci.yaml)
-
-This repository contains the public material for my Machine Learning course: [lecture notes](lectures/), [tutorials](tutorials/) and [lab works](labs/).
+This repository contains the public material for my Machine Learning course: [lectures](lectures/), [tutorials](tutorials/) and [lab works](labs/).
 
 I have tried to write them in such a way that they should be accessible to anyone wanting to learn the subject, regardless of whether you are one of my students or not.
 
@@ -64,11 +60,13 @@ Reinforcement Learning is a subset of Machine Learning concerned with the maximi
 
 ## Usage
 
+> [uv](https://docs.astral.sh/uv/) needs to be available on your system.
+
 ```bash
 git clone https://github.com/bpesquet/mlcourse.git
 cd mlcourse
-poetry install
-python {path to Python code file}
+uv sync
+uv run python {path to example file}
 ```
 
 ## Development notes
@@ -77,24 +75,22 @@ python {path to Python code file}
 
 This project is built with the following software:
 
-- [Poetry](https://python-poetry.org/) for dependency management;
-- [Black](https://github.com/psf/black) for code formatting;
-- [Pylint](https://github.com/pylint-dev/pylint) to detect mistakes in the code;
-- [pytest](https://docs.pytest.org) for testing the code;
-- [Marp](https://marp.app/) for showcasing notes as slideshows during lectures.
+- [uv](https://docs.astral.sh/uv/) for project management;
+- [ruff](https://docs.astral.sh/ruff/) for code formatting and linting;
+- [pytest](https://docs.pytest.org) for testing.
 
 ### Useful commands
 
 ```bash
-# Reformat all Python files
-black .
+# Format all Python files
+uvx ruff format
 
-# Check the code for mistakes
-pylint lectures/* tutorials/*
+# Lint all Python files and fix any fixable errors
+uvx ruff check --fix
 
-# Run all code examples as unit tests
-# The optional -s flag prints code output
-pytest [-s] .
+# Run all code examples as unit tests.
+# The optional -s flag prints code output.
+uv run pytest [-s]
 ```
 
 ## License
