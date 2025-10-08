@@ -1,6 +1,6 @@
 # Machine Learning Course
 
-This repository contains the public material for my Machine Learning course: [lectures](lectures/), [tutorials](tutorials/) and [lab works](labs/).
+This repository contains the public material for my Machine Learning course: 📚 [lectures](lectures/), 🛠️ [tutorials](tutorials/) and 👩🏽‍💻 [lab works](labs/).
 
 I have tried to write them in such a way that they should be accessible to anyone wanting to learn the subject, regardless of whether you are one of my students or not.
 
