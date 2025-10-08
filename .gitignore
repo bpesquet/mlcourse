@@ -1,11 +1,11 @@
 # macOS folder files
 .DS_Store
 
-# Output files
-_output/
-
 # VS Code settings
 .vscode/
+
+# Output files
+.output/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

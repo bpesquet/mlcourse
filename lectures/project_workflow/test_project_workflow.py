@@ -278,7 +278,7 @@ def save_model(model, pipeline):
     """Save a model and preprocessing pipeline to disk for later reuse"""
 
     # Relative path for saving and loading models
-    model_folder = "./_output"
+    model_folder = "./.output"
     Path(model_folder).mkdir(parents=True, exist_ok=True)
 
     # Serialize final model and input pipeline to disk
