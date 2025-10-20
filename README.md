@@ -1,62 +1,48 @@
 # Machine Learning Course
 
-This repository contains the public material for my Machine Learning course: 📚 [lectures](lectures/), 🛠️ [tutorials](tutorials/) and 👩🏽‍💻 [lab works](labs/).
+This repository contains the public material for my Machine Learning course: [lectures](#-lectures), [tutorials](#️-tutorials), [lab works](#-labs) and [resources](#-resources).
 
 I have tried to write them in such a way that they should be accessible to anyone wanting to learn the subject, regardless of whether you are one of my students or not.
 
 ## Table of Contents
 
-- 📚 [Artificial Intelligence: past, present, future(s) ⤴](https://github.com/bpesquet/bpesquet.github.io/blob/master/content/presentations/chembiona-2925/index.md)
+### 📚 Lectures
 
-### Supervised learning fundamentals
+#### Overview
 
-Supervised Learning is a subset of Machine Learning in which expected results are fed into the system alongside training data.
+- [Artificial Intelligence: past, present, future(s) ⤴](https://github.com/bpesquet/bpesquet.github.io/blob/master/content/presentations/chembiona-2925/index.md)
+- [Principles of supervised learning](lectures/supervised_learning_principles/)
+- [End-to-end project workflow](lectures/project_workflow/)
+- [Assessing classification performance](lectures/classification_performance/)
+- [Feedforward Neural Networks](lectures/feedforward_neural_networks/)
+- [Learning via Gradient Descent](lectures/gradient_descent/)
 
-- 📚 [Principles of supervised learning](lectures/supervised_learning_principles/)
-- 📚 [End-to-end project workflow](lectures/project_workflow/)
-- 📚 [Assessing classification performance](lectures/classification_performance/)
-- 📚 [Learning via Gradient Descent](lectures/gradient_descent/)
-- 🛠️ [NumPy](tutorials/numpy/), [pandas](tutorials/pandas/), [scikit-learn](tutorials/scikit-learn/)
-- 👩🏽‍💻 [Predict heart disease](labs/predict_heart_disease/)
+#### Deep Learning
 
-### Classic algorithms
+- [Convolutional Neural Networks](lectures/convolutional_neural_networks/)
+- [Recurrent Neural Networks](lectures/recurrent_neural_networks/)
+- [Large Language Models](lectures/large_language_models/)
 
-- 📚 🚧 [Linear Regression](lectures/linear_regression/)
-- 📚 🚧 [Decision Trees & Random Forests](lectures/decision_trees_random_forests/)
-- ... (more to come)
+#### Reinforcement Learning
 
-### Neural networks and Deep Learning
+- [Introduction to Reinforcement Learning](lectures/rl_introduction/)
 
-Deep Learning is a subset of Machine Learning based on the usage of large neural networks trained on vast amounts of data.
+### 🛠️ Tutorials
 
-#### Feedforward neural networks
+- [NumPy](tutorials/numpy/)
+- [pandas](tutorials/pandas/)
+- [scikit-learn](tutorials/scikit-learn/)
+- [PyTorch ⤴](https://github.com/bpesquet/pytorch-tutorial)
 
-- 📚 [Feedforward Neural Networks](lectures/feedforward_neural_networks/)
-- 🛠️ [PyTorch Fundamentals ⤴](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/fundamentals), [Linear Regression with PyTorch ⤴](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/linear_regression), [Logistic Regression with PyTorch ⤴](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/logistic_regression), [MultiLayer Perceptron with PyTorch ⤴](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/multilayer_perceptron)
-- 👨‍💻 [Recognize handwritten digits](labs/recognize_handwritten_digits/)
+### 👩🏽‍💻 Labs
 
-#### Convolutional neural networks
+- [Predict heart disease](labs/predict_heart_disease/)
+- [Recognize handwritten digits](labs/recognize_handwritten_digits/)
+- [Classify common images](labs/classify_common_images/)
 
-- 📚 [Convolutional Neural Networks](lectures/convolutional_neural_networks/)
-- 🛠️ [Convolutional Neural Network with PyTorch ⤴](https://github.com/bpesquet/pytorch-tutorial/tree/main/pytorch_tutorial/convolutional_neural_network)
-- 👩🏼‍💻 [Classify common images](labs/classify_common_images/)
+### 💡 Resources
 
-#### Recurrent neural networks
-
-- 📚 [Recurrent Neural Networks](lectures/recurrent_neural_networks/)
-
-#### Large Language Models
-
-- 📚 [Large Language Models](lectures/large_language_models/)
-
-#### ... (More to come)
-
-### Reinforcement Learning
-
-Reinforcement Learning is a subset of Machine Learning concerned with the maximization of rewards in a dynamic environment.
-
-- 🚧 [Introduction to Reinforcement Learning](lectures/rl_introduction/)
-- ... (more to come)
+- [Python](https://github.com/bpesquet/python)
 
 ## Usage
 
