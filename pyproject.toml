@@ -18,6 +18,7 @@ dependencies = [
     "scikit-learn>=1.7.2",
     "seaborn>=0.13.2",
     "torch>=2.9.0",
+    "tqdm>=4.67.1",
 ]
 
 [dependency-groups]

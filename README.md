@@ -26,6 +26,7 @@ I have tried to write them in such a way that they should be accessible to anyon
 #### Reinforcement Learning
 
 - [Introduction to Reinforcement Learning](lectures/rl_introduction/)
+- [Multi-armed Bandits](lectures/rl_bandits/)
 
 ### 🛠️ Tutorials
 
