@@ -4,8 +4,8 @@ Introduction to Reinforcement Learning.
 Inspired by https://github.com/ageron/handson-ml2/blob/master/18_reinforcement_learning.ipynb
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import seaborn as sns
 
 
@@ -129,7 +129,8 @@ def plot_q_values(
 ):
     """Plot histories for Q-Value iteration and Q-learning algorithms"""
 
-    final_q_value = history_q_learning[-1, 0, 0]  # final q-value for s0 and a0
+    # Final Q-value for s0 and a0
+    true_q_value = history_q_vi[-1, 0, 0]
 
     # Plot training histories for Q-Value Iteration and Q-Learning methods
     _, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
@@ -141,7 +142,7 @@ def plot_q_values(
         (n_iterations_q_vi, n_iterations_q_learning),
         (history_q_vi, history_q_learning),
     ):
-        ax.plot([0, width], [final_q_value, final_q_value], "k--")
+        ax.plot([0, width], [true_q_value, true_q_value], "k--")
         ax.plot(np.arange(width), history[:, 0, 0], "b-", linewidth=2)
         ax.set_xlabel("Iterations", fontsize=14)
         ax.axis([0, width, 0, 24])
@@ -180,7 +181,6 @@ def test_rl_intro(show_plot=False) -> None:
     q_final_learning, history_q_learning = q_learning(
         n_iterations=n_iterations_q_learning, mdp=mdp
     )
-
     # Show final action-state values
     print(q_final_learning)
     print_optimal_actions(

@@ -1,3 +1,8 @@
+"""
+Python code for reproducing the figures of chapter "A Tutorial Example"
+from the book "Deep Learning: Foundations and Concepts" by C. and H. Bishop.
+"""
+
 import math
 import matplotlib.pyplot as plt
 import torch
@@ -265,8 +270,9 @@ def plot_figure_1_10(x, t, N_test=100, M=9):
     plt.show()
 
 
+# Standalone execution
 if __name__ == "__main__":
-    # Sets the seed for generating random numbers in order to obtain reproducible results
+    # Set the seed for generating random numbers in order to obtain reproducible results
     torch.manual_seed(6)
 
     # Create the reference training set
