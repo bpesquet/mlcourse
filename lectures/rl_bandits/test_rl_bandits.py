@@ -38,11 +38,26 @@ class Bandit:
 class Agent:
     """An agent playing with a bandit"""
 
-    def __init__(self, bandit: Bandit, epsilon: float = 0.1) -> None:
+    def __init__(
+        self,
+        bandit: Bandit,
+        epsilon: float = 0.1,
+        step_size: float = 0,
+        initial_estimate: float = 0,
+    ) -> None:
         self.bandit = bandit
+
+        # Probability for exploration in epsilon-greedy algorithm
         self.epsilon = epsilon
 
-        self.action_estimates = torch.zeros(self.bandit.k)
+        # Factor for updating estimates. If zero, the sample averages method is used
+        self.step_size = step_size
+
+        # Action value (Q-value) estimates for each action.
+        # Initial estimate implements the optimistic initial action value technique
+        self.action_estimates = torch.zeros(self.bandit.k) + initial_estimate
+
+        # Number of times an action was taken. Used to update estimates in the sample averages method
         self.action_count = torch.zeros(self.bandit.k)
 
     def play(self, n_steps):
@@ -81,10 +96,15 @@ class Agent:
         # Incremental update of the action value estimate
         self.action_count[action] += 1
 
-        # Update estimate for chosen action using sample averages
-        self.action_estimates[action] += (
+        # Using sample averages if step size is zero
+        update_factor = (
+            self.step_size if self.step_size != 0 else 1 / self.action_count[action]
+        )
+
+        # Update estimate for chosen action
+        self.action_estimates[action] += update_factor * (
             reward - self.action_estimates[action]
-        ) / self.action_count[action]
+        )
 
 
 def plot_figure_2_1(k=10) -> None:
@@ -121,10 +141,10 @@ def plot_figure_2_2(k=10, n_runs=200, n_steps=100) -> None:
 
     fig, (ax1, ax2) = plt.subplots(nrows=2, figsize=(10, 8))
     fig.suptitle(
-        f"Average performance ({n_runs} runs) of epsilon-greedy methods on a {k}-armed bandit"
+        f"Average performance of $\\epsilon$-greedy methods on a {k}-armed bandit ({n_runs} runs, sample averages)"
     )
 
-    for epsilon in [0, 0.01, 0.1]:
+    for epsilon, label in zip((0, 0.01, 0.1), ("(greedy)", "", "")):
         avg_rewards = torch.zeros(n_steps)
         optimal_action_percent = torch.zeros(n_steps)
 
@@ -136,19 +156,59 @@ def plot_figure_2_2(k=10, n_runs=200, n_steps=100) -> None:
             avg_rewards += rewards
             optimal_action_percent += optimal_actions_taken
 
-        # Average cumulated values
+        # Average the previously cumulated values
         avg_rewards /= n_runs
         optimal_action_percent /= n_runs
 
         # Plot average rewards for the current value of epsilon
-        ax1.plot(avg_rewards, label=f"Epsilon = {epsilon}")
+        ax1.plot(avg_rewards, label=f"$\\epsilon$ = {epsilon} {label}")
         ax1.set(ylabel="Average reward")
         ax1.legend()
 
         # Plot % of optimal action chosen for the current value of epsilon
-        ax2.plot(optimal_action_percent, label=f"Epsilon = {epsilon}")
+        ax2.plot(optimal_action_percent, label=f"$\\epsilon$ = {epsilon} {label}")
         ax2.set(ylabel="% Optimal action")
         ax2.legend()
+
+    plt.xlabel("Steps")
+    plt.show()
+
+
+def plot_figure_2_3(k=10, n_runs=200, n_steps=100, step_size=0.1) -> None:
+    """Reproduce figure 2.3 of Sutton & Barto book: effect of optimistic initial action-value estimates"""
+
+    plt.figure(figsize=(10, 5))
+    plt.title(
+        f"Effect of optimistic initial action-value estimates on a {k}-armed bandit ({n_runs} runs, $\\alpha$ = {step_size})"
+    )
+
+    for epsilon, initial_estimate, label in zip(
+        (0, 0.1), (5, 0), ("Optimistic, greedy", "Realistic, $\\epsilon$-greedy")
+    ):
+        optimal_action_percent = torch.zeros(n_steps)
+
+        for _ in trange(n_runs):
+            bandit = Bandit(k=k)
+            agent = Agent(
+                bandit=bandit,
+                epsilon=epsilon,
+                step_size=step_size,
+                initial_estimate=initial_estimate,
+            )
+            _, optimal_actions_taken = agent.play(n_steps=n_steps)
+
+            optimal_action_percent += optimal_actions_taken
+
+        # Average the previously cumulated values
+        optimal_action_percent /= n_runs
+
+        # Plot % of optimal action chosen for the current value of epsilon
+        plt.plot(
+            optimal_action_percent,
+            label=f"{label} ($\\epsilon$ = {epsilon}, $Q_1$ = {initial_estimate})",
+        )
+        plt.ylabel("% Optimal action")
+        plt.legend()
 
     plt.xlabel("Steps")
     plt.show()
@@ -159,5 +219,10 @@ if __name__ == "__main__":
     # Set the seed for generating random numbers in order to obtain reproducible results
     torch.manual_seed(6)
 
+    # Use same hyperparameters as in Sutton & Barto book
+    n_runs = 2000
+    n_steps = 1000
+
     plot_figure_2_1()
-    plot_figure_2_2(n_runs=2000, n_steps=1000)
+    plot_figure_2_2(n_runs=n_runs, n_steps=n_steps)
+    plot_figure_2_3(n_runs=n_runs, n_steps=n_steps)
