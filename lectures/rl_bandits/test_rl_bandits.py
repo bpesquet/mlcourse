@@ -17,12 +17,12 @@ from tqdm import trange
 class Bandit:
     """A multi-armed bandit"""
 
-    def __init__(self, n_actions) -> None:
+    def __init__(self, n_actions: int, rewards_mean: float = 0) -> None:
         # Number of arms/actions (denoted k in S & B book)
         self.n_actions = n_actions
 
-        # True action values (Q-values). Shape: (n_actions,)
-        self.action_values = torch.normal(mean=0, std=1, size=(n_actions,))
+        # True action values (Q-values) are generated from a normal distribution centered on the rewards mean
+        self.action_values = torch.normal(mean=rewards_mean, std=1, size=(n_actions,))
 
         # Action with best value
         self.best_action = torch.argmax(self.action_values)
@@ -46,7 +46,7 @@ class Policy(ABC):
         self.n_actions = n_actions
 
         # Optional initial value of action value estimates.
-        # Used to implement the optimistic initial action value technique
+        # If nonzero, implements the optimistic initial action value technique
         self.initial_estimate = initial_estimate
 
         self.reset()
@@ -62,7 +62,7 @@ class Policy(ABC):
         """Choose and return an action (the pulled bandit arm)"""
 
     @abstractmethod
-    def update_estimate(self, action, reward) -> None:
+    def update_estimate(self, action, reward, step: int) -> None:
         """Update estimate (Q-value) of an action after receiving its reward"""
 
 
@@ -84,6 +84,8 @@ class SampleAverages(Policy):
         self.action_count = torch.zeros(self.n_actions)
 
     def choose_action(self, step: int) -> torch.Tensor:
+        _ = step  # No need for time step here
+
         if torch.rand(1) < self.epsilon:
             # Explore: choose a random action
             return torch.randint(low=0, high=self.n_actions, size=(1,))
@@ -91,7 +93,9 @@ class SampleAverages(Policy):
             # Exploit: choose the action with the highest value estimate
             return torch.argmax(self.action_estimates)
 
-    def update_estimate(self, action, reward) -> None:
+    def update_estimate(self, action, reward, step: int) -> None:
+        _ = step  # No need for time step here
+
         # Increment number of times n the chosen action was taken
         self.action_count[action] += 1
 
@@ -120,6 +124,8 @@ class StepSize(Policy):
         self.step_size = step_size
 
     def choose_action(self, step: int) -> torch.Tensor:
+        _ = step  # No need for time step here
+
         if torch.rand(1) < self.epsilon:
             # Explore: choose a random action
             return torch.randint(low=0, high=self.n_actions, size=(1,))
@@ -127,7 +133,9 @@ class StepSize(Policy):
             # Exploit: choose the action with the highest value estimate
             return torch.argmax(self.action_estimates)
 
-    def update_estimate(self, action, reward) -> None:
+    def update_estimate(self, action, reward, step: int) -> None:
+        _ = step  # No need for time step here
+
         # Update estimate for chosen action, using step size as factor
         self.action_estimates[action] += self.step_size * (
             reward - self.action_estimates[action]
@@ -141,41 +149,86 @@ class UCB(Policy):
         self,
         n_actions: int,
         initial_estimate: float = 0,
-        exploration_factor=2,
+        confidence_level=2,
     ):
         super().__init__(
             n_actions=n_actions,
             initial_estimate=initial_estimate,
         )
 
-        # Degree of exploration (denoted c in S & B book)
-        self.exploration_factor = exploration_factor
-
-        self.reset()
+        # Confidence level (denoted c in S & B book)
+        self.confidence_level = confidence_level
 
     def reset(self) -> None:
         super().reset()
 
-        # Number of times an action was taken
+        # Reset the number of times an action was taken
         self.action_count = torch.zeros(self.n_actions)
 
     def choose_action(self, step: int) -> torch.Tensor:
         # Compute UCB estimates for all actions
-        ucb_estimates = self.action_estimates + self.exploration_factor * torch.sqrt(
+        ucb_estimates = self.action_estimates + self.confidence_level * torch.sqrt(
             math.log(step + 1) / (self.action_count + 1e-5)
         )
 
         # Choose the action with the highest UCB-estimated value
         return torch.argmax(ucb_estimates)
 
-    def update_estimate(self, action, reward) -> None:
+    def update_estimate(self, action, reward, step: int) -> None:
+        _ = step  # No need for time step here
+
         # Increment number of times n the chosen action was taken
         self.action_count[action] += 1
 
-        # Update estimate for chosen action, using 1/n as update factor
+        # Update estimate for chosen action, using sample averages method
         self.action_estimates[action] += (
             reward - self.action_estimates[action]
         ) / self.action_count[action]
+
+
+class Gradient(Policy):
+    """Policy using gradient ascent to compute action preferences"""
+
+    def __init__(
+        self,
+        n_actions: int,
+        initial_estimate: float = 0,
+        step_size: float = 0.1,
+        use_baseline: bool = False,
+    ):
+        super().__init__(n_actions=n_actions, initial_estimate=initial_estimate)
+
+        # Step size for updating estimates (denoted alpha in S & B book)
+        self.step_size = step_size
+
+        # Average reward up to (and including) current time step
+        self.avg_reward = 0
+
+        # Use average reward as baseline
+        self.use_baseline = use_baseline
+
+    def choose_action(self, step: int) -> torch.Tensor:
+        _ = step  # No need for time step here
+
+        exp_estimates = torch.exp(self.action_estimates)
+        self.action_probas = exp_estimates / torch.sum(exp_estimates)
+
+        return self.action_probas.multinomial(num_samples=1, replacement=True)
+
+    def update_estimate(self, action, reward, step: int) -> None:
+        # Create one-hot vector for actions.
+        # Used to invert sign of update operation for non-chosen actions
+        one_hot = torch.zeros(self.n_actions)
+        one_hot[action] = 1
+
+        if self.use_baseline:
+            # Incremental update of average reward
+            self.avg_reward += (reward - self.avg_reward) / (step + 1)
+
+        # Update preferences for all actions, using gradient ascent algorithm
+        self.action_estimates += (
+            self.step_size * (reward - self.avg_reward) * (one_hot - self.action_probas)
+        )
 
 
 def run(
@@ -195,7 +248,7 @@ def run(
         # Pull a bandit arm and update associated reward estimate
         action = policy.choose_action(step=step)
         reward = bandit.pull(action=action)
-        policy.update_estimate(action=action, reward=reward)
+        policy.update_estimate(action=action, reward=reward, step=step)
 
         rewards[step] = reward
         optimal_actions_taken[step] = action == bandit.best_action
@@ -204,7 +257,7 @@ def run(
 
 
 def simulate(
-    n_actions: int, policy: Policy, n_runs: int, n_steps: int
+    n_actions: int, policy: Policy, n_runs: int, n_steps: int, rewards_mean: float = 0
 ) -> tuple[torch.Tensor, torch.Tensor]:
     """Simulate n_runs runs of a policy against a bandit"""
 
@@ -212,23 +265,23 @@ def simulate(
     rewards = torch.zeros(size=(n_runs, n_steps))
 
     # For each run and step, was the optimal action taken?
-    optimal_action_taken = torch.zeros(size=(n_runs, n_steps))
+    optimal_actions_taken = torch.zeros(size=(n_runs, n_steps))
 
     for r in trange(n_runs):
         run_rewards, run_optimal_actions_taken = run(
-            bandit=Bandit(n_actions=n_actions),
+            bandit=Bandit(n_actions=n_actions, rewards_mean=rewards_mean),
             policy=policy,
             n_steps=n_steps,
         )
 
         rewards[r, :] = run_rewards
-        optimal_action_taken[r, :] = run_optimal_actions_taken
+        optimal_actions_taken[r, :] = run_optimal_actions_taken
 
     # Return averaged values against all runs
-    return rewards.mean(axis=0), optimal_action_taken.mean(axis=0)
+    return rewards.mean(axis=0), optimal_actions_taken.mean(axis=0)
 
 
-def plot_figure_2_1(n_actions=10) -> None:
+def plot_figure_2_1(n_actions: int = 10) -> None:
     """Reproduce figure 2.1 of Sutton & Barto book: example bandit problem"""
 
     # Generate true Q-values for each action from a standard normal distribution N(0,1)
@@ -258,7 +311,7 @@ def plot_figure_2_1(n_actions=10) -> None:
     plt.show()
 
 
-def plot_figure_2_2(n_actions=10, n_runs=200, n_steps=100) -> None:
+def plot_figure_2_2(n_actions: int = 10, n_runs: int = 200, n_steps: int = 100) -> None:
     """Reproduce figure 2.2 of Sutton & Barto book: average performance of epsilon-greedy methods"""
 
     fig, (ax1, ax2) = plt.subplots(nrows=2, figsize=(10, 8))
@@ -271,7 +324,7 @@ def plot_figure_2_2(n_actions=10, n_runs=200, n_steps=100) -> None:
     labels = ("(greedy)", "", "")
 
     for epsilon, label in zip(epsilons, labels):
-        avg_rewards, optimal_action_percent = simulate(
+        avg_rewards, optimal_actions_percent = simulate(
             n_actions=n_actions,
             policy=SampleAverages(n_actions=n_actions, epsilon=epsilon),
             n_runs=n_runs,
@@ -284,7 +337,7 @@ def plot_figure_2_2(n_actions=10, n_runs=200, n_steps=100) -> None:
         ax1.legend()
 
         # Plot % of optimal action chosen for the current value of epsilon
-        ax2.plot(optimal_action_percent, label=f"$\\epsilon$ = {epsilon} {label}")
+        ax2.plot(optimal_actions_percent, label=f"$\\epsilon$ = {epsilon} {label}")
         ax2.set(ylabel="% Optimal action")
         ax2.legend()
 
@@ -292,7 +345,9 @@ def plot_figure_2_2(n_actions=10, n_runs=200, n_steps=100) -> None:
     plt.show()
 
 
-def plot_figure_2_3(n_actions=10, n_runs=200, n_steps=100, step_size=0.1) -> None:
+def plot_figure_2_3(
+    n_actions: int = 10, n_runs: int = 200, n_steps: int = 100, step_size: float = 0.1
+) -> None:
     """Reproduce figure 2.3 of Sutton & Barto book: effect of optimistic initial action-value estimates"""
 
     plt.figure(figsize=(10, 5))
@@ -306,7 +361,7 @@ def plot_figure_2_3(n_actions=10, n_runs=200, n_steps=100, step_size=0.1) -> Non
     labels = ("Optimistic, greedy", "Realistic, $\\epsilon$-greedy")
 
     for epsilon, initial_estimate, label in zip(epsilons, initial_estimates, labels):
-        _, optimal_action_percent = simulate(
+        _, optimal_actions_percent = simulate(
             n_actions=n_actions,
             policy=StepSize(
                 n_actions=n_actions,
@@ -318,9 +373,9 @@ def plot_figure_2_3(n_actions=10, n_runs=200, n_steps=100, step_size=0.1) -> Non
             n_steps=n_steps,
         )
 
-        # Plot % of optimal action chosen for the current value of epsilon
+        # Plot £ of optimal actions chosen rewards for the current set of hyperparameters
         plt.plot(
-            optimal_action_percent,
+            optimal_actions_percent,
             label=f"{label} ($\\epsilon$ = {epsilon}, $Q_1$ = {initial_estimate})",
         )
 
@@ -331,7 +386,11 @@ def plot_figure_2_3(n_actions=10, n_runs=200, n_steps=100, step_size=0.1) -> Non
 
 
 def plot_figure_2_4(
-    n_actions=10, n_runs=200, n_steps=100, epsilon=0.1, exploration_factor=2
+    n_actions: int = 10,
+    n_runs: int = 200,
+    n_steps: int = 100,
+    epsilon: float = 0.1,
+    exploration_factor: float = 2,
 ) -> None:
     """Reproduce figure 2.4 of Sutton & Barto book: average performance of UCB action selection"""
 
@@ -345,7 +404,7 @@ def plot_figure_2_4(
         SampleAverages(n_actions=n_actions, epsilon=epsilon),
         UCB(
             n_actions=n_actions,
-            exploration_factor=exploration_factor,
+            confidence_level=exploration_factor,
         ),
     )
     labels = (
@@ -358,10 +417,47 @@ def plot_figure_2_4(
             n_actions=n_actions, policy=policy, n_runs=n_runs, n_steps=n_steps
         )
 
-        # Plot average rewards for the current value of epsilon
+        # Plot average rewards for the current set of hyperparameters
         plt.plot(avg_rewards, label=f"{label}")
 
     plt.ylabel("Average reward")
+    plt.legend()
+    plt.xlabel("Steps")
+    plt.show()
+
+
+def plot_figure_2_5(
+    n_actions: int = 10, n_runs: int = 200, n_steps: int = 100, rewards_mean: float = 4
+) -> None:
+    """Reproduce figure 2.5 of Sutton & Barto book: average performance of the gradient bandit algorithm"""
+
+    plt.figure(figsize=(10, 5))
+    plt.title(
+        f"Average performance of the gradient bandit algorithm on a {n_actions}-armed bandit ({n_runs} runs, mean reward = {rewards_mean})"
+    )
+
+    # Compared policies and associated plot labels
+    step_sizes = (0.1, 0.4, 0.1, 0.4)
+    use_baselines = (False, False, True, True)
+
+    for step_size, use_baseline in zip(step_sizes, use_baselines):
+        _, optimal_actions_percent = simulate(
+            n_actions=n_actions,
+            policy=Gradient(
+                n_actions=n_actions, step_size=step_size, use_baseline=use_baseline
+            ),
+            n_runs=n_runs,
+            n_steps=n_steps,
+            rewards_mean=rewards_mean,
+        )
+
+        # Plot £ of optimal actions chosen for the current set of hyperparameters
+        label_start = "With baseline" if use_baseline else "Without baseline"
+        plt.plot(
+            optimal_actions_percent, label=label_start + f" ($\\alpha$ = {step_size})"
+        )
+
+    plt.ylabel("% Optimal action")
     plt.legend()
     plt.xlabel("Steps")
     plt.show()
@@ -380,3 +476,4 @@ if __name__ == "__main__":
     plot_figure_2_2(n_runs=n_runs, n_steps=n_steps)
     plot_figure_2_3(n_runs=n_runs, n_steps=n_steps)
     plot_figure_2_4(n_runs=n_runs, n_steps=n_steps)
+    plot_figure_2_5(n_runs=n_runs, n_steps=n_steps)
