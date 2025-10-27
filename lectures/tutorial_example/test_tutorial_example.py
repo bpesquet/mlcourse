@@ -4,6 +4,7 @@ from the book "Deep Learning: Foundations and Concepts" by C. and H. Bishop.
 """
 
 import math
+
 import matplotlib.pyplot as plt
 import torch
 
@@ -78,7 +79,7 @@ def plot_fit(plot, x, w, t, M):
         x_plot,
         X_plot @ w,
         color="red",
-        label=f"Model fit (M={M})",
+        label="Model fit",
     )
 
 
@@ -100,11 +101,6 @@ def plot_figure_1_6(x, t):
         w_best = fit(X=X_train, t=targets)
         print(w_best)
 
-        # Plot inputs and targets as dots
-        axs[fig_row, fig_col].scatter(
-            samples, targets, color="blue", label="Training samples"
-        )
-
         # Create subplot with model fit for polynomial order M
         plot_fit(plot=axs[fig_row, fig_col], x=samples, w=w_best, t=t, M=M)
         axs[fig_row, fig_col].set_title(f"M = {M}")
@@ -118,6 +114,9 @@ def plot_figure_1_6(x, t):
     # Hide x labels and tick labels for top plots and y ticks for right plots.
     for ax in axs.flat:
         ax.label_outer()
+
+    # Show legend only for top-left plot
+    axs[0, 0].legend()
 
     plt.show()
 
@@ -191,6 +190,9 @@ def plot_figure_1_8(M=9):
     for ax in axs.flat:
         ax.label_outer()
 
+    # Show legend only for leftmost plot
+    axs[0].legend()
+
     plt.show()
 
 
@@ -214,7 +216,7 @@ def plot_figure_1_9(x, t, M=9):
         # Create subplot with model fit for lambda value
         plot_fit(plot=axs[fig_col], x=samples, w=w_best, t=t, M=M)
         ln_lambda = f"{math.log(lambda_reg):.0f}" if lambda_reg > 0 else "-Infinity"
-        axs[fig_col].set_title(f"ln λ = {ln_lambda}")
+        axs[fig_col].set_title(f"ln $\\lambda$ = {ln_lambda}")
 
         # Increment column of next plot
         fig_col += 1
@@ -222,6 +224,9 @@ def plot_figure_1_9(x, t, M=9):
     # Hide x labels and tick labels for top plots and y ticks for right plots.
     for ax in axs.flat:
         ax.label_outer()
+
+    # Show legend only for leftmost plot
+    axs[0].legend()
 
     plt.show()
 
@@ -263,7 +268,7 @@ def plot_figure_1_10(x, t, N_test=100, M=9):
     plt.plot(history_lambda, history_train, marker="o", label="Training")
     plt.plot(history_lambda, history_test, marker="^", label="Test")
 
-    plt.xlabel("ln λ")
+    plt.xlabel("ln $\\lambda$")
     plt.ylabel("RMS error")
     plt.title(f"Impact of regularization on training and test errors (M = {M})")
     plt.legend()
