@@ -66,7 +66,7 @@ class Policy(ABC):
         """Update estimate (Q-value) of an action after receiving its reward"""
 
 
-class SampleAverages(Policy):
+class SampleAverage(Policy):
     """Policy using sample averages to update estimates"""
 
     def __init__(
@@ -149,7 +149,7 @@ class UCB(Policy):
         self,
         n_actions: int,
         initial_estimate: float = 0,
-        confidence_level=2,
+        confidence: float = 2,
     ):
         super().__init__(
             n_actions=n_actions,
@@ -157,7 +157,7 @@ class UCB(Policy):
         )
 
         # Confidence level (denoted c in S & B book)
-        self.confidence_level = confidence_level
+        self.confidence = confidence
 
     def reset(self) -> None:
         super().reset()
@@ -167,7 +167,7 @@ class UCB(Policy):
 
     def choose_action(self, step: int) -> torch.Tensor:
         # Compute UCB estimates for all actions
-        ucb_estimates = self.action_estimates + self.confidence_level * torch.sqrt(
+        ucb_estimates = self.action_estimates + self.confidence * torch.sqrt(
             math.log(step + 1) / (self.action_count + 1e-5)
         )
 
@@ -194,7 +194,7 @@ class Gradient(Policy):
         n_actions: int,
         initial_estimate: float = 0,
         step_size: float = 0.1,
-        use_baseline: bool = False,
+        use_baseline: bool = True,
     ):
         super().__init__(n_actions=n_actions, initial_estimate=initial_estimate)
 
@@ -326,7 +326,7 @@ def plot_figure_2_2(n_actions: int = 10, n_runs: int = 200, n_steps: int = 100) 
     for epsilon, label in zip(epsilons, labels):
         avg_rewards, optimal_actions_percent = simulate(
             n_actions=n_actions,
-            policy=SampleAverages(n_actions=n_actions, epsilon=epsilon),
+            policy=SampleAverage(n_actions=n_actions, epsilon=epsilon),
             n_runs=n_runs,
             n_steps=n_steps,
         )
@@ -390,7 +390,7 @@ def plot_figure_2_4(
     n_runs: int = 200,
     n_steps: int = 100,
     epsilon: float = 0.1,
-    exploration_factor: float = 2,
+    confidence: float = 2,
 ) -> None:
     """Reproduce figure 2.4 of Sutton & Barto book: average performance of UCB action selection"""
 
@@ -401,15 +401,15 @@ def plot_figure_2_4(
 
     # Compared policies and associated plot labels
     policies = (
-        SampleAverages(n_actions=n_actions, epsilon=epsilon),
+        SampleAverage(n_actions=n_actions, epsilon=epsilon),
         UCB(
             n_actions=n_actions,
-            confidence_level=exploration_factor,
+            confidence=confidence,
         ),
     )
     labels = (
         f"$\\epsilon$-greedy ($\\epsilon$ = {epsilon})",
-        f"UCB ($c$ = {exploration_factor})",
+        f"UCB ($c$ = {confidence})",
     )
 
     for policy, label in zip(policies, labels):
@@ -463,6 +463,62 @@ def plot_figure_2_5(
     plt.show()
 
 
+def plot_figure_2_6(n_actions=10, n_runs=200, n_steps=100) -> None:
+    """Reproduce figure 2.6 of Sutton & Barto book: parameter study of bandit algorithms"""
+
+    plt.figure(figsize=(10, 5))
+    plt.title(f"Parameter study of bandit algorithms ({n_runs} runs)")
+
+    initial_step_size = 0.1
+    policy_generators = [
+        lambda epsilon: SampleAverage(n_actions=n_actions, epsilon=epsilon),
+        lambda initial_estimate: StepSize(
+            n_actions=n_actions,
+            epsilon=0,
+            initial_estimate=initial_estimate,
+            step_size=initial_step_size,
+        ),
+        lambda confidence: UCB(n_actions=n_actions, confidence=confidence),
+        lambda step_size: Gradient(n_actions=n_actions, step_size=step_size),
+    ]
+    parameter_ranges = [
+        torch.arange(start=-7, end=-1, dtype=torch.float),
+        torch.arange(start=-2, end=3, dtype=torch.float),
+        torch.arange(start=-4, end=3, dtype=torch.float),
+        torch.arange(start=-5, end=2, dtype=torch.float),
+    ]
+    labels = (
+        "$\\epsilon$-greedy",
+        f"Greedy with optimistic initialization ($\\alpha$ = {initial_step_size})",
+        "UCB",
+        "Gradient bandit",
+    )
+
+    for policy_generator, param_range, label in zip(
+        policy_generators, parameter_ranges, labels
+    ):
+        policy_variants = []
+        for parameter in param_range:
+            policy_variants.append(policy_generator(pow(2, parameter)))
+
+        variants_avg_rewards = []
+        for policy in policy_variants:
+            avg_rewards, _ = simulate(
+                n_actions=n_actions, policy=policy, n_runs=n_runs, n_steps=n_steps
+            )
+            variants_avg_rewards.append(avg_rewards.mean())
+
+        plt.plot(
+            torch.pow(self=2, exponent=param_range), variants_avg_rewards, label=label
+        )
+
+    plt.xscale("log", base=2)
+    plt.xlabel("$\\epsilon$ | $Q_0$ | $c$ | $\\alpha$")
+    plt.ylabel(f"Average reward over first {n_steps} steps")
+    plt.legend()
+    plt.show()
+
+
 # Standalone execution
 if __name__ == "__main__":
     # Set the seed for generating random numbers in order to obtain reproducible results
@@ -472,8 +528,9 @@ if __name__ == "__main__":
     n_runs = 2000
     n_steps = 1000
 
-    plot_figure_2_1()
-    plot_figure_2_2(n_runs=n_runs, n_steps=n_steps)
-    plot_figure_2_3(n_runs=n_runs, n_steps=n_steps)
-    plot_figure_2_4(n_runs=n_runs, n_steps=n_steps)
-    plot_figure_2_5(n_runs=n_runs, n_steps=n_steps)
+    # plot_figure_2_1()
+    # plot_figure_2_2(n_runs=n_runs, n_steps=n_steps)
+    # plot_figure_2_3(n_runs=n_runs, n_steps=n_steps)
+    # plot_figure_2_4(n_runs=n_runs, n_steps=n_steps)
+    # plot_figure_2_5(n_runs=n_runs, n_steps=n_steps)
+    plot_figure_2_6(n_runs=n_runs, n_steps=n_steps)
