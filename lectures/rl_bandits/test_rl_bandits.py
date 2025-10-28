@@ -469,7 +469,9 @@ def plot_figure_2_6(n_actions=10, n_runs=200, n_steps=100) -> None:
     plt.figure(figsize=(10, 5))
     plt.title(f"Parameter study of bandit algorithms ({n_runs} runs)")
 
+    # Step size for greedy & optimistic policies
     initial_step_size = 0.1
+
     policy_generators = [
         lambda epsilon: SampleAverage(n_actions=n_actions, epsilon=epsilon),
         lambda initial_estimate: StepSize(
@@ -497,10 +499,12 @@ def plot_figure_2_6(n_actions=10, n_runs=200, n_steps=100) -> None:
     for policy_generator, param_range, label in zip(
         policy_generators, parameter_ranges, labels
     ):
+        # Generate policy variants with varying hyperparameter
         policy_variants = []
         for parameter in param_range:
             policy_variants.append(policy_generator(pow(2, parameter)))
 
+        # Compute average reward of first n_step steps for each variant
         variants_avg_rewards = []
         for policy in policy_variants:
             avg_rewards, _ = simulate(
@@ -508,11 +512,14 @@ def plot_figure_2_6(n_actions=10, n_runs=200, n_steps=100) -> None:
             )
             variants_avg_rewards.append(avg_rewards.mean())
 
+        # Plot average rewards of variants for each hyperparameter value
         plt.plot(
             torch.pow(self=2, exponent=param_range), variants_avg_rewards, label=label
         )
 
+    # Use a logarithmic scale for x-axis
     plt.xscale("log", base=2)
+
     plt.xlabel("$\\epsilon$ | $Q_0$ | $c$ | $\\alpha$")
     plt.ylabel(f"Average reward over first {n_steps} steps")
     plt.legend()
@@ -528,9 +535,9 @@ if __name__ == "__main__":
     n_runs = 2000
     n_steps = 1000
 
-    # plot_figure_2_1()
-    # plot_figure_2_2(n_runs=n_runs, n_steps=n_steps)
-    # plot_figure_2_3(n_runs=n_runs, n_steps=n_steps)
-    # plot_figure_2_4(n_runs=n_runs, n_steps=n_steps)
-    # plot_figure_2_5(n_runs=n_runs, n_steps=n_steps)
+    plot_figure_2_1()
+    plot_figure_2_2(n_runs=n_runs, n_steps=n_steps)
+    plot_figure_2_3(n_runs=n_runs, n_steps=n_steps)
+    plot_figure_2_4(n_runs=n_runs, n_steps=n_steps)
+    plot_figure_2_5(n_runs=n_runs, n_steps=n_steps)
     plot_figure_2_6(n_runs=n_runs, n_steps=n_steps)
