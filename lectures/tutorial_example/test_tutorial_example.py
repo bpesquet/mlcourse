@@ -274,6 +274,7 @@ def plot_figure_1_10(x, t, N_test=100, M=9):
 
         # Fit model to training set with regularization
         w_best = fit(X=X_train, t=t, lambda_reg=lambda_reg)
+        print(w_best)
 
         # Record error on training set
         history_train.append(rms_error(X=X_train, w=w_best, t=t))
