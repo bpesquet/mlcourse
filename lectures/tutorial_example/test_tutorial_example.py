@@ -83,14 +83,37 @@ def plot_fit(plot, x, w, t, M):
     )
 
 
+def plot_figure_1_4(x, t):
+    """Reproduce figure 1.4 of DLFC book: training set"""
+
+    # Plot inputs and targets as dots
+    plt.scatter(x, t, color="blue", label="Training samples")
+
+    x_plot = torch.linspace(start=0, end=1, steps=100, dtype=torch.float64)
+
+    # Plot underlying function
+    plt.plot(
+        x_plot,
+        ground_truth(x_plot),
+        color="green",
+        linestyle="dashed",
+        label="Underlying function",
+    )
+
+    plt.title(f"Training set (N = {len(x)})")
+    plt.legend()
+
+    plt.show()
+
+
 def plot_figure_1_6(x, t):
     """Reproduce figure 1.6 of DLFC book: impact of model complexity on fitting"""
 
-    fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(10, 8))
+    fig, axs = plt.subplots(nrows=1, ncols=4, figsize=(18, 4))
     fig.suptitle("Impact of model complexity on fitting")
 
-    # Init subplots coordinates
-    fig_row = fig_col = 0
+    # Init subplot column
+    fig_col = 0
 
     # Plot model fit for various orders of the polynomial model
     for M in (0, 1, 3, 9):
@@ -102,21 +125,18 @@ def plot_figure_1_6(x, t):
         print(w_best)
 
         # Create subplot with model fit for polynomial order M
-        plot_fit(plot=axs[fig_row, fig_col], x=samples, w=w_best, t=t, M=M)
-        axs[fig_row, fig_col].set_title(f"M = {M}")
+        plot_fit(plot=axs[fig_col], x=samples, w=w_best, t=t, M=M)
+        axs[fig_col].set_title(f"M = {M}")
 
         # Increment coordinates of next subplot
         fig_col += 1
-        if fig_col == 2:
-            fig_row += 1
-            fig_col = 0
 
     # Hide x labels and tick labels for top plots and y ticks for right plots.
     for ax in axs.flat:
         ax.label_outer()
 
     # Show legend only for top-left plot
-    axs[0, 0].legend()
+    axs[0].legend()
 
     plt.show()
 
@@ -283,6 +303,7 @@ if __name__ == "__main__":
     # Create the reference training set
     samples, targets = create_dataset(N=10)
 
+    plot_figure_1_4(x=samples, t=targets)
     plot_figure_1_6(x=samples, t=targets)
     plot_figure_1_7(x=samples, t=targets)
     plot_figure_1_8()
