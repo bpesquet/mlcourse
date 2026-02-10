@@ -13,6 +13,7 @@
 
 #set math.equation(numbering: "(1)")
 #show figure.caption: set text(size: 16pt)
+#show table: set align(right)
 
 #title-slide[
   // Institution logos
@@ -54,7 +55,7 @@
 - Target variable: $t$.
 - $N$ observations of $x$, denoted $x_1,x_2,...,x_N$.
 - $N$ corresponding values of $t$, denoted $t_1,t_2,...,t_N$.
-- A cauple ($x_i, t_i$) is called a _data sample_.
+- A couple ($x_i, t_i$) is called a _data sample_.
 
 === Example: a noisy sinusoidal training set
 
@@ -71,8 +72,14 @@ Example: @model defines a _linear model_.
 
 $ y(x,bold(w)) = w_0 + w_1 x + w_2 x^2 ... + w_M x^M = sum_(j=0)^M w_j x^j $ <model>
 
-- $bold(w)$: vector of polynomial coefficients (also called _weights_).
+- $bold(w)$: vector of polynomial coefficients, also called _weights_ or _parameters_.
 - $M$: order of the polynomial function.
+
+=== What the model "sees"
+
+#figure(
+  image("images/Figure_2.png", width: 51%),
+)
 
 == Loss function
 
@@ -87,17 +94,17 @@ $ L(bold(w)) = 1/2 sum_(n=1)^N (y(x_n, bold(w)) - t_n)^2 $ <sum_of_squares>
 === Example: errors for some training samples
 
 #figure(
-  image("images/Figure_2.png", width: 49%),
-  caption: [Illustration of the errors between actual targets $t_i$ and the value computed by the model $y(x_i,bold(w))$ for three training samples @bishop2023learning.],
+  image("images/Figure_3.png", width: 49%),
+  caption: [Adapted from @bishop2023learning],
 )
 
 == Optimization algorithm
 
-Goal: find the set of weights $bold(w^*)$ that minimzes the loss function $L(bold(w))$.
+Goal: find the set of weights $bold(w^*)$ that minimizes the loss function $L(bold(w))$.
 
 Can be done either by _analytical_ or _numerical_ methods.
 
-In our example, error minimization (@error_deriv) defines a system of $M$ equations with $M$ unknowns $w_i$.
+Example: minimization of $L(bold(w))$ defines a system of $M$ equations with $M$ unknowns $w_i$ (@error_deriv).
 
 $ partial(L(bold(w)))/partial(w_i) = 0 <=> sum_(j=0)^M A_(i j) w_j = T_i $ <error_deriv>
 
@@ -110,8 +117,7 @@ $ partial(L(bold(w)))/partial(w_i) = 0 <=> sum_(j=0)^M A_(i j) w_j = T_i $ <erro
 === Example: impact of model complexity on fitting
 
 #figure(
-  image("images/Figure_3.png", width: 125%),
-  caption: [Impact of polynomial order $M$ on model fitting, showing vairous degrees of _underfitting_ (left) and _overfitting_ (right). $M=3$ seems like the best balance.],
+  image("images/Figure_4.png", width: 125%),
 )
 
 === Generalization
@@ -127,8 +133,7 @@ $ E_("RMS") = sqrt(1/N sum_(n=1)^N (y(x_n,bold(w^*)) - t_n)^2) $ <rms>
 === Example: impact of model complexity on generalization error
 
 #figure(
-  image("images/Figure_4.png", width: 52%),
-  caption: [Impact of polynomial order $M$ on training and tests errors, as measured by $E_("RMS")$ (@rms). Values in the range $3 <= M <= 6$ offer an acceptable compromise. Overfitting appears when $M >= 4$.],
+  image("images/Figure_5.png", width: 52%),
 )
 
 === Example: impact of model complexity on weights
@@ -150,7 +155,6 @@ $ E_("RMS") = sqrt(1/N sum_(n=1)^N (y(x_n,bold(w^*)) - t_n)^2) $ <rms>
     [$w_8^*$], [], [], [$$], [$-1040.7$],
     [$w_9^*$], [], [], [$$], [$-542.7$],
   ),
-  caption: [Impact of polynomial order $M$ on model weights, showing a large absolute increase as $M$ grows.],
 )
 
 == Dataset size
@@ -158,8 +162,7 @@ $ E_("RMS") = sqrt(1/N sum_(n=1)^N (y(x_n,bold(w^*)) - t_n)^2) $ <rms>
 === Example: impact of dataset size on overfitting
 
 #figure(
-  image("images/Figure_5.png", width: 69%),
-  caption: [Impact of dataset size $N$ on model fitting, showing that the overfitting problem becomes less severe as the number of training samples increases.],
+  image("images/Figure_6.png", width: 69%),
 )
 
 == Regularization
@@ -171,20 +174,18 @@ Example: @reg_sum_of_squares uses _L2 regularization_.
 $ L(bold(w)) = 1/2 sum_(n=1)^N (y(x_n, bold(w)) - t_n)^2 + lambda/2 norm(bold(w))^2 $ <reg_sum_of_squares>
 
 - $lambda$: regularization rate.
-- $norm(bold(w))^2 = sum_(j=1)^M w_i^2$
+- $norm(bold(w))^2 = sum_(j=1)^M w_j^2$
 
 === Example: impact of regularization on overfitting
 
 #figure(
-  image("images/Figure_6.png", width: 125%),
-  caption: [Impact of regularization rate $lambda$ on overfitting for $M=9$. Left: $lambda=0$ (no regularization). Right: $lambda=1$ (strong regularization). The intermediate value of $lambda$ gives the best result.],
+  image("images/Figure_7.png", width: 125%),
 )
 
 === Example: impact of regularization on generalization error
 
 #figure(
-  image("images/Figure_7.png", width: 52%),
-  caption: [Impact of regularization rate $lambda$ on training and test errors for $M=9$, as measured by $E_("RMS")$ (@rms). Values such that $-10 <= ln lambda <= -6$ offer the best compromise.],
+  image("images/Figure_8.png", width: 52%),
 )
 
 === Example: impact of regularization on model weights
@@ -194,22 +195,47 @@ $ L(bold(w)) = 1/2 sum_(n=1)^N (y(x_n, bold(w)) - t_n)^2 + lambda/2 norm(bold(w)
     columns: 4,
     stroke: none,
 
-    table.header[][$ln lambda = -infinity$][$ln lambda = -10$][$ln lambda = 1$],
-    [$w_0^*$], [$$], [$$], [$$],
-    [$w_1^*$], [], [$$], [$$],
-    [$w_2^*$], [], [], [$$],
-    [$w_3^*$], [], [], [$$],
-    [$w_4^*$], [], [], [$$],
-    [$w_5^*$], [], [], [$$],
-    [$w_6^*$], [], [], [$$],
-    [$w_7^*$], [], [], [$$],
-    [$w_8^*$], [], [], [$$],
-    [$w_9^*$], [], [], [$$],
+    table.header[][$ln lambda = -infinity$][$ln lambda = -10$][$ln lambda = 0$],
+    [$w_0^*$], [$-0.5625$], [$-0.5515$], [$0.1955$],
+    [$w_1^*$], [$-6.3815$], [$12.6206$], [$-0.1786$],
+    [$w_2^*$], [$232.25$], [$-29.8103$], [$-0.2508$],
+    [$w_3^*$], [$-1038.7$], [$4.0986$], [$-0.1764$],
+    [$w_4^*$], [$841.95$], [$13.9172$], [$-0.0975$],
+    [$w_5^*$], [$3568.1$], [$7.9275$], [$-0.0375$],
+    [$w_6^*$], [$-8702.6$], [$0.8214$], [$0.0045$],
+    [$w_7^*$], [$6689$], [$-2.6544$], [$0.0329$],
+    [$w_8^*$], [$-1040.7$], [$-3.3195$], [$0.0518$],
+    [$w_9^*$], [$-542.7$], [$-3.3804$], [$0.0640$],
   ),
-  caption: [Impact of regularization rate $lambda$ on model weights for $M=9$.],
 )
 
 == Model selection
+
+=== Hyperparameters
+
+- $M$ and $lambda$ are examples of _hyperparameters_: configuration properties chosen before training.
+- Exploring combinations of hyperparameters can be costly and even untractable.
+
+=== Training, validation and test sets
+
+#figure(
+  image("images/Figure_9.png", width: 70%),
+)
+
+=== K-fold cross-validation
+
+#figure(
+  image("images/Figure_10.png", width: 50%),
+  caption: [Adapted from @bishop2023learning.],
+)
+
+== From example to reality
+
+- Dataset size.
+- Several input values (_features_) for each sample.
+- Number of model parameters ($>1"B"$ in some cases).
+- Iterative optimization techniques for loss minimization.
+- Computational cost.
 
 = References
 
