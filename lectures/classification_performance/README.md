@@ -4,7 +4,7 @@ math: true  # Use default Marp engin for math rendering
 ---
 
 <!-- Apply header and footer to first slide only -->
-<!-- _header: "[![Bordeaux INP logo](../../images/ensc_logo.jpg)](https://www.bordeaux-inp.fr)" -->
+<!-- _header: "[![Bordeaux INP logo](../../images/ensc_logo.jpg)](https://www.bordeaux-inp.fr) [![IOGS logo](../../images/iogs_logo.jpg)](https://www.institutoptique.fr)" -->
 <!-- _footer: "[Baptiste Pesquet](https://www.bpesquet.fr)" -->
 
 # Assessing classification performance

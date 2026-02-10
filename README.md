@@ -11,7 +11,7 @@ I have tried to write them in such a way that they should be accessible to anyon
 #### Overview
 
 - [Artificial Intelligence: past, present, future(s) ⤴](https://github.com/bpesquet/bpesquet.github.io/blob/master/content/presentations/chembiona-2925/index.md)
-- [Principles of supervised learning](lectures/supervised_learning_principles/)
+- [Supervised Learning: a tutorial example](lectures/tutorial_example//)
 - [End-to-end project workflow](lectures/project_workflow/)
 - [Assessing classification performance](lectures/classification_performance/)
 - [Feedforward Neural Networks](lectures/feedforward_neural_networks/)
