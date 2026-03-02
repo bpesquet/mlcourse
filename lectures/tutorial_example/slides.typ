@@ -55,13 +55,13 @@
 - Target variable: $t$.
 - $N$ observations of $x$, denoted $x_1,x_2,...,x_N$.
 - $N$ corresponding values of $t$, denoted $t_1,t_2,...,t_N$.
-- A couple ($x_i, t_i$) is called a _data sample_.
+- A couple ($x_n, t_n$) is called a _data sample_.
 
 === Example: a noisy sinusoidal training set
 
 #figure(
   image("images/Figure_1.png", width: 51%),
-  caption: [Training set of $N=10$ samples. Inputs $x_i$ are scalars in the $[0,1]$ range. Targets values $t_i$ are generated using the function $t = sin(2 pi x) + "noise"$.],
+  caption: [Training set of $N=10$ samples. Inputs $x_n$ are scalars in the $[0,1]$ range. Targets values $t_n$ are generated using the function $t = sin(2 pi x) + "noise"$.],
 )
 
 == Model
