@@ -29,6 +29,8 @@ You may use either a local or remote Python environment for this lab.
 
 The easiest way to obtain a working Python setup is by using a cloud-based [Jupyter notebook](https://jupyter.org/) execution platform like [Google Colaboratory](https://colab.research.google.com/), [Paperspace](https://www.paperspace.com/notebooks) or [Kaggle Notebooks](https://www.kaggle.com/code).
 
+> To help you get started, [this Colab notebook](https://colab.research.google.com/drive/1MOLnKB6qUZxxgmSyuTyLcKnVae7tLOO9?usp=sharing) contains the initial source code of the solution.
+
 ## Tools
 
 To tackle this challenge, you should leverage three essential libraries of the Python ecosystem for Machine Learning: [NumPy](https://numpy.org), [pandas](https://pandas.pydata.org) and [scikit-learn](https://scikit-learn.org).
