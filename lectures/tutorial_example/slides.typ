@@ -162,7 +162,7 @@ $ E_("RMS") = sqrt(1/N sum_(n=1)^N (y(x_n,bold(w^*)) - t_n)^2) $ <rms>
 === Example: impact of dataset size on overfitting
 
 #figure(
-  image("images/Figure_6.png", width: 69%),
+  image("images/Figure_6.png", width: 75%),
 )
 
 == Regularization
@@ -219,14 +219,15 @@ $ L(bold(w)) = 1/2 sum_(n=1)^N (y(x_n, bold(w)) - t_n)^2 + lambda/2 norm(bold(w)
 === Training, validation and test sets
 
 #figure(
-  image("images/Figure_9.png", width: 70%),
+  image("images/train_validation_test_sets.png", width: 70%),
+  caption: [Generated with ChatGPT.],
 )
 
 === K-fold cross-validation
 
 #figure(
-  image("images/Figure_10.png", width: 50%),
-  caption: [Adapted from @bishop2023learning.],
+  image("images/k_fold_cross_validation.png", width: 80%),
+  caption: [Generated with Claude.],
 )
 
 == From example to reality
