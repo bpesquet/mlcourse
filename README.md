@@ -1,10 +1,12 @@
 # Machine Learning Course
 
+> [TP 1](https://colab.research.google.com/drive/1vfJ3KAEZMfDo0y2FauHpTnavTWRixxD4?usp=sharing)
+
 This repository contains the public material for my Machine Learning course: [lectures](#-lectures), [tutorials](#️-tutorials), [lab works](#-labs) and [resources](#-resources).
 
 I have tried to write them in such a way that they should be accessible to anyone wanting to learn the subject, regardless of whether you are one of my students or not.
 
-## Table of Contents
+## Table of Contentsv
 
 ### 📚 Lectures
 
