@@ -195,7 +195,7 @@ You can create an array with a range of elements:
 
 ```python
 # Create a 1D array with integer values evenly spaced within a given interval
-a = np.arange(stop=4)
+a = np.arange(start=0, stop=4)
 np.testing.assert_allclose(a, [0, 1, 2, 3])
 ```
 

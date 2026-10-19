@@ -3,6 +3,7 @@ NumPy tutorial code
 """
 
 import math
+
 import numpy as np
 
 
@@ -62,7 +63,7 @@ def test_array_creation():
     np.testing.assert_allclose(a, [[1, 1], [1, 1], [1, 1]])
 
     # Create a 1D array with integer values evenly spaced within a given interval
-    a = np.arange(stop=4)
+    a = np.arange(start=0, stop=4)
     np.testing.assert_allclose(a, [0, 1, 2, 3])
 
     # Init a NumPy random number generator

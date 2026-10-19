@@ -7,12 +7,9 @@ Inspired by https://github.com/ageron/handson-ml2/blob/master/03_classification.
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.datasets import fetch_openml
-from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.metrics import (
-    ConfusionMatrixDisplay,
-    classification_report,
-)
 from sklearn.linear_model import SGDClassifier
+from sklearn.metrics import ConfusionMatrixDisplay, classification_report
+from sklearn.model_selection import cross_val_score, train_test_split
 
 
 def load_mnist_dataset():

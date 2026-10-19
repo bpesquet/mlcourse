@@ -61,7 +61,7 @@ def plot_digits(dataset, device, model=None):
             pred_label = model(x_img).argmax(dim=1).item()
             plt.title(f"It's a {pred_label}")
 
-    # Return the new plot        
+    # Return the new plot
     return plt.gcf()
 ```
 

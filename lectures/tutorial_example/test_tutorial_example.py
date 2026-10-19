@@ -116,7 +116,7 @@ def plot_figure_1_6(x, t):
     fig_col = 0
 
     # Plot model fit for various orders of the polynomial model
-    for M in (0, 1, 3, 9):
+    for fig_col, M in enumerate([0, 1, 3, 9]):
         # Create the training matrix
         X_train = add_powers(x=samples, M=M)
 
@@ -185,11 +185,8 @@ def plot_figure_1_8(M=9):
     fig, axs = plt.subplots(ncols=2, figsize=(11, 5))
     fig.suptitle(f"Impact of dataset size on overfitting (M = {M})")
 
-    # Init plot column
-    fig_col = 0
-
     # Plot model fit for various dataset sizes
-    for N in (10, 100):
+    for fig_col, N in enumerate([10, 100]):
         # Create the training set
         samples, targets = create_dataset(N=N)
 
@@ -202,9 +199,6 @@ def plot_figure_1_8(M=9):
         # Create subplot with model fit for dataset size N
         plot_fit(plot=axs[fig_col], x=samples, w=w_best, t=targets, M=M)
         axs[fig_col].set_title(f"N = {N}")
-
-        # Increment column of next plot
-        fig_col += 1
 
     # Hide x labels and tick labels for top plots and y ticks for right plots.
     for ax in axs.flat:
@@ -222,14 +216,11 @@ def plot_figure_1_9(x, t, M=9):
     fig, axs = plt.subplots(ncols=3, figsize=(16, 5))
     fig.suptitle(f"Impact of regularization on overfitting (M = {M})")
 
-    # Init plot column
-    fig_col = 0
-
     # Create the training matrix
     X_train = add_powers(x=x, M=M)
 
     # Plot model fit for various values of regularization factor
-    for lambda_reg in (0, math.exp(-10), 1):
+    for fig_col, lambda_reg in enumerate([0, math.exp(-10), 1]):
         # Fit model to training set with regularization
         w_best = fit(X=X_train, t=t, lambda_reg=lambda_reg)
 
@@ -237,9 +228,6 @@ def plot_figure_1_9(x, t, M=9):
         plot_fit(plot=axs[fig_col], x=samples, w=w_best, t=t, M=M)
         ln_lambda = f"{math.log(lambda_reg):.0f}" if lambda_reg > 0 else "-Infinity"
         axs[fig_col].set_title(f"ln $\\lambda$ = {ln_lambda}")
-
-        # Increment column of next plot
-        fig_col += 1
 
     # Hide x labels and tick labels for top plots and y ticks for right plots.
     for ax in axs.flat:

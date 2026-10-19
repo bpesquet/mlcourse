@@ -8,6 +8,7 @@ Adapted from https://github.com/ShangtongZhang/reinforcement-learning-an-introdu
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.table import Table
+from matplotlib.transforms import Bbox
 
 WORLD_SIZE = 4
 # left, up, right, down
@@ -35,9 +36,9 @@ def step(state, action):
 
 
 def draw_image(image, n_iterations: int):
-    fig, ax = plt.subplots()
+    _, ax = plt.subplots()
     ax.set_axis_off()
-    tb = Table(ax, bbox=[0, 0, 1, 1])
+    tb = Table(ax, bbox=Bbox.from_bounds(0, 0, 1, 1))
 
     nrows, ncols = image.shape
     width, height = 1.0 / ncols, 1.0 / nrows
