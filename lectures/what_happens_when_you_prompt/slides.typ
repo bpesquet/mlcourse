@@ -167,7 +167,7 @@
 
 #show outline: set text(size: 20pt)
 
-#components.adaptive-columns(outline(title: none, depth: 2, indent: 1em))
+#components.adaptive-columns(outline(title: none, depth: 3, indent: 1em))
 
 = The big picture
 
@@ -181,10 +181,7 @@
 
 == Information flow
 
-#figure(
-  schema,
-  caption: [The general information flow of a prompt. Generated with Claude.],
-) <fig-flow>
+#align(center, image("images/prompt_information_flow.svg", width: 68%))
 
 = Step-by-step process
 
@@ -208,34 +205,76 @@
 
 Upon request arrival, several server-side operations take place:
 
-- User authentication and authorization.
-- Usage and rate limits checkups.
-- Conversation storage.
-- Safety screenings.
+- User _authentication_ and _authorization_.
+- _Usage_ and _rate limits_ checkups.
+- Conversation _storage_.
+- _Safety_ screenings.
+
+== Harness
+
+Serving and orchestration layer for responding to a request.
+
+- Prepares the context for the model.
+- Process any uploaded files or images.
+- Call the model and read its output.
+- Run tools and feeds results back.
+- Apply safety and policy checks throughout.
 
 == Prompt assembly
 
 The model receives one long document containing (in this order):
 - The _system prompt_.
-- The _entire conservation history_, including your current prompt at the very end.
+- The _session context_, including current date, timezone and approximate location.
+- Any _preferences_ you may have saved.
+- Definition and guidance for every _tool_ the model may call (web search, code execution, etc.)
+- The entire _conservation history_, including your current prompt at the very end.
 
 ---
 
 === The system prompt
+
+Set of instructions given to a language model before the user’s conversation starts.
+
+Typically contains:
+- Model _identity_ and _role_.
+- Behavioral _guidelines_.
+- _Boundaries_.
+
+Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-models-of-ai-tools/refs/heads/main/Anthropic/Claude%20Sonnet%205.txt")[Claude Sonnet 5], #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-models-of-ai-tools/refs/heads/main/Perplexity/Prompt.txt")[Perplexity]
 
 ---
 
 === The context window
 
 - Model's _working memory_: maximum amount of text (measured in tokens) that it can take into account at once.
+- Larger context window $==>$ processing longer inputs.
+- Potential downsides: #sym.arrow.tr cost, #sym.arrow.br speed, #sym.arrow.br model attention.
 
-== Model inference
+#figure(
+  table(
+    columns: 2,
+    table.header([*Context window*], [*Approx. English text equivalent*]),
+    [4,000 tokens], [3,000 words],
+    [128,000 tokens], [96,000 words],
+    [1 million tokens], [750,000 words],
+  ),
+)
 
-== Tool calls
+== Model
+
+=== Tokenisation
+
+== Tools
+
+Tools extend the model's capabilities beyond TODO.
+
+Tools may run either on server or client hardware.
+
+== Context update
 
 == Response streaming and rendering
 
 - Eventually, the model samples a special "stop" token that triggers:
   - network stream closing;
   - user interface updating.
-- Between prompts, the client/server interaction is _stateless_: each subsequent submission starts a new cycle.
+- Between prompts, the client/model interaction is _stateless_: each subsequent submission starts a new cycle.
