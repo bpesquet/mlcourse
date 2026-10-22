@@ -177,6 +177,7 @@
 - Your prompt is a _small part_ of the exchange.
 - The interaction is orchestrated by the software surrounding the model, called the _harness_.
 - Responses are generated _autoregressively_, one token at a time.
+- The model has _no memory between turns_: the conversation is reassembled and re-processed each time.
 - Much of the journey is _ordinary web technology_.
 
 == Information flow
@@ -197,9 +198,9 @@
 
 == Network exchange
 
-- The request travels from the client to the service provider's servers over an encrypted HTTPS/TLS connection.
-- Its response is a _long-lived stream_ rather than a single reply.
-- Through this open stream, the server can send back _response fragments_ as they become available.
+- The request travels from the client to the provider's servers over an encrypted HTTPS (TLS) connection.
+- The response is not a single reply but a _long-lived stream_, typically using Server-Sent Events (SSE).
+- Through this open stream, the server sends back _response fragments_ as soon as they are generated.
 
 == Server intake
 
@@ -212,24 +213,24 @@ Upon request arrival, several server-side operations take place:
 
 == Harness
 
-Serving and orchestration layer for responding to a request.
+Software layer that orchestrates the response to a request. It:
 
 - Prepares the context for the model.
 - Processes any uploaded files or images.
-- Sequences operations.
-- Calls the model and reads its output.
-- Runs tools and feeds results back.
+- Sends the context to the model and reads its output.
+- Runs tools and feeds their results back.
 - Applies safety and policy checks throughout.
 - Delivers the response.
 
 == Context preparation
 
-The model receives one long document containing (in this order):
+The harness assembles one long input for the model, typically containing:
 - The _system prompt_.
-- The _session context_, including current date, timezone and approximate location.
-- Any _preferences_ you may have saved.
-- Definition and guidance for every _tool_ the model may call (web search, code execution, etc.)
-- The entire _conversation history_, including your current prompt at the very end.
+- The _session_ context: current date, time zone, approximate location.
+- Any saved _preferences_ or _memories_.
+- Definitions and usage guidance for every _tool_ the model may use (web search, code execution, etc.).
+- The contents of _attached files_.
+- The entire _conversation history_, with your current prompt at the end.
 
 ---
 
@@ -274,9 +275,9 @@ Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-mo
 
 === Embeddings
 
-- Each token ID is looked up in a learned _embedding table_ and becomes a vector, which represents the token in a high-dimensional space.
-- Tokens' _position_ in the sequence is usually encoded by rotating parts of these vectors by an angle that depends on position.
+- Each token ID is looked up in a learned _embedding table_ and becomes a vector representing the token in a _high-dimensional space_.
 - Conceptually, the input becomes a matrix $X in RR^(n times d)$, with $n$ the number of input positions and $d$ the dimension of the hidden representation space.
+- Word order is not yet encoded at this stage. In most models, _position_ is injected later by Rotary Position Embedding (RoPE).
 
 ---
 
@@ -292,10 +293,10 @@ Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-mo
 
 === Sampling
 
-- The output layer of the model produces $RR$-valued _scores_ (commonly called logits) for each possible next token.
-- A softmax transformation turns them into a _probability distribution_.
-- Conceptually, the model estimates $P(y_t|x, y_1, ..., y_(t-1))$, with $x$ the existing context and $y_t$ the next generated token.
-- The model selects the next token according to its _decoding strategy_, using settings like _temperature_.
+- The network's output layer produces a real-valued score (a _logit_) for each possible next token.
+- A softmax turns these scores into a _probability distribution_.
+- Conceptually, the model estimates $P(y_t | x, y_1, ..., y_(t-1))$, with $x$ the existing context and $y_t$ the next token.
+- A _decoding step_ outside the network then picks the next token, using settings such as _temperature_, top-$p$ or top-$k$.
 - The same prompt does not necessarily produce identical output on every run!
 
 ---
@@ -318,18 +319,16 @@ Each new token becomes part of the context used to predict subsequent tokens.
 
 == Tools and context update
 
-- Tools _extend_ the model's capabilities beyond producing tokens.
-  - Examples: searching the web, fetching a page, running code, etc.
-- When it determines that its internal knowledge is insufficient, the model emits a _structured tool call_.
-- The harness pauses token generation, executes the operation if permitted, post-processes and appends the result to the model's context, then resumes generation.
-- A complex task may _cycle_ through this loop multiple times.
-- Tools may run on _server_, _client_ or _external_ hardware.
+- Tools _extend_ the model beyond producing text: searching the web, fetching a page, running code, creating files, etc.
+- When a tool would help, the model emits a _structured tool call_ instead of a regular answer (it was trained to do so in suitable situations).
+- The harness stops generation, runs the operation if permitted, formats the result and appends it to the context, then calls the model again.
+- A complex task may _cycle_ through this loop many times.
+- Tools may run on the provider's _servers_, on the _client machine_ or on _external services_.
 
 == Response streaming and rendering
 
-- As tokens are generated, they’re _decoded_ back into text fragments and sent down the open stream as events.
-- These fragments are _processed_ and _rendered_ by the client software.
-- Eventually, the model samples a special "stop" token that triggers:
-  - network stream closing;
-  - user interface updating.
-- Between prompts, the client/model interaction is _stateless_: each subsequent submission starts a new cycle.
+- As tokens are generated, they are decoded back into text fragments and sent down the open stream as _events_.
+- The client software processes and renders these fragments (Markdown, code, etc.) as they arrive.
+- Generation ends when the model emits a special _end-of-turn token_, or when a limit is reached (maximum output length, user cancellation).
+- The harness then closes the stream and the user interface is updated.
+- The model keeps _no memory_ between prompts: each new submission starts a fresh cycle, with the full conversation history reassembled into the context.
