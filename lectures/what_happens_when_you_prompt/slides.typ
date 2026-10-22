@@ -193,12 +193,12 @@
   - selected model
   - references to attached files, if any
   - client context (time zone, etc.)
-- the user interface is updated to show that a response is pending.
+- The user interface is updated to show that a response is pending.
 
 == Network exchange
 
-- The request travels from the client to an LLM-based service's server over an encrypted HTTPS/TLS connection.
-- The response is not merely a single page, but a _long-lived stream_.
+- The request travels from the client to the service provider's servers over an encrypted HTTPS/TLS connection.
+- Its response is a _long-lived stream_ rather than a single reply.
 - Through this open stream, the server can send back _response fragments_ as they become available.
 
 == Server intake
@@ -215,19 +215,21 @@ Upon request arrival, several server-side operations take place:
 Serving and orchestration layer for responding to a request.
 
 - Prepares the context for the model.
-- Process any uploaded files or images.
-- Call the model and read its output.
-- Run tools and feeds results back.
-- Apply safety and policy checks throughout.
+- Processes any uploaded files or images.
+- Sequences operations.
+- Calls the model and reads its output.
+- Runs tools and feeds results back.
+- Applies safety and policy checks throughout.
+- Delivers the response.
 
-== Prompt assembly
+== Context preparation
 
 The model receives one long document containing (in this order):
 - The _system prompt_.
 - The _session context_, including current date, timezone and approximate location.
 - Any _preferences_ you may have saved.
 - Definition and guidance for every _tool_ the model may call (web search, code execution, etc.)
-- The entire _conservation history_, including your current prompt at the very end.
+- The entire _conversation history_, including your current prompt at the very end.
 
 ---
 
@@ -247,7 +249,7 @@ Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-mo
 === The context window
 
 - Model's _working memory_: maximum amount of text (measured in tokens) that it can take into account at once.
-- Larger context window $==>$ processing longer inputs.
+- Larger context window $==>$ ability to process longer inputs.
 - Potential downsides: #sym.arrow.tr cost, #sym.arrow.br speed, #sym.arrow.br model attention.
 
 #figure(
@@ -262,18 +264,71 @@ Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-mo
 
 == Model
 
-=== Tokenisation
+=== Tokenization
 
-== Tools
+- A _tokenizer_ splits the raw textual input into frequent sub-word pieces called _tokens_ (a common word is one, a rare word is several).
+- Each token is mapped to an integer ID.
+- Images, audio, and other modalities are encoded into representations appropriate to the model.
 
-Tools extend the model's capabilities beyond TODO.
+---
 
-Tools may run either on server or client hardware.
+=== Embeddings
 
-== Context update
+- Each token ID is looked up in a learned _embedding table_ and becomes a vector, which represents the token in a high-dimensional space.
+- Tokens' _position_ in the sequence is usually encoded by rotating parts of these vectors by an angle that depends on position.
+- Conceptually, the input becomes a matrix $X in RR^(n times d)$, with $n$ the number of input positions and $d$ the dimension of the hidden representation space.
+
+---
+
+=== Inference
+
+- The previous representations are processed by multiple _neural network layers_.
+- These computations notably involve:
+  - _Self-attention_, which allows representations to incorporate information from other positions in the input.
+  - _Feed-forward neural network_ (MLP) blocks.
+- The model repeats its neural computations across its layers, progressively transforming the representations.
+
+---
+
+=== Sampling
+
+- The output layer of the model produces $RR$-valued _scores_ (commonly called logits) for each possible next token.
+- A softmax transformation turns them into a _probability distribution_.
+- Conceptually, the model estimates $P(y_t|x, y_1, ..., y_(t-1))$, with $x$ the existing context and $y_t$ the next generated token.
+- The model selects the next token according to its _decoding strategy_, using settings like _temperature_.
+- The same prompt does not necessarily produce identical output on every run!
+
+---
+
+=== Autoregressive generation
+
+Each new token becomes part of the context used to predict subsequent tokens.
+
+#figure(
+  image("images/autoregressive_generation.gif", width: 65%),
+  caption: [Image credits: #link("https://www.youtube.com/watch?v=0VLAoVGf_74")[Welch Labs].],
+)
+
+---
+
+=== Hardware acceleration
+
+- Model-serving systems use GPUs or other specialized _accelerators_ to perform operations.
+- The workload may be _distributed_ across multiple devices.
+
+== Tools and context update
+
+- Tools _extend_ the model's capabilities beyond producing tokens.
+  - Examples: searching the web, fetching a page, running code, etc.
+- When it determines that its internal knowledge is insufficient, the model emits a _structured tool call_.
+- The harness pauses token generation, executes the operation if permitted, post-processes and appends the result to the model's context, then resumes generation.
+- A complex task may _cycle_ through this loop multiple times.
+- Tools may run on _server_, _client_ or _external_ hardware.
 
 == Response streaming and rendering
 
+- As tokens are generated, they’re _decoded_ back into text fragments and sent down the open stream as events.
+- These fragments are _processed_ and _rendered_ by the client software.
 - Eventually, the model samples a special "stop" token that triggers:
   - network stream closing;
   - user interface updating.
