@@ -41,128 +41,6 @@
   // #datetime(year: 2026, month: 01, day: 06).display("[month repr:long] [day], [year repr:full]")
 ]
 
-// ---------- Palette (three zones) ----------
-#let zones = (
-  device: (
-    fill: rgb("#FAC775"),
-    stroke: rgb("#633806"),
-    title: rgb("#412402"),
-    sub: rgb("#633806"),
-    label: "Your device and network",
-  ),
-  server: (
-    fill: rgb("#CECBF6"),
-    stroke: rgb("#3C3489"),
-    title: rgb("#26215C"),
-    sub: rgb("#3C3489"),
-    label: "Service servers",
-  ),
-  model: (
-    fill: rgb("#9FE1CB"),
-    stroke: rgb("#085041"),
-    title: rgb("#04342C"),
-    sub: rgb("#085041"),
-    label: "Model and tools",
-  ),
-)
-
-// Small coloured tag shown under each stage heading
-#let zone-tag(z) = {
-  let c = zones.at(z)
-  box(fill: c.fill, stroke: 0.9pt + c.stroke, radius: 2pt, inset: (x: 5pt, y: 2.5pt), text(
-    size: 8pt,
-    fill: c.title,
-    c.label,
-  ))
-  v(0.3em)
-}
-
-// ---------- Diagram primitives ----------
-#let u = 16cm / 680   // one unit of the original 680 × 425 schema
-#let ink = rgb("#5F5E5A")
-
-#let node(x, y, title, sub, z, w: 136, h: 56) = {
-  let c = zones.at(z)
-  place(top + left, dx: x * u, dy: y * u, rect(
-    width: w * u,
-    height: h * u,
-    radius: 4pt,
-    fill: c.fill,
-    stroke: 0.9pt + c.stroke,
-    inset: 0pt,
-    align(center + horizon, stack(spacing: 4pt, text(size: 9pt, weight: "bold", fill: c.title, title), text(
-      size: 7.5pt,
-      fill: c.sub,
-      sub,
-    ))),
-  ))
-}
-
-#let arrow(x1, y1, x2, y2, dash: none) = {
-  let dx = x2 - x1
-  let dy = y2 - y1
-  let len = calc.sqrt(dx * dx + dy * dy)
-  let (ux, uy) = (dx / len, dy / len)
-  let (hl, hw) = (7, 3.5) // head length / half-width, in schema units
-  let (bx, by) = (x2 - ux * hl, y2 - uy * hl)
-  place(top + left, line(start: (x1 * u, y1 * u), end: (bx * u, by * u), stroke: (
-    paint: ink,
-    thickness: 0.7pt,
-    dash: dash,
-  )))
-  place(top + left, polygon(
-    fill: ink,
-    stroke: none,
-    (x2 * u, y2 * u),
-    ((bx - uy * hw) * u, (by + ux * hw) * u),
-    ((bx + uy * hw) * u, (by - ux * hw) * u),
-  ))
-}
-
-#let legend-item(x, z) = {
-  let c = zones.at(z)
-  place(top + left, dx: x * u, dy: 395 * u, stack(
-    dir: ltr,
-    spacing: 4pt,
-    box(width: 12 * u, height: 12 * u, fill: c.fill, stroke: 0.9pt + c.stroke, radius: 1.5pt),
-    text(size: 7.5pt, fill: ink, c.label),
-  ))
-}
-
-#let schema = box(width: 680 * u, height: 375 * u, place(top + left, dy: -40 * u, box(width: 680 * u, height: 420 * u, {
-  // Top row: request travels left to right
-  node(29, 50, "Input box", "Keys, Enter", "device")
-  node(191, 50, "Client request", "Message, context", "device")
-  node(353, 50, "Network", "DNS, TLS, HTTP", "device")
-  node(515, 50, "Server intake", "Auth, limits", "server")
-  arrow(167, 78, 189, 78)
-  arrow(329, 78, 351, 78)
-  arrow(491, 78, 513, 78)
-  arrow(583, 108, 583, 178)
-
-  // Bottom row: reply travels right to left
-  node(515, 180, "Prompt assembly", "Tools, history", "server")
-  node(353, 180, "Model inference", "Tokens, sampling", "model")
-  node(191, 180, "Stream back", "Server-sent events", "device")
-  node(29, 180, "Render", "Markdown, paint", "device")
-  arrow(513, 208, 491, 208)
-  arrow(351, 208, 329, 208)
-  arrow(189, 208, 167, 208)
-
-  // Tool loop
-  node(353, 290, "Tool calls", "Search, fetch, code", "model")
-  arrow(405, 238, 405, 288)
-  arrow(437, 288, 437, 238)
-
-  // Next turn
-  arrow(97, 178, 97, 108, dash: "dashed")
-  place(top + left, dx: 107 * u, dy: 137 * u, text(size: 7.5pt, fill: ink, [↻ next turn]))
-
-  legend-item(110, "device")
-  legend-item(300, "server")
-  legend-item(450, "model")
-})))
-
 == Outline <touying:hidden>
 
 #show outline: set text(size: 20pt)
@@ -173,12 +51,11 @@
 
 == Key takeaways
 
-- An LLM-based service is a _networked software system_ wrapped around a _generative language model_.
-- Your prompt is a _small part_ of the exchange.
-- The interaction is orchestrated by the software surrounding the model, called the _harness_.
-- Responses are generated _autoregressively_, one token at a time.
-- The model has _no memory between turns_: the conversation is reassembled and re-processed each time.
-- Much of the journey is _ordinary web technology_.
+- An LLM service is a _networked software system_ built around one or more _generative models_.
+- Your prompt is a small part of the exchange.
+- The _harness_ orchestrates the interaction: it prepares and updates the context, manages tools and controls the response flow.
+- The _model_ processes a finite context and generates outputs autoregressively.
+- The model does not inherently retain interaction history between turns. Conversational continuity is provided by the surrounding system.
 
 == Information flow
 
@@ -188,60 +65,63 @@
 
 == From input to client request
 
-- Typing is _local only_.
-- The client-side software (web browser, desktop or mobile app) sends your prompt as a _web request_ when you submit it, augmenting it with info such as:
-  - conversation ID
-  - selected model
-  - references to attached files, if any
-  - client context (time zone, etc.)
-- The user interface is updated to show that a response is pending.
+- Typing is normally local only.
+- The client-side software (web browser, desktop or mobile app) sends your prompt as a web request when you submit it, augmenting it with info such as:
+  - conversation identifier;
+  - selected model;
+  - references to attached files, if any;
+  - relevant metadata (time zone, etc.).
+- The user interface is updated to indicate that processing has started.
 
 == Network exchange
 
 - The request travels from the client to the provider's servers over an encrypted HTTPS (TLS) connection.
-- The response is not a single reply but a _long-lived stream_, typically using Server-Sent Events (SSE).
-- Through this open stream, the server sends back _response fragments_ as soon as they are generated.
+- The response is not a single reply but a long-lived stream, typically using Server-Sent Events (SSE).
+- Through this open stream, the server sends back response fragments as soon as they are generated.
 
 == Server intake
 
-Upon request arrival, several server-side operations take place:
+Upon request arrival, several server-side operations may take place:
 
-- User _authentication_ and _authorization_.
-- _Usage_ and _rate limits_ checkups.
-- Conversation _storage_.
-- _Safety_ screenings.
+- User authentication and authorization.
+- Usage and rate limits checkups.
+- Conversation storage.
+- Safety screenings.
+- Request routing to an appropriate processing service.
 
 == Harness
 
-Software layer that orchestrates the response to a request. It:
+Orchestration layer coordinating the model
+and the surrounding software services. Implemented by potentially distributed components. Roles:
 
-- Prepares the context for the model.
-- Processes any uploaded files or images.
-- Sends the context to the model and reads its output.
-- Runs tools and feeds their results back.
-- Applies safety and policy checks throughout.
-- Delivers the response.
+- Assemble and manage the model's input context.
+- Process files and prepare multimodal inputs.
+- Invoke the model and interpret its structured output.
+- Run tools and integrate their results.
+- Apply validation, safety and permission checks throughout.
+- Handle response delivery.
 
-== Context preparation
+== Context assembly
 
-The harness assembles one long input for the model, typically containing:
-- The _system prompt_.
-- The _session_ context: current date, time zone, approximate location.
-- Any saved _preferences_ or _memories_.
-- Definitions and usage guidance for every _tool_ the model may use (web search, code execution, etc.).
-- The contents of _attached files_.
-- The entire _conversation history_, with your current prompt at the end.
+The harness constructs a model input from relevant
+instructions, conversation state and available data, typically including:
+- The system prompt.
+- Session metadata: current date, time zone, approximate location.
+- Relevant saved preferences.
+- Definitions and usage guidance for every tool the model may use (web search, code execution, etc.).
+- Extracted text, visual representations or other file content.
+- Your current prompt and selected conversation history.
 
 ---
 
 === The system prompt
 
-Set of instructions given to a language model before the user’s conversation starts.
+Set of instructions supplied to the model by the service.
 
 Typically contains:
-- Model _identity_ and _role_.
-- Behavioral _guidelines_.
-- _Boundaries_.
+- Model identity and role.
+- Behavioral guidelines and boundaries.
+- Tool usage instructions and output format requirements.
 
 Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-models-of-ai-tools/refs/heads/main/Anthropic/Claude%20Sonnet%205.txt")[Claude Sonnet 5], #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-models-of-ai-tools/refs/heads/main/Perplexity/Prompt.txt")[Perplexity]
 
@@ -250,13 +130,14 @@ Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-mo
 === The context window
 
 - Model's _working memory_: maximum amount of text (measured in tokens) that it can take into account at once.
-- Larger context window $==>$ ability to process longer inputs.
-- Potential downsides: #sym.arrow.tr cost, #sym.arrow.br speed, #sym.arrow.br model attention.
+- Larger context window  ability to process longer inputs.
+- Longer inputs $==>$ #sym.arrow.tr cost and #sym.arrow.br speed.
 
 #figure(
   table(
-    columns: 2,
-    table.header([*Context window*], [*Approx. English text equivalent*]),
+    columns: (1fr, 1fr),
+    align: left,
+    table.header([*Context window*], [*Approx. English words*]),
     [4,000 tokens], [3,000 words],
     [128,000 tokens], [96,000 words],
     [1 million tokens], [750,000 words],
@@ -265,70 +146,84 @@ Examples: #link("https://raw.githubusercontent.com/x1xhlol/system-prompts-and-mo
 
 == Model
 
-=== Tokenization
+=== Input representations
 
-- A _tokenizer_ splits the raw textual input into frequent sub-word pieces called _tokens_ (a common word is one, a rare word is several).
+- A _tokenizer_ splits the raw textual input into frequent sub-word pieces called _tokens_. A common word is one, a rare word is several.
 - Each token is mapped to an integer ID.
-- Images, audio, and other modalities are encoded into representations appropriate to the model.
+- Images, audio, and other modalities require additional preprocessing to be encoded into representations appropriate to the model.
+
+---
+
+=== Multimodality
+
+- The ability to process non-textual formats may be provided by:
+  - the model, using modality-specific encoders or representations;
+  - external tools orchestrated by the harness;
+  - both.
+- Images may be represented by patches, visual tokens or encoded features.
+- Audio may use audio tokens, encoded features or transcription.
+- Video may be represented as sequences of frames and associated temporal information.
 
 ---
 
 === Embeddings
 
-- Each token ID is looked up in a learned _embedding table_ and becomes a vector representing the token in a _high-dimensional space_.
-- Conceptually, the input becomes a matrix $X in RR^(n times d)$, with $n$ the number of input positions and $d$ the dimension of the hidden representation space.
-- Word order is not yet encoded at this stage. In most models, _position_ is injected later by Rotary Position Embedding (RoPE).
+- Each token ID is looked up in a learned embedding table and becomes a vector representing the token in a high-dimensional space.
+- Conceptually, a text-only input becomes a matrix $X in RR^(n times d)$, with $n$ the number of input positions and $d$ the dimension of the hidden representation space.
+- Positional information is incorporated according to the model architecture, either through embeddings or within subsequent computations.
 
 ---
 
 === Inference
 
-- The previous representations are processed by multiple _neural network layers_.
-- These computations notably involve:
+- The model processes the input representations through multiple neural network layers. These computations typically combine:
   - _Self-attention_, which allows representations to incorporate information from other positions in the input.
-  - _Feed-forward neural network_ (MLP) blocks.
-- The model repeats its neural computations across its layers, progressively transforming the representations.
+  - _ Feed-forward_ (MLP) blocks, which transform representations at each position.
+  - Residual connections and normalization operations.
+- Across layers, the representations are progressively
+  transformed into features used to predict the next token.
 
 ---
 
-=== Sampling
+=== Sampling and decoding
 
-- The network's output layer produces a real-valued score (a _logit_) for each possible next token.
-- A softmax turns these scores into a _probability distribution_.
-- Conceptually, the model estimates $P(y_t | x, y_1, ..., y_(t-1))$, with $x$ the existing context and $y_t$ the next token.
-- A _decoding step_ outside the network then picks the next token, using settings such as _temperature_, top-$p$ or top-$k$.
+- The model produces $RR$-valued scores (_logits_) for possible next tokens.
+- A probability distribution is obtained from these scores, typically using softmax.
+- Conceptually, the model estimates $P(y_t | x, y_1, ..., y_(t-1))$, with $x$ the supplied context and $y_i$ the tokens generated so far.
+- A decoding strategy then picks the next token. Examples include _greedy decoding_ or _temperature sampling_.
 - The same prompt does not necessarily produce identical output on every run!
 
 ---
 
 === Autoregressive generation
 
-Each new token becomes part of the context used to predict subsequent tokens.
+- Each new token becomes part of the context used to predict subsequent tokens.
+- Generation continues until a limit or stopping condition is reached.
 
 #figure(
-  image("images/autoregressive_generation.gif", width: 65%),
+  image("images/autoregressive_generation.gif", width: 56%),
   caption: [Image credits: #link("https://www.youtube.com/watch?v=0VLAoVGf_74")[Welch Labs].],
 )
 
 ---
 
-=== Hardware acceleration
+=== Infrastructure and optimizations
 
-- Model-serving systems use GPUs or other specialized _accelerators_ to perform operations.
-- The workload may be _distributed_ across multiple devices.
+- Model-serving systems use GPUs or other specialized accelerators to perform operations.
+- The workload may be distributed across multiple devices.
+- Many other optimizations take place (prefill, caching, request batching, etc.).
 
 == Tools and context update
 
-- Tools _extend_ the model beyond producing text: searching the web, fetching a page, running code, creating files, etc.
-- When a tool would help, the model emits a _structured tool call_ instead of a regular answer (it was trained to do so in suitable situations).
-- The harness stops generation, runs the operation if permitted, formats the result and appends it to the context, then calls the model again.
-- A complex task may _cycle_ through this loop many times.
-- Tools may run on the provider's _servers_, on the _client machine_ or on _external services_.
+- Tools extend the model beyond producing text: searching the web, fetching a page, running code, creating files, etc.
+- Model output may contain user-facing text, structured data, control flow signals or tool calls.
+- The harness determines whether to continue generation, execute a tool and update the context, return a response or stop processing.
+- A complex task may cycle through this loop many times.
+- Tools may run on the provider's servers, on the client machine or on external services.
 
 == Response streaming and rendering
 
-- As tokens are generated, they are decoded back into text fragments and sent down the open stream as _events_.
-- The client software processes and renders these fragments (Markdown, code, etc.) as they arrive.
-- Generation ends when the model emits a special _end-of-turn token_, or when a limit is reached (maximum output length, user cancellation).
-- The harness then closes the stream and the user interface is updated.
-- The model keeps _no memory_ between prompts: each new submission starts a fresh cycle, with the full conversation history reassembled into the context.
+- As tokens are generated, they are decoded back into text fragments and sent down the open stream as events.
+- The client software interprets the received data and renders it.
+- Completion may result from an end-of-turn signal, a length limit, cancellation or an error.
+- Each subsequent submission starts a fresh cycle.

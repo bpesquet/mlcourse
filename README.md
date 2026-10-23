@@ -21,7 +21,11 @@ I have tried to write them in such a way that they should be accessible to anyon
 
 - [Convolutional Neural Networks](lectures/convolutional_neural_networks/)
 - [Recurrent Neural Networks](lectures/recurrent_neural_networks/)
+
+#### Large Language Models
+
 - [Large Language Models](lectures/large_language_models/)
+- [What happens when you prompt](lectures/what_happens_when_you_prompt/)
 
 #### Reinforcement Learning
 
