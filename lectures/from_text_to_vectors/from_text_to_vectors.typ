@@ -156,8 +156,8 @@ $ p(t_i | x_1 dots x_L) $
 == Markov model
 
 - Simplest/dumbest possible language model: the _unigram_ (1-gram) model draws words randomly according to their frequency.
-$ p(x_(L+1) | x_1 dots x_L) = p(x_i) = (C(x_i)) / N $
-- $C(x_i)$: count of word $x_i$ in the training corpus; $N = sum_i C(x_i)$: corpus size.
+$ p(x_(L+1) | x_1 dots x_L) = p(x_(L+1)) = (C(x_(L+1))) / N $
+- $C(x_(L+1))$: count of word $x_(L+1)$ in the training corpus; $N = sum_i C(x_i)$: corpus size.
 
 ---
 
@@ -227,7 +227,7 @@ $==>$ Finding $q$ that minimizes $D_"KL" (p parallel q)$ is equivalent to minimi
 
 ---
 
-=== Expectation over distribution probability
+=== Expectation over a probability distribution
 
 $ bb(E)_(x tilde p) [f(x)] = sum_x p(x)f(x) $
 
@@ -248,14 +248,14 @@ $ 1/N sum_(i=1)^N f(x_i) stretch(->)^(N -> oo) bb(E)_(x ~ p) [f(x)] $
 $==>$ Averaging over the training samples estimates the cross-entropy.
 
 $
-  hat(H) = -1/N sum_(i=1)^N log q_theta (x_i | x_(<i)) stretch(->)^(N -> oo) bb(E)_(x tilde p(dot | c)) [log q_theta (x | c)]
+  hat(H) = -1/N sum_(i=1)^N log q_theta (x_i | x_(<i)) stretch(->)^(N -> oo) -bb(E)_(x tilde p(dot | c)) [log q_theta (x | c)]
 $
 
 ---
 
 === Likelihood
 
-$L(theta)$: probability the model gives to the whole training set. Assuming independance between samples:
+$L(theta)$: probability the model gives to the whole training set.
 
 $ L(theta) = product_(i=1)^N q_theta (x_i | x_(<i)) $
 $
@@ -302,7 +302,7 @@ Perplexity can be seen as the number of words the model hesitates between.
 
 = Classification with bag of words
 
-== Architecture of a NLP classifier
+== Architecture of an NLP classifier
 
 - Input texts have variable length, and the key information can be anywhere in a review.
 - Classic ML methods (logistic regression, MLPs, trees...) need fixed-size inputs.
@@ -481,7 +481,7 @@ $ 1/L sum_(i=1)^L e_i = 1/L W_E C = W_E f $
 - _Distributional hypothesis_: words that appear in similar contexts tend to have similar meanings.
 
 #quote(attribution: [J.R. Firth, 1957])[
-  "You shall know a word by the company it keeps!"
+  "You shall know a word by the company it keeps"
 ]
 
 == word2vec
@@ -489,7 +489,7 @@ $ 1/L sum_(i=1)^L e_i = 1/L W_E C = W_E f $
 - Two architectures by Mikolov et al. (2013), using a window around a middle word:
   - CBOW (_Continuous Bag of Words_): predict the middle word from the average of the surrounding embeddings;
   - _Skip-gram_: predict each surrounding word from the middle word's embedding.
-- Neither have a hidden layer: going from embeddings to word scores costs a single matrix–vector product.
+- Neither has a hidden layer: going from embeddings to word scores costs a single matrix–vector product.
 - Light and fast enough to learn from billions of words.
 
 ---
@@ -550,17 +550,16 @@ Embeddings also learn the stereotypes present in their training corpus.
 
 == Three granularities
 
-#figure(
-  table(
-    columns: (1fr, 1.6fr, 1fr, 1fr, 1.2fr),
-    align: left,
-    table.header([*Unit*], [*"deconstruction"*], [*Vocabulary*], [*Sequences*], [*Unknown word*]),
-    [Word], [`[deconstruction]`], [huge], [short], [frequent],
-    [Character], [`[d] [e] [c] [o] …`], [tiny], [very long], [impossible],
-    [Subword], [`[de] [construct] [ion]`], [fixed in advance], [medium], [split into pieces],
-  ),
-  caption: [Subwords: frequent pieces stay whole, rare words break apart. No word is ever _out of vocabulary_. The example split is illustrative.],
+#table(
+  columns: (0.85fr, 1.6fr, 1.1fr, 1fr, 1.2fr),
+  align: left,
+  table.header([*Unit*], [*"deconstruction"*], [*Vocabulary*], [*Sequences*], [*Main limitation*]),
+  [Word], [`[deconstruction]`], [huge], [short], [Unknown words],
+  [Character], [`[d] [e] [c] [o] …`], [tiny], [very long], [Long dependencies],
+  [Subword], [`[de] [construct] [ion]`], [fixed in advance], [medium], [More complex],
 )
+
+Subword tokenization balances vocabulary size and sequence length, while allowing rare words to be represented using familiar pieces.
 
 == Byte Pair Encoding (BPE)
 
@@ -574,8 +573,6 @@ Embeddings also learn the stereotypes present in their training corpus.
 To tokenize new text, replay the learned merges in the same order.
 
 ---
-
-=== Example
 
 Corpus: _cat_ ×5, _cats_ ×2, _catch_ ×3, _rat_ ×4.
 
@@ -591,8 +588,9 @@ Corpus: _cat_ ×5, _cats_ ×2, _catch_ ×3, _rat_ ×4.
   ),
 )
 
-- Learned vocabulary: characters + `at`, `cat`, `rat`.
-- A new word such as _rats_ splits into known pieces.
+- Learned vocabulary after 3 merges: characters + `at`, `cat`, `rat`.
+- A new word such as _rats_ splits into known pieces `rat` and `s`.
+- Real training stops at a target vocabulary size.
 
 #speaker-note[
   Step 1: (a, t) occurs 5 + 2 + 3 + 4 = 14 times. Step 2: (c, at) occurs 5 + 2 + 3 = 10 times. Step 3: (r, at) wins with 4, ahead of (cat, c) and (c, h) with 3. Ties are broken by a fixed rule.
@@ -622,3 +620,24 @@ _SentencePiece_ applies BPE or Unigram to raw text, spaces included (written ▁
 #speaker-note[
   The number split is illustrative: the exact split depends on the tokenizer.
 ]
+
+== The complete pipeline
+
+#grid(
+  columns: (1fr, auto, 1fr, auto, 1fr, auto, 1.6fr, auto, 1fr),
+  gutter: 0.5em,
+  align: horizon,
+  stage[*Raw text* \ #text(size: 16pt)["The results are unbelievable!"]],
+  $->$,
+  stage[*Tokens* \ #text(size: 16pt)[[The] [results] [are] [un] [believ] [able] [!]]],
+  $->$,
+  stage[*IDs* \ #text(size: 16pt)[[99, 464, 11875, 389, 11029, 766, 13]]],
+  $->$,
+  stage[*Embeddings* \ #text(size: 16pt)[$[e_1, e_2, e_3, e_4, e_5, e_6, e_7]$]],
+  $->$,
+  stage[*Model* \ #text(size: 16pt)[Classifier, RNN, Transformer...]],
+)
+
+- The vocabulary and embedding matrix must use the same token IDs.
+- Each token ID selects one column of the embedding matrix.
+- The result is a sequence of dense vectors, ready for further processing.
