@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="460" viewBox="0 0 720 460" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2F5D8A"/></marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#B44E1E"/></marker>
+  </defs>
+  <line x1="120" y1="360" x2="194" y2="158" stroke="#2F5D8A" stroke-width="4" marker-end="url(#ab)"/>
+  <line x1="560" y1="320" x2="634" y2="118" stroke="#2F5D8A" stroke-width="4" marker-end="url(#ab)"/>
+  <line x1="120" y1="360" x2="540" y2="322" stroke="#B44E1E" stroke-width="4" stroke-dasharray="12 8" marker-end="url(#ao)"/>
+  <line x1="200" y1="140" x2="620" y2="102" stroke="#B44E1E" stroke-width="4" stroke-dasharray="12 8" marker-end="url(#ao)"/>
+  <circle cx="120" cy="360" r="12" fill="#14213D"/>
+  <circle cx="200" cy="140" r="12" fill="#14213D"/>
+  <circle cx="560" cy="320" r="12" fill="#14213D"/>
+  <circle cx="640" cy="100" r="12" fill="#14213D"/>
+  <text x="90" y="410" font-size="30" font-weight="bold" fill="#14213D">man</text>
+  <text x="150" y="110" font-size="30" font-weight="bold" fill="#14213D">woman</text>
+  <text x="545" y="370" font-size="30" font-weight="bold" fill="#14213D">king</text>
+  <text x="600" y="70" font-size="30" font-weight="bold" fill="#14213D">queen</text>
+  <text x="140" y="260" font-size="26" fill="#2F5D8A" text-anchor="end">gender</text>
+  <text x="340" y="380" font-size="26" fill="#B44E1E" text-anchor="middle">royalty</text>
+</svg>
