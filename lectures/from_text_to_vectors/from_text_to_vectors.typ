@@ -497,14 +497,14 @@ $ 1/L sum_(i=1)^L e_i = 1/L W_E C = W_E f $
 === Architecture comparison
 
 #figure(
-  link(demos_url + "#41-the-embedding-matrix")[
+  link(demos_url + "#52-word2vec")[
     #image("images/word2vec_models.png", width: 37%)],
   caption: fig_caption,
 )
 
 == Putting word2vec to the test
 
-🧑🏻‍💻 Activity 4: train word2vec on a Wikipedia sample.
+🧑🏻‍💻 Activity 4: train word2vec on a small, cleaned sample of Wikipedia.
 
 - Pros:
   - Related words end up close together.
